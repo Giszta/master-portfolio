@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "projects": "Projekty",
+    "skills": "Umiejętności",
+    "about": "O mnie",
+    "learning": "Nauka",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "available": "Dostępny do pracy",
+    "title_line1": "Frontend",
+    "title_line2": "Developer",
+    "title_line3": "// next.js",
+    "subtitle": "Buduję czyste, testowane i produkcyjnie dopracowane aplikacje webowe.",
+    "stack_line": "Next.js · TypeScript · Tailwind · Vitest",
+    "cta_projects": "Projekty",
+    "cta_contact": "Kontakt",
+    "cta_cv": "Pobierz CV",
+    "photo_label": "twoje zdjęcie tutaj",
+    "stat_deploy": "deployed",
+    "stat_ts": "typescript",
+    "coord": "PL // 52°N 16°E",
+    "version": "v1.0.0 — 2026"
+  },
+  "projects": {
+    "label": "Projekty",
+    "title": "Wybrane projekty",
+    "description": "Projekty które najlepiej pokazują moje umiejętności techniczne i podejście do budowania.",
+    "all": "Wszystkie projekty",
+    "case_study": "Case study",
+    "status_live": "Live",
+    "status_wip": "W trakcie",
+    "status_archived": "Archiwum",
+    "diff_beginner": "Początkujący",
+    "diff_intermediate": "Średni",
+    "diff_advanced": "Zaawansowany"
+  },
+  "proof": {
+    "label": "Jakość techniczna",
+    "title": "Nie tylko ładny UI — prawdziwy frontend",
+    "description": "Każda decyzja ma uzasadnienie techniczne."
+  },
+  "learning": {
+    "label": "Nauka",
+    "title": "Świadomy proces nauki",
+    "description": "Każdy etap potwierdzony projektem, nie tylko tutorialem.",
+    "cta": "Zobacz całą roadmapę",
+    "progress": "Postęp"
+  },
+  "contact_cta": {
+    "label": "Kontakt",
+    "title": "Szukasz junior frontend developera który dba o czysty UI i jakość kodu?",
+    "subtitle": "Chętnie porozmawiam o możliwościach współpracy, stażu lub pracy.",
+    "cta_primary": "Napisz do mnie",
+    "cta_secondary": "Zobacz projekty"
+  }
+}

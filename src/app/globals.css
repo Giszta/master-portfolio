@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg: #050810;
+    --bg-surface: #0a0f1a;
+    --bg-card: #0d1525;
+    --cyan: #00ffb4;
+    --cyan-dim: rgba(0, 255, 180, 0.12);
+    --cyan-border: rgba(0, 255, 180, 0.25);
+    --purple: #bf00ff;
+    --purple-dim: rgba(191, 0, 255, 0.1);
+    --purple-border: rgba(191, 0, 255, 0.25);
+    --blue: #00b4ff;
+    --blue-dim: rgba(0, 180, 255, 0.1);
+    --text-primary: #e8eaf0;
+    --text-secondary: #8899aa;
+    --text-dim: #445566;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-primary);
+    font-family: "Courier New", "Courier", monospace;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 180, 0.15);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 180, 0.3);
+  }
+}
