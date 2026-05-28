@@ -1,0 +1,57 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "skills": "Skills",
+    "about": "About",
+    "learning": "Learning",
+    "contact": "Contact"
+  },
+  "hero": {
+    "available": "Available for hire",
+    "title_line1": "Frontend",
+    "title_line2": "Developer",
+    "title_line3": "// next.js",
+    "subtitle": "Building clean, tested and production-ready web applications.",
+    "stack_line": "Next.js · TypeScript · Tailwind · Vitest",
+    "cta_projects": "Projects",
+    "cta_contact": "Contact",
+    "cta_cv": "Download CV",
+    "photo_label": "your photo here",
+    "stat_deploy": "deployed",
+    "stat_ts": "typescript",
+    "coord": "PL // 52°N 16°E",
+    "version": "v1.0.0 — 2026"
+  },
+  "projects": {
+    "label": "Projects",
+    "title": "Featured projects",
+    "description": "Projects that best demonstrate my technical skills and approach to building.",
+    "all": "All projects",
+    "case_study": "Case study",
+    "status_live": "Live",
+    "status_wip": "In Progress",
+    "status_archived": "Archived",
+    "diff_beginner": "Beginner",
+    "diff_intermediate": "Intermediate",
+    "diff_advanced": "Advanced"
+  },
+  "proof": {
+    "label": "Technical quality",
+    "title": "Not just pretty UI — real frontend",
+    "description": "Every decision has a technical reason behind it."
+  },
+  "learning": {
+    "label": "Learning",
+    "title": "Intentional learning path",
+    "description": "Every stage confirmed by a project, not just a tutorial.",
+    "cta": "See full roadmap",
+    "progress": "Progress"
+  },
+  "contact_cta": {
+    "label": "Contact",
+    "title": "Looking for a junior frontend developer who cares about clean UI and code quality?",
+    "subtitle": "I'd love to talk about collaboration, internship or job opportunities.",
+    "cta_primary": "Get in touch",
+    "cta_secondary": "View projects"
+  }
+}
