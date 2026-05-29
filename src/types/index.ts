@@ -43,3 +43,17 @@ export type Project = {
   image: string;
   createdAt: string;
 };
+
+export type SkillLevel = "learning" | "comfortable" | "confident";
+
+export type SkillCategory = "core" | "ui" | "state-data" | "testing" | "tooling";
+
+export type Skill = {
+  id: string;
+  name: string;
+  level: SkillLevel;
+  category: SkillCategory;
+  description: LocalizedText;
+  usedIn: string[];
+  icon: string;
+};

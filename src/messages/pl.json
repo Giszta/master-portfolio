@@ -69,5 +69,26 @@
     "subtitle": "Chętnie porozmawiam o możliwościach współpracy, stażu lub pracy.",
     "cta_primary": "Napisz do mnie",
     "cta_secondary": "Zobacz projekty"
+  },
+  "skills": {
+    "label": "Umiejętności",
+    "page_title": "Umiejętności techniczne",
+    "page_description": "Technologie których używam w realnych projektach — nie tylko tutorialach.",
+    "level_confident": "Pewny",
+    "level_comfortable": "Komfortowy",
+    "level_learning": "W nauce",
+    "level_confident_desc": "Używane w wielu projektach produkcyjnych",
+    "level_comfortable_desc": "Używane w projektach, nadal pogłębiam wiedzę",
+    "level_learning_desc": "Aktywnie się uczę, używane w projektach ćwiczeniowych",
+    "cat_core": "Języki i frameworki",
+    "cat_ui": "UI i stylowanie",
+    "cat_state_data": "Stan i dane",
+    "cat_testing": "Testowanie",
+    "cat_tooling": "Narzędzia i deployment",
+    "filter_all": "Wszystkie",
+    "used_in": "Użyte w",
+    "projects_count": "projektach",
+    "total_skills": "umiejętności",
+    "legend": "Legenda poziomów"
   }
 }
