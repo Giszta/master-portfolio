@@ -69,5 +69,26 @@
     "subtitle": "I'd love to talk about collaboration, internship or job opportunities.",
     "cta_primary": "Get in touch",
     "cta_secondary": "View projects"
+  },
+  "skills": {
+    "label": "Skills",
+    "page_title": "Technical skills",
+    "page_description": "Technologies I use in real projects — not just tutorials.",
+    "level_confident": "Confident",
+    "level_comfortable": "Comfortable",
+    "level_learning": "Learning",
+    "level_confident_desc": "Used in multiple production projects",
+    "level_comfortable_desc": "Used in projects, still deepening knowledge",
+    "level_learning_desc": "Actively learning, used in practice projects",
+    "cat_core": "Core languages & frameworks",
+    "cat_ui": "UI & styling",
+    "cat_state_data": "State & data",
+    "cat_testing": "Testing",
+    "cat_tooling": "Tools & deployment",
+    "filter_all": "All",
+    "used_in": "Used in",
+    "projects_count": "projects",
+    "total_skills": "skills",
+    "legend": "Skill level legend"
   }
 }
