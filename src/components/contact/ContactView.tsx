@@ -264,7 +264,7 @@ export function ContactView({ locale: _locale }: Props) {
           className="mb-3 text-[11px] tracking-[3px]"
           style={{ color: "#00ffb4", textTransform: "uppercase" }}
         >
-          // {t("label")}
+          {t("label")}
         </p>
         <h1
           className="mb-3 text-3xl font-bold tracking-tight lg:text-4xl"
@@ -573,7 +573,7 @@ export function ContactView({ locale: _locale }: Props) {
               className="mb-2 text-[9px] tracking-[2px]"
               style={{ color: "#bf00ff", textTransform: "uppercase" }}
             >
-              // {t("note_title")}
+              {t("note_title")}
             </p>
             <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
               {t("note_body")}
