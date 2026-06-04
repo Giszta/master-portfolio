@@ -5,36 +5,13 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { getFeaturedProjects } from "@/data/projectsData";
-import type { Locale, Project } from "@/types";
+import type { Locale } from "@/types";
+import { statusColor, statusLabel, categoryColor, cardGlow } from "@/lib/projectHelpers";
 
 type Props = { locale: Locale };
 
-function statusColor(status: Project["status"]) {
-  if (status === "live")
-    return { color: "#00ffb4", border: "rgba(0,255,180,0.3)", bg: "rgba(0,255,180,0.06)" };
-  if (status === "in-progress")
-    return { color: "#ffb800", border: "rgba(255,184,0,0.3)", bg: "rgba(255,184,0,0.06)" };
-  return { color: "#8899aa", border: "rgba(136,153,170,0.3)", bg: "rgba(136,153,170,0.06)" };
-}
-
-function statusLabel(status: Project["status"], locale: Locale) {
-  const m = {
-    live: { en: "live", pl: "live" },
-    "in-progress": { en: "in progress", pl: "w trakcie" },
-    archived: { en: "archived", pl: "archiwum" },
-  };
-  return m[status][locale];
-}
-
-function categoryColor(cat: Project["category"]) {
-  if (cat === "fullstack") return "#d44dff";
-  if (cat === "frontend") return "#00b4ff";
-  if (cat === "landing-page") return "#00ffb4";
-  return "#8899aa";
-}
-
 function hoverCyan(e: React.MouseEvent<HTMLElement>) {
-  e.currentTarget.style.color = "#00ffb4";
+  e.currentTarget.style.color = "var(--cyan)";
 }
 function hoverReset(color: string) {
   return (e: React.MouseEvent<HTMLElement>) => {
@@ -63,29 +40,6 @@ const ExternalIcon = () => (
   </svg>
 );
 
-function cardGlow(index: number) {
-  if (index === 0)
-    return {
-      border: "rgba(0,255,180,0.28)",
-      glow: "rgba(0,255,180,0.06)",
-      glowHover: "rgba(0,255,180,0.18)",
-      corner: "#00ffb4",
-    };
-  if (index === 1)
-    return {
-      border: "rgba(191,0,255,0.28)",
-      glow: "rgba(191,0,255,0.06)",
-      glowHover: "rgba(191,0,255,0.18)",
-      corner: "#d44dff",
-    };
-  return {
-    border: "rgba(0,180,255,0.28)",
-    glow: "rgba(0,180,255,0.06)",
-    glowHover: "rgba(0,180,255,0.18)",
-    corner: "#00b4ff",
-  };
-}
-
 export function FeaturedProjectsSection({ locale }: Props) {
   const t = useTranslations("projects");
   const projects = getFeaturedProjects();
@@ -96,7 +50,7 @@ export function FeaturedProjectsSection({ locale }: Props) {
         className="absolute top-0 right-0 left-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(0,255,180,0.15), rgba(191,0,255,0.15), transparent)",
+            "linear-gradient(90deg, transparent, var(--cyan-dim), var(--purple-dim), transparent)",
         }}
       />
 
@@ -111,26 +65,29 @@ export function FeaturedProjectsSection({ locale }: Props) {
           <div>
             <p
               className="mb-3 text-[11px] tracking-[3px]"
-              style={{ color: "#00ffb4", textTransform: "uppercase" }}
+              style={{ color: "var(--cyan)", textTransform: "uppercase" }}
             >
               {t("label")}
             </p>
             <h2
               className="text-3xl font-bold tracking-tight lg:text-4xl"
-              style={{ color: "#e8eaf0" }}
+              style={{ color: "var(--text-primary)" }}
             >
               {t("title")}
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+            <p
+              className="mt-3 max-w-xl text-sm leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
               {t("description")}
             </p>
           </div>
           <Link
             href="/projects"
             className="hidden shrink-0 text-[11px] tracking-[2px] transition-colors md:block"
-            style={{ color: "#8899aa", textTransform: "uppercase" }}
+            style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
             onMouseEnter={hoverCyan}
-            onMouseLeave={hoverReset("#8899aa")}
+            onMouseLeave={hoverReset("var(--text-secondary)")}
           >
             {t("all")} →
           </Link>
@@ -141,12 +98,11 @@ export function FeaturedProjectsSection({ locale }: Props) {
             const sc = statusColor(project.status);
             const cc = categoryColor(project.category);
             const glow = cardGlow(i);
-            const isFeatured = i === 0;
 
             return (
               <motion.article
                 key={project.slug}
-                className={`group relative flex flex-col transition-all duration-300`}
+                className="group relative flex flex-col transition-all duration-300"
                 style={{
                   border: `1px solid ${glow.border}`,
                   background: "rgba(10,15,26,0.85)",
@@ -204,7 +160,7 @@ export function FeaturedProjectsSection({ locale }: Props) {
                     {/* Color tint per karta */}
                     <div
                       className="absolute inset-0"
-                      style={{ background: `${glow.corner}0a`, mixBlendMode: "color" }}
+                      style={{ background: `${glow.cornerRaw}0a`, mixBlendMode: "color" }}
                       aria-hidden="true"
                     />
                     {/* Scan line na hover */}
@@ -212,8 +168,8 @@ export function FeaturedProjectsSection({ locale }: Props) {
                       className="absolute right-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                       style={{
                         height: "2px",
-                        background: `linear-gradient(90deg, transparent, ${glow.corner}99, transparent)`,
-                        boxShadow: `0 0 8px ${glow.corner}66`,
+                        background: `linear-gradient(90deg, transparent, ${glow.cornerRaw}99, transparent)`,
+                        boxShadow: `0 0 8px ${glow.cornerRaw}66`,
                       }}
                       animate={{ top: ["0%", "100%"] }}
                       transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
@@ -227,13 +183,13 @@ export function FeaturedProjectsSection({ locale }: Props) {
                           rel="noopener noreferrer"
                           className="flex items-center justify-center border p-1.5 backdrop-blur-sm transition-colors"
                           style={{
-                            color: "#e8eaf0",
+                            color: "var(--text-primary)",
                             borderColor: "rgba(255,255,255,0.2)",
                             background: "rgba(5,8,16,0.7)",
                           }}
                           aria-label={`Live: ${project.title}`}
                           onMouseEnter={hoverCyan}
-                          onMouseLeave={hoverReset("#e8eaf0")}
+                          onMouseLeave={hoverReset("var(--text-primary)")}
                         >
                           <ExternalIcon />
                         </a>
@@ -244,13 +200,13 @@ export function FeaturedProjectsSection({ locale }: Props) {
                         rel="noopener noreferrer"
                         className="flex items-center justify-center border p-1.5 backdrop-blur-sm transition-colors"
                         style={{
-                          color: "#e8eaf0",
+                          color: "var(--text-primary)",
                           borderColor: "rgba(255,255,255,0.2)",
                           background: "rgba(5,8,16,0.7)",
                         }}
                         aria-label={`GitHub: ${project.title}`}
                         onMouseEnter={hoverCyan}
-                        onMouseLeave={hoverReset("#e8eaf0")}
+                        onMouseLeave={hoverReset("var(--text-primary)")}
                       >
                         <GitHubIcon />
                       </a>
@@ -275,9 +231,9 @@ export function FeaturedProjectsSection({ locale }: Props) {
                     <span
                       className="border px-2 py-0.5 text-[9px] tracking-[2px]"
                       style={{
-                        color: cc,
-                        borderColor: `${cc}44`,
-                        background: `${cc}0d`,
+                        color: cc.var,
+                        borderColor: `${cc.raw}44`,
+                        background: `${cc.raw}0d`,
                         textTransform: "uppercase",
                       }}
                     >
@@ -287,51 +243,42 @@ export function FeaturedProjectsSection({ locale }: Props) {
 
                   <h3
                     className="mb-2 text-base font-bold tracking-wide"
-                    style={{ color: "#e8eaf0" }}
+                    style={{ color: "var(--text-primary)" }}
                   >
                     {project.title}
                   </h3>
 
-                  <p className="mb-5 flex-1 text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+                  <p
+                    className="mb-5 flex-1 text-sm leading-relaxed"
+                    style={{ color: "var(--text-secondary)" }}
+                  >
                     {project.shortDescription[locale]}
                   </p>
 
                   <div className="mb-4 flex flex-wrap gap-1.5">
-                    {project.stack.slice(0, isFeatured ? 7 : 4).map((tech) => (
+                    {project.stack.map((tech) => (
                       <span
                         key={tech}
                         className="border px-2 py-0.5 text-[9px] tracking-[1.5px]"
                         style={{
-                          color: "rgba(0,255,180,0.6)",
-                          borderColor: "rgba(0,255,180,0.12)",
-                          background: "rgba(0,255,180,0.03)",
+                          color: "var(--cyan-muted)",
+                          borderColor: "var(--cyan-dim)",
+                          background: "var(--cyan-subtle)",
                           textTransform: "uppercase",
                         }}
                       >
                         {tech}
                       </span>
                     ))}
-                    {project.stack.length > (isFeatured ? 7 : 4) && (
-                      <span
-                        className="border px-2 py-0.5 text-[9px] tracking-[1.5px]"
-                        style={{
-                          color: "#445566",
-                          borderColor: "rgba(68,85,102,0.3)",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        +{project.stack.length - (isFeatured ? 7 : 4)}
-                      </span>
-                    )}
                   </div>
 
-                  <div className="border-t pt-4" style={{ borderColor: `${glow.corner}18` }}>
+                  <div className="border-t pt-4" style={{ borderColor: `${glow.cornerRaw}18` }}>
                     <Link
                       href={`/projects/${project.slug}`}
                       className="text-[10px] tracking-[2px] transition-colors"
-                      style={{ color: "#445566", textTransform: "uppercase" }}
+                      style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
                       onMouseEnter={hoverCyan}
-                      onMouseLeave={hoverReset("#445566")}
+                      onMouseLeave={hoverReset("var(--text-dim)")}
                     >
                       {t("case_study")} →
                     </Link>
