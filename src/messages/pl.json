@@ -4,7 +4,8 @@
     "skills": "Umiejętności",
     "about": "O mnie",
     "learning": "Nauka",
-    "contact": "Kontakt"
+    "contact": "Kontakt",
+    "footer_desc": "Frontend developer budujący czyste, testowane i produkcyjnie gotowe aplikacje webowe."
   },
   "hero": {
     "available": "Otwarty na role frontendowe",

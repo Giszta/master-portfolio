@@ -36,20 +36,24 @@ const LinkedInIcon = () => (
   </svg>
 );
 
-export function Footer() {
+type Props = { locale: "en" | "pl" };
+export function Footer({ locale }: Props) {
   const t = useTranslations("nav");
   const year = new Date().getFullYear();
-
+  const cvHref =
+    locale === "pl"
+      ? "/Engineer_Who_Codes-React_TS_Next_Tailwind-PL.pdf"
+      : "/Engineer_Who_Codes-React_TS_Next_Tailwind-EN.pdf";
   return (
     <footer
       className="relative border-t"
-      style={{ borderColor: "rgba(0,255,180,0.08)", background: "rgba(5,8,16,0.95)" }}
+      style={{ borderColor: "var(--cyan-glow)", background: "rgba(5,8,16,0.95)" }}
     >
       <div
         className="absolute top-0 right-0 left-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(0,255,180,0.2), rgba(191,0,255,0.2), transparent)",
+            "linear-gradient(90deg, transparent, var(--cyan-dim), var(--purple-dim), transparent)",
         }}
       />
 
@@ -60,19 +64,22 @@ export function Footer() {
             <div className="mb-4 flex items-center gap-2">
               <span
                 className="text-sm font-bold tracking-[3px]"
-                style={{ color: "#00ffb4", textTransform: "uppercase" }}
+                style={{ color: "var(--cyan)", textTransform: "uppercase" }}
               >
                 dev
               </span>
               <span
                 className="text-sm tracking-[3px]"
-                style={{ color: "#445566", textTransform: "uppercase" }}
+                style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
               >
                 .portfolio
               </span>
             </div>
-            <p className="mb-6 max-w-xs text-sm leading-relaxed" style={{ color: "#8899aa" }}>
-              Frontend developer building clean, tested and production-ready web applications.
+            <p
+              className="mb-6 max-w-xs text-sm leading-relaxed"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              {t("footer_desc")}
             </p>
             <div className="mb-8 flex flex-wrap gap-1.5">
               {STACK.map((s) => (
@@ -80,9 +87,9 @@ export function Footer() {
                   key={s}
                   className="border px-2 py-0.5 text-[9px] tracking-[1.5px]"
                   style={{
-                    color: "rgba(0,255,180,0.5)",
-                    borderColor: "rgba(0,255,180,0.12)",
-                    background: "rgba(0,255,180,0.03)",
+                    color: "var(--cyan-muted)",
+                    borderColor: "var(--cyan-dim)",
+                    background: "var(--cyan-subtle)",
                     textTransform: "uppercase",
                   }}
                 >
@@ -92,36 +99,40 @@ export function Footer() {
             </div>
             <div className="flex items-center gap-4">
               <a
-                href="https://github.com/yourusername"
+                href="https://github.com/Giszta"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="flex items-center gap-2 border px-3 py-2 text-[10px] tracking-[1.5px] transition-all hover:brightness-125"
                 style={{
-                  color: "#8899aa",
+                  color: "var(--text-secondary)",
                   borderColor: "rgba(136,153,170,0.15)",
                   background: "transparent",
                   textTransform: "uppercase",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00ffb4")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#8899aa")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cyan)")}
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
+                }
               >
                 <GitHubIcon /> GitHub
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/adam-giszter/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="flex items-center gap-2 border px-3 py-2 text-[10px] tracking-[1.5px] transition-all hover:brightness-125"
                 style={{
-                  color: "#8899aa",
+                  color: "var(--text-secondary)",
                   borderColor: "rgba(136,153,170,0.15)",
                   background: "transparent",
                   textTransform: "uppercase",
                 }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00b4ff")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#8899aa")}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--blue)")}
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
+                }
               >
                 <LinkedInIcon /> LinkedIn
               </a>
@@ -132,7 +143,7 @@ export function Footer() {
           <div>
             <p
               className="mb-5 text-[10px] tracking-[3px]"
-              style={{ color: "#00ffb4", textTransform: "uppercase" }}
+              style={{ color: "var(--cyan)", textTransform: "uppercase" }}
             >
               sitemap
             </p>
@@ -142,9 +153,9 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className="text-[11px] tracking-[2px] transition-colors"
-                    style={{ color: "#8899aa", textTransform: "uppercase" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = "#00ffb4")}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = "#8899aa")}
+                    style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = "var(--cyan)")}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-secondary)")}
                   >
                     {t(link.key)}
                   </Link>
@@ -157,31 +168,35 @@ export function Footer() {
           <div>
             <p
               className="mb-5 text-[10px] tracking-[3px]"
-              style={{ color: "#d44dff", textTransform: "uppercase" }}
+              style={{ color: "var(--purple)", textTransform: "uppercase" }}
             >
               contact
             </p>
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:twoj@email.com"
+                  href="mailto:a.m.giszter@gmail.com"
                   className="text-[11px] tracking-[1px] transition-colors"
-                  style={{ color: "#8899aa" }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00ffb4")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#8899aa")}
+                  style={{ color: "var(--text-secondary)" }}
+                  onMouseEnter={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color = "var(--cyan)")
+                  }
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
+                  }
                 >
-                  twoj@email.com
+                  a.m.giszter@gmail.com
                 </a>
               </li>
               <li>
                 <a
-                  href="/cv.pdf"
+                  href={cvHref}
                   download
                   className="inline-flex items-center gap-2 border px-4 py-2 text-[10px] font-bold tracking-[2px] transition-all hover:brightness-110"
                   style={{
-                    color: "#050810",
-                    background: "#00ffb4",
-                    borderColor: "#00ffb4",
+                    color: "var(--bg)",
+                    background: "var(--cyan)",
+                    borderColor: "var(--cyan)",
                     textTransform: "uppercase",
                     clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
                   }}
@@ -200,13 +215,13 @@ export function Footer() {
         >
           <p
             className="text-[9px] tracking-[2px]"
-            style={{ color: "#445566", textTransform: "uppercase" }}
+            style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
           >
             © {year} dev.portfolio — built with Next.js
           </p>
           <p
             className="text-[9px] tracking-[2.5px]"
-            style={{ color: "rgba(0,255,180,0.2)", textTransform: "uppercase" }}
+            style={{ color: "var(--cyan-muted)", textTransform: "uppercase" }}
           >
             PL // 52°N 16°E
           </p>

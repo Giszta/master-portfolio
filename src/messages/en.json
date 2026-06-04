@@ -4,7 +4,8 @@
     "skills": "Skills",
     "about": "About",
     "learning": "Learning",
-    "contact": "Contact"
+    "contact": "Contact",
+    "footer_desc": "Frontend developer building clean, tested and production-ready web applications."
   },
   "hero": {
     "available": "Open to frontend opportunities",
