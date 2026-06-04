@@ -85,7 +85,7 @@ export function AboutView({ locale: _locale }: Props) {
       title: t("approach_item_2_title"),
       desc: t("approach_item_2_desc"),
       icon: "02",
-      color: "#bf00ff",
+      color: "#d44dff",
     },
     {
       title: t("approach_item_3_title"),
@@ -103,7 +103,7 @@ export function AboutView({ locale: _locale }: Props) {
 
   const values = [
     { title: t("value_1_title"), desc: t("value_1_desc"), color: "#00ffb4" },
-    { title: t("value_2_title"), desc: t("value_2_desc"), color: "#bf00ff" },
+    { title: t("value_2_title"), desc: t("value_2_desc"), color: "#d44dff" },
     { title: t("value_3_title"), desc: t("value_3_desc"), color: "#00b4ff" },
   ];
 
@@ -260,7 +260,7 @@ export function AboutView({ locale: _locale }: Props) {
                 />
                 <div
                   className="absolute right-0 bottom-0 h-5 w-5"
-                  style={{ borderBottom: "2px solid #bf00ff", borderRight: "2px solid #bf00ff" }}
+                  style={{ borderBottom: "2px solid #d44dff", borderRight: "2px solid #d44dff" }}
                 />
                 <div
                   className="absolute top-0 right-0 h-5 w-5"
@@ -308,7 +308,7 @@ export function AboutView({ locale: _locale }: Props) {
 
       {/* WHAT MATTERS */}
       <motion.section className="mb-24" {...fadeUp()}>
-        <SectionLabel text={t("section_values")} color="#bf00ff" />
+        <SectionLabel text={t("section_values")} color="#d44dff" />
         <div className="grid gap-4 lg:grid-cols-3">
           {values.map((val, i) => (
             <motion.div key={i} {...fadeUp(i * 0.1)}>
@@ -345,7 +345,7 @@ export function AboutView({ locale: _locale }: Props) {
           />
           <div className="space-y-6">
             {timeline.map((item, i) => {
-              const colors = ["#00ffb4", "#bf00ff", "#00b4ff", "#00ffb4"];
+              const colors = ["#00ffb4", "#d44dff", "#00b4ff", "#00ffb4"];
               const color = colors[i];
               return (
                 <motion.div

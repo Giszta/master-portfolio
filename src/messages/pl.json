@@ -7,18 +7,18 @@
     "contact": "Kontakt"
   },
   "hero": {
-    "available": "Dostępny do pracy",
+    "available": "Otwarty na role frontendowe",
     "title_line1": "Frontend",
     "title_line2": "Developer",
-    "title_line3": "// next.js",
+    "title_line3": "// next.js & typescript",
     "subtitle": "Buduję czyste, testowane i produkcyjnie dopracowane aplikacje webowe.",
     "stack_line": "Next.js · TypeScript · Tailwind · Vitest",
     "cta_projects": "Projekty",
     "cta_contact": "Kontakt",
     "cta_cv": "Pobierz CV",
-    "photo_label": "twoje zdjęcie tutaj",
-    "stat_coverage": "test coverage",
-    "stat_ts": "typescript",
+    "photo_label": "Giszter.dev",
+    "stat_deploy": "Dostępne online",
+    "stat_ts": "TypeScript-first",
     "coord": "PL // 52°N 16°E",
     "version": "v1.0.0 — 2026"
   },

@@ -64,7 +64,7 @@ function ProjectCard({
   const sc = statusColor(project.status);
   const cc = categoryColor(project.category);
 
-  const glowColor = index % 3 === 0 ? "#00ffb4" : index % 3 === 1 ? "#bf00ff" : "#00b4ff";
+  const glowColor = index % 3 === 0 ? "#00ffb4" : index % 3 === 1 ? "#d44dff" : "#00b4ff";
   const glowRgba =
     index % 3 === 0
       ? "rgba(0,255,180,0.06)"

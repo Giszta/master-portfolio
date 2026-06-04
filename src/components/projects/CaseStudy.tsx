@@ -13,7 +13,7 @@ type Props = {
 };
 
 function SectionHeader({ label, index }: { label: string; index: number }) {
-  const colors = ["#00ffb4", "#bf00ff", "#00b4ff", "#00ffb4"];
+  const colors = ["#00ffb4", "#d44dff", "#00b4ff", "#00ffb4"];
   return (
     <div className="mb-6 flex items-center gap-3">
       <span className="text-[10px] tracking-[2px]" style={{ color: colors[index % colors.length], textTransform: "uppercase" }}>
@@ -186,7 +186,7 @@ export function CaseStudy({ project, locale }: Props) {
                   style={{ borderColor: "rgba(191,0,255,0.2)", background: "rgba(191,0,255,0.03)" }}>
                   <div className="grid gap-4 sm:grid-cols-3">
                     <div>
-                      <p className="mb-1.5 text-[9px] tracking-[2px]" style={{ color: "#bf00ff", textTransform: "uppercase" }}>{t("problem")}</p>
+                      <p className="mb-1.5 text-[9px] tracking-[2px]" style={{ color: "#d44dff", textTransform: "uppercase" }}>{t("problem")}</p>
                       <p className="text-sm leading-relaxed" style={{ color: "#8899aa" }}>{td.problem[locale]}</p>
                     </div>
                     <div>

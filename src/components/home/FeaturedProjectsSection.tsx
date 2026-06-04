@@ -27,7 +27,7 @@ function statusLabel(status: Project["status"], locale: Locale) {
 }
 
 function categoryColor(cat: Project["category"]) {
-  if (cat === "fullstack") return "#bf00ff";
+  if (cat === "fullstack") return "#d44dff";
   if (cat === "frontend") return "#00b4ff";
   if (cat === "landing-page") return "#00ffb4";
   return "#8899aa";
@@ -76,7 +76,7 @@ function cardGlow(index: number) {
       border: "rgba(191,0,255,0.28)",
       glow: "rgba(191,0,255,0.06)",
       glowHover: "rgba(191,0,255,0.18)",
-      corner: "#bf00ff",
+      corner: "#d44dff",
     };
   return {
     border: "rgba(0,180,255,0.28)",

@@ -244,7 +244,7 @@ export type SkillCategoryKey = "core" | "ui" | "state-data" | "testing" | "tooli
 
 export const categoryMeta: Record<SkillCategoryKey, { labelEn: string; labelPl: string; color: string; border: string; glow: string }> = {
   core:        { labelEn: "Core languages & frameworks", labelPl: "Języki i frameworki",         color: "#00ffb4", border: "rgba(0,255,180,0.28)",  glow: "rgba(0,255,180,0.06)"  },
-  ui:          { labelEn: "UI & styling",                labelPl: "UI i stylowanie",              color: "#bf00ff", border: "rgba(191,0,255,0.28)", glow: "rgba(191,0,255,0.06)" },
+  ui:          { labelEn: "UI & styling",                labelPl: "UI i stylowanie",              color: "#d44dff", border: "rgba(191,0,255,0.28)", glow: "rgba(191,0,255,0.06)" },
   "state-data":{ labelEn: "State & data",               labelPl: "Stan i dane",                  color: "#00b4ff", border: "rgba(0,180,255,0.28)",  glow: "rgba(0,180,255,0.06)"  },
   testing:     { labelEn: "Testing",                     labelPl: "Testowanie",                   color: "#ff6b6b", border: "rgba(255,107,107,0.28)", glow: "rgba(255,107,107,0.06)"},
   tooling:     { labelEn: "Tools & deployment",          labelPl: "Narzędzia i deployment",       color: "#ffb800", border: "rgba(255,184,0,0.28)",  glow: "rgba(255,184,0,0.06)"  },

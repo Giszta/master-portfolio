@@ -684,7 +684,7 @@ export const statusMeta = {
     labelPl: "Ukończone",
   },
   active: {
-    color: "#bf00ff",
+    color: "#d44dff",
     border: "rgba(191,0,255,0.35)",
     bg: "rgba(191,0,255,0.08)",
     symbol: "▶",

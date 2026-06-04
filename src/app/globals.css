@@ -2,19 +2,46 @@
 
 @layer base {
   :root {
+    /* ── Backgrounds ── */
     --bg: #050810;
     --bg-surface: #0a0f1a;
-    --bg-card: #0d1525;
+    --bg-card: rgba(10, 15, 26, 0.85);
+
+    /* ── Cyan ── */
     --cyan: #00ffb4;
+    --cyan-border: rgba(0, 255, 180, 0.28);
+    --cyan-glow: rgba(0, 255, 180, 0.06);
+    --cyan-glow-hover: rgba(0, 255, 180, 0.18);
     --cyan-dim: rgba(0, 255, 180, 0.12);
-    --cyan-border: rgba(0, 255, 180, 0.25);
-    --purple: #bf00ff;
-    --purple-dim: rgba(191, 0, 255, 0.1);
-    --purple-border: rgba(191, 0, 255, 0.25);
+    --cyan-muted: rgba(0, 255, 180, 0.5);
+    --cyan-subtle: rgba(0, 255, 180, 0.05);
+
+    /* ── Purple ── */
+    --purple: #da6aff;
+    --purple-border: rgba(218, 106, 255, 0.28);
+    --purple-glow: rgba(218, 106, 255, 0.06);
+    --purple-glow-hover: rgba(218, 106, 255, 0.18);
+    --purple-dim: rgba(218, 106, 255, 0.12);
+    --purple-muted: rgba(218, 106, 255, 0.5);
+    --purple-subtle: rgba(218, 106, 255, 0.05);
+
+    /* ── Blue ── */
     --blue: #00b4ff;
-    --blue-dim: rgba(0, 180, 255, 0.1);
+    --blue-border: rgba(0, 180, 255, 0.28);
+    --blue-glow: rgba(0, 180, 255, 0.06);
+    --blue-glow-hover: rgba(0, 180, 255, 0.18);
+    --blue-dim: rgba(0, 180, 255, 0.12);
+    --blue-muted: rgba(0, 180, 255, 0.5);
+    --blue-subtle: rgba(0, 180, 255, 0.05);
+
+    /* ── Accents ── */
+    --amber: #ffb800;
+    --red: #ff6b6b;
+
+    /* ── Text ── */
     --text-primary: #e8eaf0;
     --text-secondary: #8899aa;
+    --text-muted: #aab8c8;
     --text-dim: #445566;
   }
 
@@ -51,5 +78,24 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 255, 180, 0.3);
+  }
+}
+
+@layer utilities {
+  /* ── Neon text glow ── */
+  .glow-cyan {
+    text-shadow:
+      0 0 24px rgba(0, 255, 180, 0.5),
+      0 0 48px rgba(0, 255, 180, 0.18);
+  }
+  .glow-purple {
+    text-shadow:
+      0 0 24px rgba(218, 106, 255, 0.5),
+      0 0 48px rgba(218, 106, 255, 0.18);
+  }
+  .glow-blue {
+    text-shadow:
+      0 0 24px rgba(0, 180, 255, 0.5),
+      0 0 48px rgba(0, 180, 255, 0.18);
   }
 }
