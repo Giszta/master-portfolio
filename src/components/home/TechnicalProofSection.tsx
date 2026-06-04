@@ -88,7 +88,7 @@ const accentColors = {
     bg: "rgba(0,255,180,0.06)",
   },
   purple: {
-    color: "#bf00ff",
+    color: "#d44dff",
     border: "rgba(191,0,255,0.28)",
     glow: "rgba(191,0,255,0.06)",
     glowHover: "rgba(191,0,255,0.14)",
@@ -128,7 +128,7 @@ export function TechnicalProofSection({ locale }: Props) {
         >
           <p
             className="mb-3 text-[11px] tracking-[3px]"
-            style={{ color: "#bf00ff", textTransform: "uppercase" }}
+            style={{ color: "#d44dff", textTransform: "uppercase" }}
           >
             {t("label")}
           </p>

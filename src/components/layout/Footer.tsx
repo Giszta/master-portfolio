@@ -157,7 +157,7 @@ export function Footer() {
           <div>
             <p
               className="mb-5 text-[10px] tracking-[3px]"
-              style={{ color: "#bf00ff", textTransform: "uppercase" }}
+              style={{ color: "#d44dff", textTransform: "uppercase" }}
             >
               contact
             </p>

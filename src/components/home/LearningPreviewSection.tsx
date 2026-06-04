@@ -23,7 +23,7 @@ const PATH: LearningItem[] = [
 
 const statusStyle = {
   done:    { color: "#00ffb4", border: "rgba(0,255,180,0.2)",  bg: "rgba(0,255,180,0.05)",  symbol: "✓" },
-  active:  { color: "#bf00ff", border: "rgba(191,0,255,0.3)", bg: "rgba(191,0,255,0.08)", symbol: "▶" },
+  active:  { color: "#d44dff", border: "rgba(191,0,255,0.3)", bg: "rgba(191,0,255,0.08)", symbol: "▶" },
   planned: { color: "#445566", border: "rgba(68,85,102,0.2)", bg: "transparent",            symbol: "○" },
 };
 
@@ -138,7 +138,7 @@ export function LearningPreviewSection({ locale }: Props) {
                         {item.label}
                       </p>
                       {item.status === "active" && (
-                        <span className="shrink-0 border px-1.5 py-0.5 text-[8px] tracking-[2px]" style={{ color: "#bf00ff", borderColor: "rgba(191,0,255,0.3)", textTransform: "uppercase" }}>
+                        <span className="shrink-0 border px-1.5 py-0.5 text-[8px] tracking-[2px]" style={{ color: "#d44dff", borderColor: "rgba(191,0,255,0.3)", textTransform: "uppercase" }}>
                           {locale === "pl" ? "aktywny" : "active"}
                         </span>
                       )}

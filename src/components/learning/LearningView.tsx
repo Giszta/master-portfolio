@@ -35,7 +35,7 @@ function StatsBar({ locale: _l }: { locale: Locale }) {
     <div className="mb-12 grid gap-4 sm:grid-cols-3">
       {[
         { value: `${done}/${total}`, label: t("stat_done"),     color: "#00ffb4" },
-        { value: projects.toString(), label: t("stat_projects"), color: "#bf00ff" },
+        { value: projects.toString(), label: t("stat_projects"), color: "#d44dff" },
         { value: "52",               label: t("stat_tests"),    color: "#00b4ff" },
       ].map((stat, i) => (
         <motion.div
@@ -130,7 +130,7 @@ function StageCard({ stage, locale, index }: { stage: LearningStage; locale: Loc
           <div className="flex items-center gap-2">
             {isActive && (
               <span className="border px-2.5 py-1 text-[9px] tracking-[2px] animate-pulse"
-                style={{ color: "#bf00ff", borderColor: "rgba(191,0,255,0.4)", background: "rgba(191,0,255,0.08)", textTransform: "uppercase" }}>
+                style={{ color: "#d44dff", borderColor: "rgba(191,0,255,0.4)", background: "rgba(191,0,255,0.08)", textTransform: "uppercase" }}>
                 {t("active_badge")}
               </span>
             )}
@@ -164,7 +164,7 @@ function StageCard({ stage, locale, index }: { stage: LearningStage; locale: Loc
 
           {/* Projects */}
           <div>
-            <p className="mb-2 text-[9px] tracking-[2px]" style={{ color: "#bf00ff", textTransform: "uppercase" }}>
+            <p className="mb-2 text-[9px] tracking-[2px]" style={{ color: "#d44dff", textTransform: "uppercase" }}>
               {t("projects_built")}
             </p>
             {stage.projects.length > 0 ? (
@@ -173,7 +173,7 @@ function StageCard({ stage, locale, index }: { stage: LearningStage; locale: Loc
                   <Link key={slug} href={`/projects/${slug}`}
                     className="border px-2 py-0.5 text-[9px] tracking-[1px] transition-colors"
                     style={{ color: "rgba(191,0,255,0.7)", borderColor: "rgba(191,0,255,0.2)", background: "rgba(191,0,255,0.04)", textTransform: "uppercase" }}
-                    onMouseEnter={e => { e.currentTarget.style.color = "#bf00ff"; }}
+                    onMouseEnter={e => { e.currentTarget.style.color = "#d44dff"; }}
                     onMouseLeave={e => { e.currentTarget.style.color = "rgba(191,0,255,0.7)"; }}>
                     {slug} →
                   </Link>
@@ -238,7 +238,7 @@ function StageCard({ stage, locale, index }: { stage: LearningStage; locale: Loc
 function PhilosophySection({ locale: _locale }: { locale: Locale }) {
   const t = useTranslations("learning");
   const items = [t("philosophy_1"), t("philosophy_2"), t("philosophy_3")];
-  const colors = ["#00ffb4", "#bf00ff", "#00b4ff"];
+  const colors = ["#00ffb4", "#d44dff", "#00b4ff"];
 
   return (
     <motion.section
@@ -304,7 +304,7 @@ export function LearningView({ locale }: Props) {
           const isActive = filter === f.key;
           const color = f.key === "all" ? "#00b4ff"
             : f.key === "done" ? "#00ffb4"
-            : f.key === "active" ? "#bf00ff"
+            : f.key === "active" ? "#d44dff"
             : "#445566";
           return (
             <button

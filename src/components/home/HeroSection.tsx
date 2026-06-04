@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { Locale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ParticleCanvas } from "./ParticleCanvas";
 import { PhotoFrame } from "./PhotoFrame";
+
+type Props = { locale: Locale };
 
 const TAGS = [
   { label: "TypeScript", color: "cyan" },
@@ -19,19 +21,19 @@ const TAGS = [
 
 const tagStyles: Record<string, React.CSSProperties> = {
   cyan: {
-    color: "#00ffb4",
-    borderColor: "rgba(0,255,180,0.3)",
-    background: "rgba(0,255,180,0.05)",
+    color: "var(--cyan)",
+    borderColor: "var(--cyan-border)",
+    background: "var(--cyan-subtle)",
   },
   purple: {
-    color: "#bf00ff",
-    borderColor: "rgba(191,0,255,0.3)",
-    background: "rgba(191,0,255,0.05)",
+    color: "var(--purple)",
+    borderColor: "var(--purple-border)",
+    background: "var(--purple-subtle)",
   },
   blue: {
-    color: "#00b4ff",
-    borderColor: "rgba(0,180,255,0.3)",
-    background: "rgba(0,180,255,0.05)",
+    color: "var(--blue)",
+    borderColor: "var(--blue-border)",
+    background: "var(--blue-subtle)",
   },
 };
 
@@ -51,8 +53,13 @@ const GitHubIcon = () => (
   </svg>
 );
 
-export function HeroSection() {
+export function HeroSection({ locale }: Props) {
   const t = useTranslations("hero");
+
+  const cvHref =
+    locale === "pl"
+      ? "/Engineer_Who_Codes-React_TS_Next_Tailwind-PL.pdf"
+      : "/Engineer_Who_Codes-React_TS_Next_Tailwind-EN.pdf";
 
   return (
     <section className="relative min-h-screen overflow-hidden" aria-label="Hero">
@@ -77,7 +84,7 @@ export function HeroSection() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-center px-6 pt-24 pb-20 lg:px-12">
         {/* Desktop: side-by-side | Mobile: tekst → zdjęcie → CTA */}
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_auto] lg:gap-20">
+        <div className="grid items-center gap-12 md:grid-cols-[1fr_auto] md:gap-20">
           {/* ── LEFT / TOP ── */}
           <div>
             {/* Status pill */}
@@ -85,17 +92,17 @@ export function HeroSection() {
               <span
                 className="mb-7 inline-flex items-center gap-2.5 border px-3.5 py-1.5 text-[11px] tracking-[2px]"
                 style={{
-                  color: "#00ffb4",
-                  borderColor: "rgba(0,255,180,0.35)",
-                  background: "rgba(0,255,180,0.06)",
+                  color: "var(--cyan)",
+                  borderColor: "var(--cyan-border)",
+                  background: "var(--cyan-subtle)",
                   textTransform: "uppercase",
                 }}
               >
                 <span
                   className="h-1.5 w-1.5 rounded-full"
                   style={{
-                    background: "#00ffb4",
-                    boxShadow: "0 0 8px #00ffb4",
+                    background: "var(--cyan)",
+                    boxShadow: "0 0 8px var(--cyan)",
                     animation: "pulse 1.6s ease-in-out infinite",
                   }}
                 />
@@ -109,23 +116,15 @@ export function HeroSection() {
               style={{ fontSize: "clamp(2.8rem, 6vw, 4.5rem)", fontWeight: 700 }}
               {...fadeUp(0.1)}
             >
-              <span style={{ color: "#e8eaf0", display: "block" }}>{t("title_line1")}</span>
-              <span
-                style={{
-                  color: "#00ffb4",
-                  display: "block",
-                  textShadow: "0 0 24px rgba(0,255,180,0.5), 0 0 48px rgba(0,255,180,0.18)",
-                }}
-              >
+              <span style={{ color: "var(--text-primary)", display: "block" }}>
+                {t("title_line1")}
+              </span>
+              <span className="glow-cyan" style={{ color: "var(--cyan)", display: "block" }}>
                 {t("title_line2")}
               </span>
               <span
-                style={{
-                  color: "#bf00ff",
-                  display: "block",
-                  textShadow: "0 0 24px rgba(191,0,255,0.5), 0 0 48px rgba(191,0,255,0.18)",
-                  fontSize: "0.72em",
-                }}
+                className="glow-purple"
+                style={{ color: "var(--purple)", display: "block", fontSize: "0.42em" }}
               >
                 {t("title_line3")}
               </span>
@@ -133,38 +132,40 @@ export function HeroSection() {
 
             {/* Subtitle */}
             <motion.div className="mb-8 space-y-1" {...fadeUp(0.2)}>
-              <p className="max-w-md text-base leading-relaxed" style={{ color: "#8899aa" }}>
+              <p
+                className="max-w-md text-base leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
+              >
                 {t("subtitle")}
               </p>
-              <p className="text-sm" style={{ color: "rgba(0,255,180,0.45)" }}>
+              <p className="text-sm" style={{ color: "var(--cyan-muted)" }}>
                 {t("stack_line")}
               </p>
             </motion.div>
 
             {/* ── MOBILE ONLY — zdjęcie między tekstem a CTA ── */}
             <motion.div
-              className="mb-8 flex justify-center lg:hidden"
+              className="flex justify-center md:hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <div className="origin-top scale-[0.78]">
-                <PhotoFrame
-                  statDeploy={t("stat_deploy")}
-                  statTs={t("stat_ts")}
-                  photoLabel={t("photo_label")}
-                />
+                <PhotoFrame statDeploy={t("stat_deploy")} statTs={t("stat_ts")} />
               </div>
             </motion.div>
 
             {/* CTA buttons */}
-            <motion.div className="mb-10 flex flex-wrap gap-3" {...fadeUp(0.4)}>
+            <motion.div
+              className="mb-10 flex flex-wrap justify-center gap-3 md:justify-start"
+              {...fadeUp(0.4)}
+            >
               <Link
                 href="/projects"
                 className="inline-flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[2px] transition-all hover:brightness-110 active:scale-95"
                 style={{
-                  background: "#00ffb4",
-                  color: "#050810",
+                  background: "var(--cyan)",
+                  color: "var(--bg)",
                   textTransform: "uppercase",
                   clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
                 }}
@@ -176,8 +177,8 @@ export function HeroSection() {
                 href="/contact"
                 className="inline-flex items-center gap-2 border px-6 py-2.5 text-[11px] tracking-[2px] transition-all hover:brightness-125 active:scale-95"
                 style={{
-                  color: "#00ffb4",
-                  borderColor: "rgba(0,255,180,0.35)",
+                  color: "var(--cyan)",
+                  borderColor: "var(--cyan-border)",
                   background: "transparent",
                   textTransform: "uppercase",
                   clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
@@ -186,11 +187,11 @@ export function HeroSection() {
                 {t("cta_contact")}
               </Link>
               <a
-                href="/cv.pdf"
+                href={cvHref}
                 className="inline-flex items-center gap-2 border px-6 py-2.5 text-[11px] tracking-[2px] transition-all hover:brightness-125 active:scale-95"
                 style={{
-                  color: "#8899aa",
-                  borderColor: "rgba(136,153,170,0.2)",
+                  color: "var(--text-secondary)",
+                  borderColor: "var(--cyan-border)",
                   background: "transparent",
                   textTransform: "uppercase",
                   clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
@@ -203,7 +204,7 @@ export function HeroSection() {
 
             {/* Tech tags */}
             <motion.div
-              className="flex flex-wrap gap-2"
+              className="flex flex-wrap justify-center gap-2 md:justify-start"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
@@ -225,16 +226,12 @@ export function HeroSection() {
 
           {/* ── RIGHT — Desktop only ── */}
           <motion.div
-            className="hidden lg:flex lg:items-center lg:justify-center"
+            className="hidden md:flex md:items-center md:justify-center"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <PhotoFrame
-              statDeploy={t("stat_deploy")}
-              statTs={t("stat_ts")}
-              photoLabel={t("photo_label")}
-            />
+            <PhotoFrame statDeploy={t("stat_deploy")} statTs={t("stat_ts")} />
           </motion.div>
         </div>
 
@@ -247,35 +244,37 @@ export function HeroSection() {
           transition={{ delay: 0.9 }}
         >
           <span
-            className="text-[9px] tracking-[2.5px]"
-            style={{ color: "rgba(0,255,180,0.3)", textTransform: "uppercase" }}
+            className="hidden text-[9px] tracking-[2.5px] sm:inline-block"
+            style={{ color: "var(--cyan-muted)", textTransform: "uppercase" }}
           >
             {t("coord")}
           </span>
-          <span style={{ color: "rgba(0,255,180,0.15)" }}>·</span>
+          <span className="hidden sm:inline-block" style={{ color: "var(--cyan-muted)" }}>
+            ·
+          </span>
           <span
             className="text-[9px] tracking-[2.5px]"
-            style={{ color: "rgba(0,255,180,0.3)", textTransform: "uppercase" }}
+            style={{ color: "var(--cyan-muted)", textTransform: "uppercase" }}
           >
             {t("version")}
           </span>
           <div className="ml-auto flex items-center gap-4">
             <span
               className="text-[9px] tracking-[2px]"
-              style={{ color: "rgba(136,153,170,0.4)", textTransform: "uppercase" }}
+              style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
             >
               find me on
             </span>
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/Giszta"
               target="_blank"
               rel="noopener noreferrer"
               className="transition-colors"
-              style={{ color: "rgba(136,153,170,0.4)" }}
+              style={{ color: "var(--text-secondary)" }}
               aria-label="GitHub profile"
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00ffb4")}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cyan)")}
               onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "rgba(136,153,170,0.4)")
+                ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
               }
             >
               <GitHubIcon />
@@ -286,7 +285,7 @@ export function HeroSection() {
 
       <div
         className="pointer-events-none absolute right-0 bottom-0 left-0 z-10 h-32"
-        style={{ background: "linear-gradient(to bottom, transparent, #050810)" }}
+        style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
         aria-hidden="true"
       />
 

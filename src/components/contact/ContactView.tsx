@@ -235,7 +235,7 @@ export function ContactView({ locale: _locale }: Props) {
       label: t("info_location_label"),
       value: t("info_location_value"),
       href: undefined,
-      color: "#bf00ff",
+      color: "#d44dff",
     },
     {
       label: t("info_availability_label"),
@@ -564,14 +564,14 @@ export function ContactView({ locale: _locale }: Props) {
             <div
               className="absolute top-0 left-0 h-3.5 w-3.5"
               style={{
-                borderTop: "2px solid #bf00ff",
-                borderLeft: "2px solid #bf00ff",
+                borderTop: "2px solid #d44dff",
+                borderLeft: "2px solid #d44dff",
                 opacity: 0.5,
               }}
             />
             <p
               className="mb-2 text-[9px] tracking-[2px]"
-              style={{ color: "#bf00ff", textTransform: "uppercase" }}
+              style={{ color: "#d44dff", textTransform: "uppercase" }}
             >
               {t("note_title")}
             </p>
