@@ -23,15 +23,16 @@ export function Navbar({ locale }: Props) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const cvHref =
+    locale === "pl"
+      ? "/Engineer_Who_Codes-React_TS_Next_Tailwind-PL.pdf"
+      : "/Engineer_Who_Codes-React_TS_Next_Tailwind-EN.pdf";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
 
   const switchLocale = () => {
     const next = locale === "en" ? "pl" : "en";
@@ -59,21 +60,21 @@ export function Navbar({ locale }: Props) {
           <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
             <span
               className="text-sm font-bold tracking-[3px]"
-              style={{ color: "#00ffb4", textTransform: "uppercase" }}
+              style={{ color: "var(--cyan)", textTransform: "uppercase" }}
             >
               dev
             </span>
             <span
               className="text-sm tracking-[3px]"
-              style={{ color: "#445566", textTransform: "uppercase" }}
+              style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
             >
               .portfolio
             </span>
             <span
               className="ml-1 h-2 w-2 rounded-full"
               style={{
-                background: "#00ffb4",
-                boxShadow: "0 0 6px #00ffb4",
+                background: "var(--cyan)",
+                boxShadow: "0 0 6px var(--cyan)",
                 animation: "pulse 2s ease-in-out infinite",
               }}
             />
@@ -88,12 +89,17 @@ export function Navbar({ locale }: Props) {
                   key={link.key}
                   href={link.href}
                   className="relative px-3 py-2 text-[11px] tracking-[2px] transition-colors"
-                  style={{ color: active ? "#00ffb4" : "#8899aa", textTransform: "uppercase" }}
+                  style={{
+                    color: active ? "var(--cyan)" : "var(--text-secondary)",
+                    textTransform: "uppercase",
+                  }}
                   onMouseEnter={(e) => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = "#e8eaf0";
+                    if (!active)
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
                   }}
                   onMouseLeave={(e) => {
-                    if (!active) (e.currentTarget as HTMLElement).style.color = "#8899aa";
+                    if (!active)
+                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
                   }}
                 >
                   {active && (
@@ -101,8 +107,8 @@ export function Navbar({ locale }: Props) {
                       layoutId="nav-active"
                       className="absolute inset-0"
                       style={{
-                        background: "rgba(0,255,180,0.06)",
-                        borderBottom: "1px solid rgba(0,255,180,0.4)",
+                        background: "var(--cyan-subtle)",
+                        borderBottom: "1px solid var(--cyan-border)",
                       }}
                       transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                     />
@@ -119,7 +125,7 @@ export function Navbar({ locale }: Props) {
               onClick={switchLocale}
               className="border px-3 py-1.5 text-[10px] tracking-[2px] transition-all hover:brightness-125"
               style={{
-                color: "#8899aa",
+                color: "var(--text-secondary)",
                 borderColor: "rgba(136,153,170,0.2)",
                 background: "transparent",
                 textTransform: "uppercase",
@@ -130,13 +136,13 @@ export function Navbar({ locale }: Props) {
               {locale === "en" ? "PL" : "EN"}
             </button>
             <a
-              href="/cv.pdf"
+              href={cvHref}
               download
               className="border px-4 py-1.5 text-[10px] font-bold tracking-[2px] transition-all hover:brightness-110"
               style={{
-                color: "#050810",
-                background: "#00ffb4",
-                borderColor: "#00ffb4",
+                color: "var(--bg)",
+                background: "var(--cyan)",
+                borderColor: "var(--cyan)",
                 textTransform: "uppercase",
                 clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
               }}
@@ -150,7 +156,7 @@ export function Navbar({ locale }: Props) {
             <button
               onClick={switchLocale}
               className="text-[10px] tracking-[2px]"
-              style={{ color: "#8899aa", textTransform: "uppercase" }}
+              style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
               aria-label="Switch language"
             >
               {locale === "en" ? "PL" : "EN"}
@@ -163,19 +169,19 @@ export function Navbar({ locale }: Props) {
             >
               <motion.span
                 className="block h-px w-5"
-                style={{ background: "#00ffb4" }}
+                style={{ background: "var(--cyan)" }}
                 animate={{ rotate: menuOpen ? 45 : 0, y: menuOpen ? 5 : 0 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.span
                 className="block h-px w-5"
-                style={{ background: "#00ffb4" }}
+                style={{ background: "var(--cyan)" }}
                 animate={{ opacity: menuOpen ? 0 : 1 }}
                 transition={{ duration: 0.2 }}
               />
               <motion.span
                 className="block h-px w-5"
-                style={{ background: "#00ffb4" }}
+                style={{ background: "var(--cyan)" }}
                 animate={{ rotate: menuOpen ? -45 : 0, y: menuOpen ? -5 : 0 }}
                 transition={{ duration: 0.2 }}
               />
@@ -215,19 +221,25 @@ export function Navbar({ locale }: Props) {
                   >
                     <Link
                       href={link.href}
+                      onClick={() => setMenuOpen(false)}
                       className="flex items-center gap-3 border-b py-5 text-lg font-bold tracking-[2px] transition-colors"
                       style={{
-                        color: active ? "#00ffb4" : "#8899aa",
-                        borderColor: "rgba(0,255,180,0.06)",
+                        color: active ? "var(--cyan)" : "var(--text-secondary)",
+                        borderColor: "var(--cyan-glow)",
                         textTransform: "uppercase",
                       }}
                     >
-                      <span style={{ color: active ? "#00ffb4" : "#445566", fontSize: "11px" }}>
+                      <span
+                        style={{
+                          color: active ? "var(--cyan)" : "var(--text-dim)",
+                          fontSize: "11px",
+                        }}
+                      >
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       {t(link.key)}
                       {active && (
-                        <span className="ml-auto" style={{ color: "#00ffb4" }}>
+                        <span className="ml-auto" style={{ color: "var(--cyan)" }}>
                           →
                         </span>
                       )}
@@ -242,12 +254,12 @@ export function Navbar({ locale }: Props) {
                 transition={{ delay: 0.35 }}
               >
                 <a
-                  href="/cv.pdf"
+                  href={cvHref}
                   download
                   className="inline-flex items-center gap-2 px-6 py-3 text-[11px] font-bold tracking-[2px]"
                   style={{
-                    background: "#00ffb4",
-                    color: "#050810",
+                    background: "var(--cyan)",
+                    color: "var(--bg)",
                     textTransform: "uppercase",
                     clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
                   }}
@@ -259,13 +271,6 @@ export function Navbar({ locale }: Props) {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.7); }
-        }
-      `}</style>
     </>
   );
 }

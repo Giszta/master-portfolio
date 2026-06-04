@@ -99,3 +99,15 @@
       0 0 48px rgba(0, 180, 255, 0.18);
   }
 }
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}

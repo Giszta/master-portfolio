@@ -288,13 +288,6 @@ export function HeroSection({ locale }: Props) {
         style={{ background: "linear-gradient(to bottom, transparent, var(--bg))" }}
         aria-hidden="true"
       />
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.35; transform: scale(0.75); }
-        }
-      `}</style>
     </section>
   );
 }
