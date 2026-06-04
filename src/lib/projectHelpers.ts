@@ -13,16 +13,20 @@ export type GlowStyle = {
   corner: string;
 };
 
-export function statusColor(status: Project["status"]): StatusStyle {
+export function statusColor(status: Project["status"]) {
   if (status === "live")
-    return { color: "#00ffb4", border: "rgba(0,255,180,0.3)", bg: "rgba(0,255,180,0.06)" };
+    return { color: "var(--cyan)", border: "var(--cyan-border)", bg: "var(--cyan-glow)" };
   if (status === "in-progress")
-    return { color: "#ffb800", border: "rgba(255,184,0,0.3)", bg: "rgba(255,184,0,0.06)" };
-  return { color: "#8899aa", border: "rgba(136,153,170,0.3)", bg: "rgba(136,153,170,0.06)" };
+    return { color: "var(--amber)", border: "rgba(255,184,0,0.3)", bg: "rgba(255,184,0,0.06)" };
+  return {
+    color: "var(--text-secondary)",
+    border: "rgba(136,153,170,0.3)",
+    bg: "rgba(136,153,170,0.06)",
+  };
 }
 
-export function statusLabel(status: Project["status"], locale: Locale): string {
-  const m: Record<Project["status"], Record<Locale, string>> = {
+export function statusLabel(status: Project["status"], locale: Locale) {
+  const m = {
     live: { en: "live", pl: "live" },
     "in-progress": { en: "in progress", pl: "w trakcie" },
     archived: { en: "archived", pl: "archiwum" },
@@ -30,33 +34,36 @@ export function statusLabel(status: Project["status"], locale: Locale): string {
   return m[status][locale];
 }
 
-export function categoryColor(cat: Project["category"]): string {
-  if (cat === "fullstack") return "#d44dff";
-  if (cat === "frontend") return "#00b4ff";
-  if (cat === "landing-page") return "#00ffb4";
-  return "#8899aa";
+export function categoryColor(cat: Project["category"]) {
+  if (cat === "fullstack") return { var: "var(--purple)", raw: "#da6aff" };
+  if (cat === "frontend") return { var: "var(--blue)", raw: "#00b4ff" };
+  if (cat === "landing-page") return { var: "var(--cyan)", raw: "#00ffb4" };
+  return { var: "var(--text-secondary)", raw: "#8899aa" };
 }
 
-export function cardGlow(index: number): GlowStyle {
+export function cardGlow(index: number) {
   if (index === 0)
     return {
-      border: "rgba(0,255,180,0.28)",
-      glow: "rgba(0,255,180,0.06)",
-      glowHover: "rgba(0,255,180,0.18)",
-      corner: "#00ffb4",
+      border: "var(--cyan-border)",
+      glow: "var(--cyan-glow)",
+      glowHover: "var(--cyan-glow-hover)",
+      corner: "var(--cyan)",
+      cornerRaw: "#00ffb4",
     };
   if (index === 1)
     return {
-      border: "rgba(191,0,255,0.28)",
-      glow: "rgba(191,0,255,0.06)",
-      glowHover: "rgba(191,0,255,0.18)",
-      corner: "#d44dff",
+      border: "var(--purple-border)",
+      glow: "var(--purple-glow)",
+      glowHover: "var(--purple-glow-hover)",
+      corner: "var(--purple)",
+      cornerRaw: "#da6aff",
     };
   return {
-    border: "rgba(0,180,255,0.28)",
-    glow: "rgba(0,180,255,0.06)",
-    glowHover: "rgba(0,180,255,0.18)",
-    corner: "#00b4ff",
+    border: "var(--blue-border)",
+    glow: "var(--blue-glow)",
+    glowHover: "var(--blue-glow-hover)",
+    corner: "var(--blue)",
+    cornerRaw: "#00b4ff",
   };
 }
 

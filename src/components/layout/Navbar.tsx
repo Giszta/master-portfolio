@@ -123,7 +123,7 @@ export function Navbar({ locale }: Props) {
           <div className="hidden items-center gap-3 lg:flex">
             <button
               onClick={switchLocale}
-              className="border px-3 py-1.5 text-[10px] tracking-[2px] transition-all hover:brightness-125"
+              className="cursor-pointer border px-3 py-1.5 text-[10px] tracking-[2px] transition-all hover:brightness-125"
               style={{
                 color: "var(--text-secondary)",
                 borderColor: "rgba(136,153,170,0.2)",
