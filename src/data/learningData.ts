@@ -13,6 +13,7 @@ export type LearningStage = {
   label: string;
   status: LearningStatus;
   year: string;
+  shortDescription: LocalizedText;
   description: LocalizedText;
   skills: string[];
   projects: string[];
@@ -27,6 +28,10 @@ export const learningPath: LearningStage[] = [
     label: "Web Fundamentals",
     status: "done",
     year: "2022",
+    shortDescription: {
+      en: "How browsers, HTTP, DNS, DOM and REST APIs actually work — before any framework.",
+      pl: "Jak naprawdę działają przeglądarki, HTTP, DNS, DOM i REST API — przed jakimkolwiek frameworkiem.",
+    },
     description: {
       en: "Before going deep into frameworks, I studied how the web actually works. Not just syntax — the full picture: browser internals, request/response cycle, DNS, DOM, rendering, REST APIs, DevTools. Documented in 22-section personal notes.",
       pl: "Zanim wszedłem głębiej we frameworki, przestudiowałem jak web faktycznie działa. Nie tylko składnia — pełny obraz: internals przeglądarki, cykl request/response, DNS, DOM, renderowanie, REST API, DevTools. Udokumentowane w 22-sekcyjnych osobistych notatkach.",
@@ -85,6 +90,10 @@ export const learningPath: LearningStage[] = [
     label: "HTML",
     status: "done",
     year: "2022",
+    shortDescription: {
+      en: "Semantic HTML5, accessible forms, ARIA basics and document structure.",
+      pl: "Semantyczny HTML5, dostępne formularze, podstawy ARIA i struktura dokumentu.",
+    },
     description: {
       en: "Semantic HTML5 as a foundation — not just tags, but understanding why semantics matter for accessibility, SEO and maintainability. Forms, validation, ARIA basics, document structure.",
       pl: "Semantyczny HTML5 jako fundament — nie tylko tagi, ale zrozumienie dlaczego semantyka ma znaczenie dla dostępności, SEO i utrzymywalności. Formularze, walidacja, podstawy ARIA, struktura dokumentu.",
@@ -129,6 +138,10 @@ export const learningPath: LearningStage[] = [
     label: "CSS",
     status: "done",
     year: "2022",
+    shortDescription: {
+      en: "Box model, Flexbox, Grid, custom properties, animations and responsive design.",
+      pl: "Box model, Flexbox, Grid, custom properties, animacje i responsywny design.",
+    },
     description: {
       en: "CSS from box model through Flexbox and Grid to animations, custom properties and responsive design. Learned to reproduce layouts from designs, build reusable UI patterns and write CSS that scales.",
       pl: "CSS od box model przez Flexbox i Grid po animacje, custom properties i responsywny design. Nauka odtwarzania layoutów z projektów, budowania reużywalnych wzorców UI i pisania CSS który się skaluje.",
@@ -177,6 +190,10 @@ export const learningPath: LearningStage[] = [
     label: "JavaScript",
     status: "done",
     year: "2022–2023",
+    shortDescription: {
+      en: "ES6+, closures, async/await, DOM and browser APIs — no frameworks, just foundations.",
+      pl: "ES6+, domknięcia, async/await, DOM i API przeglądarki — bez frameworków, tylko fundamenty.",
+    },
     description: {
       en: "Deep vanilla JS — ES6+, closures, async/await, DOM manipulation, array methods, event handling, and browser APIs like Page Visibility. No frameworks — just understanding the foundation that React and Next.js build on.",
       pl: "Głęboki czysty JS — ES6+, domknięcia, async/await, manipulacja DOM, metody tablic, obsługa zdarzeń i API przeglądarki jak Page Visibility. Bez frameworków — tylko zrozumienie fundamentu na którym stoją React i Next.js.",
@@ -223,6 +240,10 @@ export const learningPath: LearningStage[] = [
     label: "Git & GitHub",
     status: "done",
     year: "2023",
+    shortDescription: {
+      en: "Branches, conventional commits, pull requests — working like a real developer.",
+      pl: "Branche, conventional commits, pull requesty — praca jak prawdziwy developer.",
+    },
     description: {
       en: "Working like a real developer from the start — branches, meaningful commits, pull requests, .gitignore, clean repo structure. Conventional commits for clear history. All portfolio projects are on GitHub.",
       pl: "Praca jak prawdziwy developer od początku — branche, sensowne commity, pull requesty, .gitignore, czysta struktura repo. Conventional commits dla przejrzystej historii. Wszystkie projekty portfolio są na GitHubie.",
@@ -270,6 +291,10 @@ export const learningPath: LearningStage[] = [
     label: "TypeScript",
     status: "done",
     year: "2023–2024",
+    shortDescription: {
+      en: "Strict mode, generics, utility types, Zod validation. No any in production.",
+      pl: "Strict mode, generics, typy pomocnicze, Zod. Zero any w produkcji.",
+    },
     description: {
       en: "Added TypeScript to React projects. Basic types → generics → utility types → discriminated unions → strict mode. Zod for runtime validation that mirrors compile-time types. No any in production code.",
       pl: "Dodałem TypeScript do projektów React. Podstawowe typy → generics → typy pomocnicze → discriminated unions → strict mode. Zod do walidacji runtime odzwierciedlającej typy compile-time. Żadnego any w kodzie produkcyjnym.",
@@ -318,6 +343,10 @@ export const learningPath: LearningStage[] = [
     label: "React",
     status: "done",
     year: "2023",
+    shortDescription: {
+      en: "Hooks, custom hooks, component composition, state lifting and loading/error states.",
+      pl: "Hooks, własne hooki, kompozycja komponentów, unoszenie stanu i stany loading/error.",
+    },
     description: {
       en: "First framework after JS fundamentals. Hooks, component composition, state lifting, custom hooks, React context. Controlled inputs, conditional rendering, lists with keys, loading/error/empty states.",
       pl: "Pierwszy framework po podstawach JS. Hooks, kompozycja komponentów, unoszenie stanu, własne hooki, React context. Kontrolowane inputy, warunkowe renderowanie, listy z kluczami, stany loading/error/empty.",
@@ -360,6 +389,10 @@ export const learningPath: LearningStage[] = [
     label: "Next.js",
     status: "done",
     year: "2024",
+    shortDescription: {
+      en: "App Router, Server Components, API routes, i18n and production deployment.",
+      pl: "App Router, Server Components, API routes, i18n i produkcyjny deployment.",
+    },
     description: {
       en: "App Router, Server Components, API routes, generateStaticParams, metadata API, middleware. i18n with next-intl for PL/EN routing. This portfolio is the most advanced Next.js project — built with production mindset.",
       pl: "App Router, Server Components, API routes, generateStaticParams, metadata API, middleware. i18n z next-intl dla routingu PL/EN. To portfolio jest dotychczas najbardziej zaawansowanym projektem Next.js — zbudowanym z myśleniem produkcyjnym.",
@@ -403,6 +436,10 @@ export const learningPath: LearningStage[] = [
     label: "API & Working with data",
     status: "done",
     year: "2024",
+    shortDescription: {
+      en: "HTTP methods, loading/error/empty states, data transformation, filtering and pagination.",
+      pl: "Metody HTTP, stany loading/error/empty, transformacja danych, filtrowanie i paginacja.",
+    },
     description: {
       en: "Connecting frontends to real APIs — HTTP methods, loading/error/success/empty state handling, form submission, data transformation, filtering, sorting and pagination. Used in every production project.",
       pl: "Podłączanie frontendów do prawdziwych API — metody HTTP, obsługa stanów loading/error/success/empty, submit formularzy, transformacja danych, filtrowanie, sortowanie i paginacja. Używane w każdym projekcie produkcyjnym.",
@@ -450,6 +487,10 @@ export const learningPath: LearningStage[] = [
     label: "Vue 3",
     status: "done",
     year: "2024",
+    shortDescription: {
+      en: "Composition API, Vuex and Axios — learned deliberately to understand how frameworks differ.",
+      pl: "Composition API, Vuex i Axios — nauka świadoma, żeby zrozumieć jak frameworki się różnią.",
+    },
     description: {
       en: "Learned Vue 3 deliberately as a React developer — to understand how another framework solves the same problems differently. Composition API, Vuex, Axios. Built Postly as the practice vehicle.",
       pl: "Nauczyłem się Vue 3 świadomie jako developer React — żeby zrozumieć jak inny framework rozwiązuje te same problemy inaczej. Composition API, Vuex, Axios. Postly jako projekt ćwiczeniowy.",
@@ -489,6 +530,10 @@ export const learningPath: LearningStage[] = [
     label: "Accessibility",
     status: "active",
     year: "2025",
+    shortDescription: {
+      en: "Semantic HTML, keyboard navigation, ARIA and focus management — applied consistently.",
+      pl: "Semantyczny HTML, nawigacja klawiaturą, ARIA i zarządzanie focusem — stosowane konsekwentnie.",
+    },
     description: {
       en: "Building apps that work for everyone — semantic HTML, keyboard navigation, ARIA labels, focus management, color contrast, accessible forms. Currently applying it consistently across all new components.",
       pl: "Budowanie aplikacji które działają dla wszystkich — semantyczny HTML, nawigacja klawiaturą, ARIA labels, zarządzanie focusem, kontrast kolorów, dostępne formularze. Aktualnie stosowane konsekwentnie we wszystkich nowych komponentach.",
@@ -534,6 +579,10 @@ export const learningPath: LearningStage[] = [
     label: "Testing",
     status: "active",
     year: "2025",
+    shortDescription: {
+      en: "Vitest, React Testing Library, Playwright — 52 passing tests and growing.",
+      pl: "Vitest, React Testing Library, Playwright — 52 przechodzące testy i dalej rośnie.",
+    },
     description: {
       en: "Building a solid testing practice — Vitest for unit tests, React Testing Library for component tests, Playwright for E2E. This portfolio already has 52 passing tests. Focus: test behavior, not implementation.",
       pl: "Budowanie solidnej praktyki testowania — Vitest dla testów jednostkowych, React Testing Library dla testów komponentów, Playwright dla E2E. To portfolio ma już 52 przechodzące testy. Fokus: testuj zachowanie, nie implementację.",
@@ -577,6 +626,10 @@ export const learningPath: LearningStage[] = [
     label: "Tools & Code quality",
     status: "done",
     year: "2024",
+    shortDescription: {
+      en: "ESLint, Prettier, npm scripts, TypeScript strict — consistent across all projects.",
+      pl: "ESLint, Prettier, skrypty npm, TypeScript strict — spójne we wszystkich projektach.",
+    },
     description: {
       en: "Working like it's a real project — ESLint, Prettier with Tailwind plugin, npm scripts for type-check/test/build/format, DevTools for debugging. Consistent tooling across all portfolio projects.",
       pl: "Praca jakby to był prawdziwy projekt — ESLint, Prettier z pluginem Tailwind, skrypty npm dla type-check/test/build/format, DevTools do debugowania. Spójny tooling we wszystkich projektach portfolio.",
@@ -618,6 +671,10 @@ export const learningPath: LearningStage[] = [
     label: "Performance & SEO",
     status: "planned",
     year: "2025",
+    shortDescription: {
+      en: "Core Web Vitals, lazy loading, bundle analysis and Next.js metadata API.",
+      pl: "Core Web Vitals, lazy loading, analiza bundle i metadata API Next.js.",
+    },
     description: {
       en: "Going deeper into what makes apps fast and findable — Core Web Vitals, lazy loading, bundle analysis, image optimization, Next.js metadata API, semantic structure for search engines.",
       pl: "Głębsze wejście w to co sprawia że aplikacje są szybkie i znajdowalne — Core Web Vitals, lazy loading, analiza bundle, optymalizacja obrazów, metadata API Next.js, semantyczna struktura dla wyszukiwarek.",
@@ -651,6 +708,10 @@ export const learningPath: LearningStage[] = [
     label: "Full-stack basics",
     status: "planned",
     year: "2025+",
+    shortDescription: {
+      en: "Databases, auth and deployment pipelines — Prisma, PostgreSQL, NextAuth.",
+      pl: "Bazy danych, autoryzacja i deployment pipelines — Prisma, PostgreSQL, NextAuth.",
+    },
     description: {
       en: "Going beyond API routes — databases, proper auth, deployment pipelines. Prisma, PostgreSQL, NextAuth. Already have foundation with Cloudinary, Vercel and Next.js API routes.",
       pl: "Wyjście poza API routes — bazy danych, właściwa autoryzacja, pipeline'y deployment. Prisma, PostgreSQL, NextAuth. Mam już fundament z Cloudinary, Vercel i API routes Next.js.",
@@ -676,24 +737,24 @@ export const learningPath: LearningStage[] = [
 
 export const statusMeta = {
   done: {
-    color: "#00ffb4",
-    border: "rgba(0,255,180,0.25)",
-    bg: "rgba(0,255,180,0.05)",
+    color: "var(--cyan)",
+    border: "var(--cyan-border)",
+    bg: "var(--cyan-subtle)",
     symbol: "✓",
     labelEn: "Done",
     labelPl: "Ukończone",
   },
   active: {
-    color: "#d44dff",
-    border: "rgba(191,0,255,0.35)",
-    bg: "rgba(191,0,255,0.08)",
+    color: "var(--purple)",
+    border: "var(--purple-border)",
+    bg: "var(--purple-subtle)",
     symbol: "▶",
     labelEn: "Active",
     labelPl: "Aktywne",
   },
   planned: {
-    color: "#445566",
-    border: "rgba(68,85,102,0.2)",
+    color: "var(--text-dim)",
+    border: "rgba(68, 85, 102, 0.2)",
     bg: "transparent",
     symbol: "○",
     labelEn: "Planned",
