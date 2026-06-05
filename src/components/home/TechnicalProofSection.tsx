@@ -3,109 +3,53 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
-type ProofItem = {
-  icon: string;
-  titleEn: string;
-  titlePl: string;
-  descEn: string;
-  descPl: string;
-  accent: "cyan" | "purple" | "blue";
-};
+type ProofAccent = "cyan" | "purple" | "blue";
 
-const ITEMS: ProofItem[] = [
-  {
-    icon: "TS",
-    titleEn: "TypeScript-first",
-    titlePl: "TypeScript-first",
-    descEn: "Strict mode, shared types, Zod validation. No any, no guessing.",
-    descPl: "Strict mode, współdzielone typy, Zod. Zero any, zero zgadywania.",
-    accent: "cyan",
-  },
-  {
-    icon: "✓",
-    titleEn: "Tested flows",
-    titlePl: "Testowane przepływy",
-    descEn: "Unit tests for logic, component tests for UI, E2E for critical paths.",
-    descPl: "Testy jednostkowe, komponentów i E2E dla krytycznych ścieżek.",
-    accent: "purple",
-  },
-  {
-    icon: "◈",
-    titleEn: "Reusable components",
-    titlePl: "Reużywalne komponenty",
-    descEn: "CVA variants, composable primitives, clear component contracts.",
-    descPl: "Warianty CVA, kompozycja prymitywów, jasne kontrakty komponentów.",
-    accent: "blue",
-  },
-  {
-    icon: "⟳",
-    titleEn: "API integration",
-    titlePl: "Integracja API",
-    descEn: "Next.js API routes, Zod schema validation, proper error handling.",
-    descPl: "API routes Next.js, walidacja Zod, poprawna obsługa błędów.",
-    accent: "cyan",
-  },
-  {
-    icon: "◎",
-    titleEn: "Accessible UI",
-    titlePl: "Dostępny UI",
-    descEn: "Semantic HTML, ARIA labels, keyboard navigation, focus management.",
-    descPl: "Semantyczny HTML, ARIA, nawigacja klawiaturą, zarządzanie focusem.",
-    accent: "purple",
-  },
-  {
-    icon: "⌥",
-    titleEn: "CI-ready",
-    titlePl: "Gotowy na CI",
-    descEn: "GitHub Actions: lint, type-check, tests, build on every push.",
-    descPl: "GitHub Actions: lint, type-check, testy, build przy każdym pushu.",
-    accent: "blue",
-  },
-  {
-    icon: "⌘",
-    titleEn: "i18n ready",
-    titlePl: "Gotowy na i18n",
-    descEn: "next-intl with PL/EN routing, localized data, no hardcoded strings.",
-    descPl: "next-intl z routingiem PL/EN, zlokalizowane dane, zero hardcoded.",
-    accent: "cyan",
-  },
-  {
-    icon: "◐",
-    titleEn: "Dark / light mode",
-    titlePl: "Dark / light mode",
-    descEn: "System preference detection, localStorage persistence, no flash.",
-    descPl: "Wykrywanie preferencji, zapis w localStorage, brak flashowania.",
-    accent: "purple",
-  },
+const ITEMS: { id: string; icon: string; accent: ProofAccent }[] = [
+  { id: "typescript", icon: "TS", accent: "cyan" },
+  { id: "testing", icon: "✓", accent: "purple" },
+  { id: "components", icon: "◈", accent: "blue" },
+  { id: "api", icon: "⟳", accent: "cyan" },
+  { id: "a11y", icon: "◎", accent: "purple" },
+  { id: "ci", icon: "⌥", accent: "blue" },
+  { id: "i18n", icon: "⌘", accent: "cyan" },
+  { id: "darkmode", icon: "◐", accent: "purple" },
 ];
 
-const accentColors = {
+const accentColors: Record<
+  ProofAccent,
+  {
+    color: string;
+    border: string;
+    glow: string;
+    glowHover: string;
+    bg: string;
+  }
+> = {
   cyan: {
-    color: "#00ffb4",
-    border: "rgba(0,255,180,0.28)",
-    glow: "rgba(0,255,180,0.06)",
-    glowHover: "rgba(0,255,180,0.14)",
-    bg: "rgba(0,255,180,0.06)",
+    color: "var(--cyan)",
+    border: "var(--cyan-border)",
+    glow: "var(--cyan-glow)",
+    glowHover: "var(--cyan-glow-hover)",
+    bg: "var(--cyan-subtle)",
   },
   purple: {
-    color: "#d44dff",
-    border: "rgba(191,0,255,0.28)",
-    glow: "rgba(191,0,255,0.06)",
-    glowHover: "rgba(191,0,255,0.14)",
-    bg: "rgba(191,0,255,0.06)",
+    color: "var(--purple)",
+    border: "var(--purple-border)",
+    glow: "var(--purple-glow)",
+    glowHover: "var(--purple-glow-hover)",
+    bg: "var(--purple-subtle)",
   },
   blue: {
-    color: "#00b4ff",
-    border: "rgba(0,180,255,0.28)",
-    glow: "rgba(0,180,255,0.06)",
-    glowHover: "rgba(0,180,255,0.14)",
-    bg: "rgba(0,180,255,0.06)",
+    color: "var(--blue)",
+    border: "var(--blue-border)",
+    glow: "var(--blue-glow)",
+    glowHover: "var(--blue-glow-hover)",
+    bg: "var(--blue-subtle)",
   },
 };
 
-type Props = { locale: "en" | "pl" };
-
-export function TechnicalProofSection({ locale }: Props) {
+export function TechnicalProofSection() {
   const t = useTranslations("proof");
 
   return (
@@ -114,7 +58,7 @@ export function TechnicalProofSection({ locale }: Props) {
         className="absolute top-0 right-0 left-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(191,0,255,0.15), rgba(0,255,180,0.15), transparent)",
+            "linear-gradient(90deg, transparent, var(--purple-dim), var(--cyan-dim), transparent)",
         }}
       />
 
@@ -128,17 +72,20 @@ export function TechnicalProofSection({ locale }: Props) {
         >
           <p
             className="mb-3 text-[11px] tracking-[3px]"
-            style={{ color: "#d44dff", textTransform: "uppercase" }}
+            style={{ color: "var(--purple)", textTransform: "uppercase" }}
           >
             {t("label")}
           </p>
           <h2
             className="text-3xl font-bold tracking-tight lg:text-4xl"
-            style={{ color: "#e8eaf0" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {t("title")}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+          <p
+            className="mx-auto mt-3 max-w-xl text-sm leading-relaxed"
+            style={{ color: "var(--text-secondary)" }}
+          >
             {t("description")}
           </p>
         </motion.div>
@@ -148,11 +95,11 @@ export function TechnicalProofSection({ locale }: Props) {
             const ac = accentColors[item.accent];
             return (
               <motion.div
-                key={item.titleEn}
+                key={item.id}
                 className="group relative flex flex-col p-5 transition-all duration-300"
                 style={{
                   border: `1px solid ${ac.border}`,
-                  background: "rgba(10,15,26,0.85)",
+                  background: "var(--bg-card)",
                   boxShadow: `0 0 20px ${ac.glow}, inset 0 0 20px rgba(0,0,0,0.3)`,
                 }}
                 initial={{ opacity: 0, y: 20 }}
@@ -166,7 +113,6 @@ export function TechnicalProofSection({ locale }: Props) {
                   e.currentTarget.style.boxShadow = `0 0 20px ${ac.glow}, inset 0 0 20px rgba(0,0,0,0.3)`;
                 }}
               >
-                {/* Corner TL */}
                 <div
                   className="absolute top-0 left-0 h-3.5 w-3.5"
                   style={{
@@ -175,7 +121,6 @@ export function TechnicalProofSection({ locale }: Props) {
                     opacity: 0.6,
                   }}
                 />
-                {/* Corner BR */}
                 <div
                   className="absolute right-0 bottom-0 h-3.5 w-3.5"
                   style={{
@@ -192,11 +137,14 @@ export function TechnicalProofSection({ locale }: Props) {
                   {item.icon}
                 </div>
 
-                <h3 className="mb-1.5 text-sm font-bold tracking-wide" style={{ color: "#e8eaf0" }}>
-                  {locale === "pl" ? item.titlePl : item.titleEn}
+                <h3
+                  className="mb-1.5 text-sm font-bold tracking-wide"
+                  style={{ color: "var(--text-primary)" }}
+                >
+                  {t(`${item.id}_title`)}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
-                  {locale === "pl" ? item.descPl : item.descEn}
+                <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                  {t(`${item.id}_desc`)}
                 </p>
               </motion.div>
             );
