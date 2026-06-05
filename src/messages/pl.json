@@ -55,7 +55,23 @@
   "proof": {
     "label": "Jakość techniczna",
     "title": "Nie tylko ładny UI — prawdziwy frontend",
-    "description": "Każda decyzja ma uzasadnienie techniczne."
+    "description": "Każda decyzja ma uzasadnienie techniczne.",
+    "typescript_title": "TypeScript-first",
+    "typescript_desc": "Strict mode, współdzielone typy, Zod. Zero any, zero zgadywania.",
+    "testing_title": "Testowane przepływy",
+    "testing_desc": "Testy jednostkowe, komponentów i E2E dla krytycznych ścieżek.",
+    "components_title": "Reużywalne komponenty",
+    "components_desc": "Warianty CVA, kompozycja prymitywów, jasne kontrakty komponentów.",
+    "api_title": "Integracja API",
+    "api_desc": "API routes Next.js, walidacja Zod, poprawna obsługa błędów.",
+    "a11y_title": "Dostępny UI",
+    "a11y_desc": "Semantyczny HTML, ARIA, nawigacja klawiaturą, zarządzanie focusem.",
+    "ci_title": "Gotowy na CI",
+    "ci_desc": "GitHub Actions: lint, type-check, testy, build przy każdym pushu.",
+    "i18n_title": "Gotowy na i18n",
+    "i18n_desc": "next-intl z routingiem PL/EN, zlokalizowane dane, zero hardcoded.",
+    "darkmode_title": "Dark / light mode",
+    "darkmode_desc": "Wykrywanie preferencji, zapis w localStorage, brak flashowania."
   },
   "learning": {
     "label": "Nauka",

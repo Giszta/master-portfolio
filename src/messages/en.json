@@ -23,6 +23,7 @@
     "coord": "PL // 52°N 16°E",
     "version": "v1.0.0 — 2026"
   },
+
   "projects": {
     "label": "Projects",
     "title": "Featured projects",
@@ -55,7 +56,23 @@
   "proof": {
     "label": "Technical quality",
     "title": "Not just pretty UI — real frontend",
-    "description": "Every decision has a technical reason behind it."
+    "description": "Every decision has a technical reason behind it.",
+    "typescript_title": "TypeScript-first",
+    "typescript_desc": "Strict mode, shared types, Zod validation. No any, no guessing.",
+    "testing_title": "Tested flows",
+    "testing_desc": "Unit tests for logic, component tests for UI, E2E for critical paths.",
+    "components_title": "Reusable components",
+    "components_desc": "CVA variants, composable primitives, clear component contracts.",
+    "api_title": "API integration",
+    "api_desc": "Next.js API routes, Zod schema validation, proper error handling.",
+    "a11y_title": "Accessible UI",
+    "a11y_desc": "Semantic HTML, ARIA labels, keyboard navigation, focus management.",
+    "ci_title": "CI-ready",
+    "ci_desc": "GitHub Actions: lint, type-check, tests, build on every push.",
+    "i18n_title": "i18n ready",
+    "i18n_desc": "next-intl with PL/EN routing, localized data, no hardcoded strings.",
+    "darkmode_title": "Dark / light mode",
+    "darkmode_desc": "System preference detection, localStorage persistence, no flash."
   },
   "learning": {
     "label": "Learning",
