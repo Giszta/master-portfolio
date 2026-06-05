@@ -16,6 +16,7 @@ const GitHubIcon = () => (
 
 export function ContactCtaSection() {
   const t = useTranslations("contact_cta");
+  const year = new Date().getFullYear();
 
   return (
     <section className="relative py-32">
@@ -24,7 +25,7 @@ export function ContactCtaSection() {
         className="absolute top-0 right-0 left-0 h-px"
         style={{
           background:
-            "linear-gradient(90deg, transparent, rgba(0,255,180,0.2), rgba(191,0,255,0.2), transparent)",
+            "linear-gradient(90deg, transparent, var(--cyan-dim), var(--purple-dim), transparent)",
         }}
       />
 
@@ -32,15 +33,11 @@ export function ContactCtaSection() {
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div
           className="absolute top-1/2 left-1/4 h-64 w-64 -translate-y-1/2 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(0,255,180,0.04) 0%, transparent 70%)",
-          }}
+          style={{ background: "radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%)" }}
         />
         <div
           className="absolute top-1/2 right-1/4 h-64 w-64 -translate-y-1/2 rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(191,0,255,0.04) 0%, transparent 70%)",
-          }}
+          style={{ background: "radial-gradient(circle, var(--purple-glow) 0%, transparent 70%)" }}
         />
       </div>
 
@@ -53,33 +50,33 @@ export function ContactCtaSection() {
         >
           <p
             className="mb-4 text-[11px] tracking-[3px]"
-            style={{ color: "#00ffb4", textTransform: "uppercase" }}
+            style={{ color: "var(--cyan)", textTransform: "uppercase" }}
           >
             {t("label")}
           </p>
 
           <h2
             className="mb-6 text-3xl leading-tight font-bold tracking-tight lg:text-4xl"
-            style={{ color: "#e8eaf0" }}
+            style={{ color: "var(--text-primary)" }}
           >
             {t("title")}
           </h2>
 
           <p
             className="mx-auto mb-12 max-w-xl text-sm leading-relaxed"
-            style={{ color: "#8899aa" }}
+            style={{ color: "var(--text-secondary)" }}
           >
             {t("subtitle")}
           </p>
 
-          {/* Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          {/* Buttons — full width on mobile, auto on sm+ */}
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3 text-[11px] font-bold tracking-[2px] transition-all hover:brightness-110 active:scale-95"
+              className="inline-flex w-full items-center justify-center gap-2 px-8 py-3 text-[11px] font-bold tracking-[2px] transition-all hover:brightness-110 active:scale-95 sm:w-auto"
               style={{
-                background: "#00ffb4",
-                color: "#050810",
+                background: "var(--cyan)",
+                color: "var(--bg)",
                 textTransform: "uppercase",
                 clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
               }}
@@ -89,10 +86,10 @@ export function ContactCtaSection() {
 
             <Link
               href="/projects"
-              className="inline-flex items-center gap-2 border px-8 py-3 text-[11px] tracking-[2px] transition-all hover:brightness-125 active:scale-95"
+              className="inline-flex w-full items-center justify-center gap-2 border px-8 py-3 text-[11px] tracking-[2px] transition-all hover:brightness-125 active:scale-95 sm:w-auto"
               style={{
-                color: "#00ffb4",
-                borderColor: "rgba(0,255,180,0.35)",
+                color: "var(--cyan)",
+                borderColor: "var(--cyan-border)",
                 background: "transparent",
                 textTransform: "uppercase",
                 clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
@@ -104,30 +101,30 @@ export function ContactCtaSection() {
 
           {/* Social row */}
           <div className="mt-16 flex items-center justify-center gap-4">
-            <div className="h-px w-12" style={{ background: "rgba(0,255,180,0.15)" }} />
+            <div className="h-px w-12" style={{ background: "var(--cyan-dim)" }} />
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/Giszta"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
               className="transition-colors"
-              style={{ color: "rgba(136,153,170,0.4)" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00ffb4")}
+              style={{ color: "var(--text-secondary)" }}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cyan)")}
               onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "rgba(136,153,170,0.4)")
+                ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
               }
             >
               <GitHubIcon />
             </a>
-            <div className="h-px w-12" style={{ background: "rgba(0,255,180,0.15)" }} />
+            <div className="h-px w-12" style={{ background: "var(--cyan-dim)" }} />
           </div>
 
           {/* Bottom coords */}
           <p
             className="mt-8 text-[9px] tracking-[3px]"
-            style={{ color: "rgba(0,255,180,0.2)", textTransform: "uppercase" }}
+            style={{ color: "var(--cyan-muted)", textTransform: "uppercase" }}
           >
-            PL // 52°N 16°E — {new Date().getFullYear()}
+            PL // 52°N 16°E — {year}
           </p>
         </motion.div>
       </div>
@@ -135,9 +132,7 @@ export function ContactCtaSection() {
       {/* Bottom line */}
       <div
         className="absolute right-0 bottom-0 left-0 h-px"
-        style={{
-          background: "linear-gradient(90deg, transparent, rgba(0,255,180,0.1), transparent)",
-        }}
+        style={{ background: "linear-gradient(90deg, transparent, var(--cyan-dim), transparent)" }}
       />
     </section>
   );
