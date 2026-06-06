@@ -14,7 +14,92 @@ const NAV_LINKS = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-type Props = { locale: "en" | "pl" };
+const CLIP_SM = "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)";
+const CLIP_MD = "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)";
+
+function setColor(color: string) {
+  return (e: React.MouseEvent<HTMLElement>) => {
+    e.currentTarget.style.color = color;
+  };
+}
+
+type Locale = "en" | "pl";
+
+function LocaleSwitcher({
+  locale,
+  onSwitch,
+  size = "md",
+}: {
+  locale: Locale;
+  onSwitch: () => void;
+  size?: "sm" | "md";
+}) {
+  const btnH = size === "sm" ? "24px" : "28px";
+  const btnW = size === "sm" ? "34px" : "38px";
+
+  const [visual, setVisual] = useState<Locale>(locale);
+
+  const handleClick = () => {
+    const next: Locale = visual === "en" ? "pl" : "en";
+    setVisual(next); // 1. animuj natychmiast
+    onSwitch(); // 2. zmień język (co spowoduje remount i reset stanu)
+  };
+
+  const isEN = visual === "en";
+
+  const labelStyle = (active: boolean): React.CSSProperties => ({
+    position: "relative",
+    zIndex: 1,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: btnW,
+    height: btnH,
+    fontSize: "9px",
+    letterSpacing: "2px",
+    textTransform: "uppercase",
+    fontFamily: "inherit",
+    color: active ? "var(--bg)" : "var(--text-dim)",
+    transition: "color 0.18s",
+    userSelect: "none",
+  });
+
+  return (
+    <button
+      onClick={handleClick}
+      aria-label={`Switch language — currently ${visual.toUpperCase()}`}
+      style={{
+        display: "inline-flex",
+        position: "relative",
+        padding: "2px",
+        border: "1px solid rgba(0,255,180,0.2)",
+        background: "transparent",
+        clipPath: CLIP_SM,
+        cursor: "pointer",
+        gap: 0,
+      }}
+    >
+      <motion.span
+        style={{
+          position: "absolute",
+          top: "2px",
+          bottom: "2px",
+          width: btnW,
+          background: "var(--cyan)",
+          zIndex: 0,
+          clipPath: "polygon(3px 0%, 100% 0%, calc(100% - 3px) 100%, 0% 100%)",
+        }}
+        initial={false}
+        animate={{ left: isEN ? "2px" : `calc(2px + ${btnW})` }}
+        transition={{ type: "spring", stiffness: 400, damping: 35 }}
+      />
+      <span style={labelStyle(isEN)}>EN</span>
+      <span style={labelStyle(!isEN)}>PL</span>
+    </button>
+  );
+}
+
+type Props = { locale: Locale };
 
 export function Navbar({ locale }: Props) {
   const t = useTranslations("nav");
@@ -80,7 +165,7 @@ export function Navbar({ locale }: Props) {
             />
           </Link>
 
-          {/* Desktop links */}
+          {/* Desktop nav links */}
           <div className="hidden items-center gap-1 lg:flex">
             {NAV_LINKS.map((link) => {
               const active = isActive(link.href);
@@ -93,14 +178,8 @@ export function Navbar({ locale }: Props) {
                     color: active ? "var(--cyan)" : "var(--text-secondary)",
                     textTransform: "uppercase",
                   }}
-                  onMouseEnter={(e) => {
-                    if (!active)
-                      (e.currentTarget as HTMLElement).style.color = "var(--text-primary)";
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!active)
-                      (e.currentTarget as HTMLElement).style.color = "var(--text-secondary)";
-                  }}
+                  onMouseEnter={active ? undefined : setColor("var(--text-primary)")}
+                  onMouseLeave={active ? undefined : setColor("var(--text-secondary)")}
                 >
                   {active && (
                     <motion.span
@@ -119,22 +198,9 @@ export function Navbar({ locale }: Props) {
             })}
           </div>
 
-          {/* Right — locale + CV */}
+          {/* Desktop right */}
           <div className="hidden items-center gap-3 lg:flex">
-            <button
-              onClick={switchLocale}
-              className="cursor-pointer border px-3 py-1.5 text-[10px] tracking-[2px] transition-all hover:brightness-125"
-              style={{
-                color: "var(--text-secondary)",
-                borderColor: "rgba(136,153,170,0.2)",
-                background: "transparent",
-                textTransform: "uppercase",
-                clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
-              }}
-              aria-label="Switch language"
-            >
-              {locale === "en" ? "PL" : "EN"}
-            </button>
+            <LocaleSwitcher key={locale} locale={locale} onSwitch={switchLocale} />
             <a
               href={cvHref}
               download
@@ -144,23 +210,16 @@ export function Navbar({ locale }: Props) {
                 background: "var(--cyan)",
                 borderColor: "var(--cyan)",
                 textTransform: "uppercase",
-                clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
+                clipPath: CLIP_SM,
               }}
             >
               CV
             </a>
           </div>
 
-          {/* Mobile — locale + burger */}
+          {/* Mobile */}
           <div className="flex items-center gap-3 lg:hidden">
-            <button
-              onClick={switchLocale}
-              className="text-[10px] tracking-[2px]"
-              style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
-              aria-label="Switch language"
-            >
-              {locale === "en" ? "PL" : "EN"}
-            </button>
+            <LocaleSwitcher key={locale} locale={locale} onSwitch={switchLocale} size="sm" />
             <button
               onClick={() => setMenuOpen((v) => !v)}
               className="flex h-8 w-8 flex-col items-center justify-center gap-1.5"
@@ -209,6 +268,7 @@ export function Navbar({ locale }: Props) {
               }}
               aria-hidden="true"
             />
+
             <nav className="relative flex flex-col px-6 py-8">
               {NAV_LINKS.map((link, i) => {
                 const active = isActive(link.href);
@@ -247,6 +307,7 @@ export function Navbar({ locale }: Props) {
                   </motion.div>
                 );
               })}
+
               <motion.div
                 className="mt-8"
                 initial={{ opacity: 0 }}
@@ -261,7 +322,7 @@ export function Navbar({ locale }: Props) {
                     background: "var(--cyan)",
                     color: "var(--bg)",
                     textTransform: "uppercase",
-                    clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
+                    clipPath: CLIP_MD,
                   }}
                 >
                   Download CV →
