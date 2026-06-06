@@ -102,7 +102,9 @@
     "philosophy_2": "I track what I'm learning and why. No random skill accumulation — each technology solves a real problem I faced.",
     "philosophy_3": "Honest self-assessment. Confident means used in production. Comfortable means used in projects. Learning means actively practicing.",
     "next_title": "What's next",
-    "next_desc": "After testing becomes comfortable, the next focus is full-stack fundamentals — databases, proper auth, and deployment pipelines."
+    "next_desc": "After testing becomes comfortable, the next focus is full-stack fundamentals — databases, proper auth, and deployment pipelines.",
+    "next_cta_projects": "See projects →",
+    "next_cta_skills": "Skills"
   },
   "contact_cta": {
     "label": "Contact",
