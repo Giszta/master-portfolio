@@ -6,15 +6,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { contactSchema, type ContactFormData } from "@/lib/contactSchema";
-import type { Locale } from "@/types";
-
-type Props = { locale: Locale };
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 const CONTACT_EMAIL = "a.m.giszter@gmail.com";
 const GITHUB_URL = "https://github.com/Giszta";
-const LINKEDIN_URL = "https://linkedin.com/in/yourusername";
+const LINKEDIN_URL = "https://www.linkedin.com/in/adam-giszter/";
+
+// Raw hex dla string interpolacji w infoItems (${color}22, ${color}05)
+const CYAN = "#00ffb4";
+const PURPLE = "#da6aff";
+const BLUE = "#00b4ff";
 
 const GitHubIcon = () => (
   <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -47,17 +49,17 @@ function FormField({
     <div className="flex flex-col gap-1.5">
       <label
         className="text-[10px] tracking-[2px]"
-        style={{ color: "#8899aa", textTransform: "uppercase" }}
+        style={{ color: "var(--text-secondary)", textTransform: "uppercase" }}
       >
         {label}
-        {required && <span style={{ color: "#00ffb4" }}> *</span>}
+        {required && <span style={{ color: "var(--cyan)" }}> *</span>}
       </label>
       {children}
       <AnimatePresence>
         {error && (
           <motion.p
             className="text-[10px] tracking-[1px]"
-            style={{ color: "#ff6b6b" }}
+            style={{ color: "var(--red)" }}
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
@@ -72,9 +74,9 @@ function FormField({
 }
 
 const inputStyle = (hasError: boolean): React.CSSProperties => ({
-  background: "rgba(10,15,26,0.8)",
+  background: "var(--bg-surface)",
   border: `1px solid ${hasError ? "rgba(255,107,107,0.5)" : "rgba(0,255,180,0.15)"}`,
-  color: "#e8eaf0",
+  color: "var(--text-primary)",
   outline: "none",
   fontFamily: "inherit",
   fontSize: "13px",
@@ -100,18 +102,18 @@ function SuccessState({
       <div
         className="flex h-16 w-16 items-center justify-center border text-2xl"
         style={{
-          borderColor: "rgba(0,255,180,0.4)",
-          background: "rgba(0,255,180,0.06)",
-          color: "#00ffb4",
+          borderColor: "var(--cyan-border)",
+          background: "var(--cyan-subtle)",
+          color: "var(--cyan)",
         }}
       >
         ✓
       </div>
       <div>
-        <h3 className="mb-2 text-lg font-bold" style={{ color: "#e8eaf0" }}>
+        <h3 className="mb-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
           {t("form_success_title")}
         </h3>
-        <p className="text-sm" style={{ color: "#8899aa" }}>
+        <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
           {t("form_success_desc")}
         </p>
       </div>
@@ -119,8 +121,8 @@ function SuccessState({
         onClick={onReset}
         className="border px-5 py-2 text-[10px] tracking-[2px] transition-all hover:brightness-125"
         style={{
-          color: "#00ffb4",
-          borderColor: "rgba(0,255,180,0.3)",
+          color: "var(--cyan)",
+          borderColor: "var(--cyan-border)",
           background: "transparent",
           textTransform: "uppercase",
           clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
@@ -151,20 +153,20 @@ function ErrorState({
         style={{
           borderColor: "rgba(255,107,107,0.4)",
           background: "rgba(255,107,107,0.06)",
-          color: "#ff6b6b",
+          color: "var(--red)",
         }}
       >
         ✕
       </div>
       <div>
-        <h3 className="mb-2 text-lg font-bold" style={{ color: "#e8eaf0" }}>
+        <h3 className="mb-2 text-lg font-bold" style={{ color: "var(--text-primary)" }}>
           {t("form_error_title")}
         </h3>
-        <p className="text-sm" style={{ color: "#8899aa" }}>
+        <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
           {t("form_error_desc")}{" "}
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            style={{ color: "#00ffb4" }}
+            style={{ color: "var(--cyan)" }}
             onMouseEnter={(e) =>
               ((e.currentTarget as HTMLElement).style.textDecoration = "underline")
             }
@@ -178,7 +180,7 @@ function ErrorState({
         onClick={onReset}
         className="border px-5 py-2 text-[10px] tracking-[2px] transition-all hover:brightness-125"
         style={{
-          color: "#ff6b6b",
+          color: "var(--red)",
           borderColor: "rgba(255,107,107,0.3)",
           background: "transparent",
           textTransform: "uppercase",
@@ -191,7 +193,7 @@ function ErrorState({
   );
 }
 
-export function ContactView({ locale: _locale }: Props) {
+export function ContactView() {
   const t = useTranslations("contact");
   const [status, setStatus] = useState<SubmitStatus>("idle");
 
@@ -229,25 +231,25 @@ export function ContactView({ locale: _locale }: Props) {
       label: t("info_email_label"),
       value: CONTACT_EMAIL,
       href: `mailto:${CONTACT_EMAIL}`,
-      color: "#00ffb4",
+      color: CYAN,
     },
     {
       label: t("info_location_label"),
       value: t("info_location_value"),
       href: undefined,
-      color: "#d44dff",
+      color: PURPLE,
     },
     {
       label: t("info_availability_label"),
       value: t("info_availability_value"),
       href: undefined,
-      color: "#00ffb4",
+      color: CYAN,
     },
     {
       label: t("info_response_label"),
       value: t("info_response_value"),
       href: undefined,
-      color: "#00b4ff",
+      color: BLUE,
     },
   ];
 
@@ -262,23 +264,23 @@ export function ContactView({ locale: _locale }: Props) {
       >
         <p
           className="mb-3 text-[11px] tracking-[3px]"
-          style={{ color: "#00ffb4", textTransform: "uppercase" }}
+          style={{ color: "var(--cyan)", textTransform: "uppercase" }}
         >
           {t("label")}
         </p>
         <h1
           className="mb-3 text-3xl font-bold tracking-tight lg:text-4xl"
-          style={{ color: "#e8eaf0" }}
+          style={{ color: "var(--text-primary)" }}
         >
           {t("page_title")}
         </h1>
-        <p className="max-w-xl text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+        <p className="max-w-xl text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
           {t("page_description")}
         </p>
       </motion.div>
 
       <div className="grid gap-12 lg:grid-cols-[1fr_360px]">
-        {/* ── LEFT — Formularz ── */}
+        {/* LEFT — Formularz */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -287,25 +289,24 @@ export function ContactView({ locale: _locale }: Props) {
           <div
             className="relative border p-8"
             style={{
-              borderColor: "rgba(0,255,180,0.2)",
-              background: "rgba(10,15,26,0.85)",
-              boxShadow: "0 0 40px rgba(0,255,180,0.05)",
+              borderColor: "var(--cyan-dim)",
+              background: "var(--bg-card)",
+              boxShadow: "0 0 40px var(--cyan-glow)",
             }}
           >
-            {/* Corner brackets */}
             <div
               className="absolute top-0 left-0 h-5 w-5"
               style={{
-                borderTop: "2px solid #00ffb4",
-                borderLeft: "2px solid #00ffb4",
+                borderTop: `2px solid ${CYAN}`,
+                borderLeft: `2px solid ${CYAN}`,
                 opacity: 0.6,
               }}
             />
             <div
               className="absolute right-0 bottom-0 h-5 w-5"
               style={{
-                borderBottom: "2px solid #00ffb4",
-                borderRight: "2px solid #00ffb4",
+                borderBottom: `2px solid ${CYAN}`,
+                borderRight: `2px solid ${CYAN}`,
                 opacity: 0.6,
               }}
             />
@@ -325,7 +326,6 @@ export function ContactView({ locale: _locale }: Props) {
                 >
                   <form onSubmit={handleSubmit(onSubmit)} noValidate>
                     <div className="grid gap-5 sm:grid-cols-2">
-                      {/* Name */}
                       <FormField
                         label={t("form_name")}
                         error={errors.name && t(errors.name.message as never)}
@@ -347,7 +347,6 @@ export function ContactView({ locale: _locale }: Props) {
                         />
                       </FormField>
 
-                      {/* Email */}
                       <FormField
                         label={t("form_email")}
                         error={errors.email && t(errors.email.message as never)}
@@ -369,7 +368,6 @@ export function ContactView({ locale: _locale }: Props) {
                         />
                       </FormField>
 
-                      {/* Subject */}
                       <div className="sm:col-span-2">
                         <FormField
                           label={t("form_subject")}
@@ -392,7 +390,6 @@ export function ContactView({ locale: _locale }: Props) {
                         </FormField>
                       </div>
 
-                      {/* Message */}
                       <div className="sm:col-span-2">
                         <FormField
                           label={t("form_message")}
@@ -420,15 +417,14 @@ export function ContactView({ locale: _locale }: Props) {
                       </div>
                     </div>
 
-                    {/* Submit */}
                     <div className="mt-6">
                       <button
                         type="submit"
                         disabled={isSubmitting || status === "submitting"}
                         className="inline-flex items-center gap-2 px-8 py-3 text-[11px] font-bold tracking-[2px] transition-all hover:brightness-110 active:scale-95 disabled:cursor-not-allowed disabled:opacity-60"
                         style={{
-                          background: "#00ffb4",
-                          color: "#050810",
+                          background: "var(--cyan)",
+                          color: "var(--bg)",
                           textTransform: "uppercase",
                           clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
                         }}
@@ -436,8 +432,8 @@ export function ContactView({ locale: _locale }: Props) {
                         {isSubmitting || status === "submitting" ? (
                           <>
                             <span
-                              className="h-3 w-3 animate-spin rounded-full border-2 border-transparent border-t-current"
-                              style={{ borderTopColor: "#050810" }}
+                              className="h-3 w-3 animate-spin rounded-full border-2 border-transparent"
+                              style={{ borderTopColor: "var(--bg)" }}
                             />
                             {t("form_submitting")}
                           </>
@@ -453,22 +449,18 @@ export function ContactView({ locale: _locale }: Props) {
           </div>
         </motion.div>
 
-        {/* ── RIGHT — Info sidebar ── */}
+        {/* RIGHT — Info sidebar */}
         <motion.div
           className="space-y-4"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          {/* Info cards */}
           {infoItems.map((item, i) => (
             <div
               key={i}
               className="border p-4"
-              style={{
-                borderColor: `${item.color}22`,
-                background: `${item.color}05`,
-              }}
+              style={{ borderColor: `${item.color}22`, background: `${item.color}05` }}
             >
               <p
                 className="mb-1 text-[9px] tracking-[2px]"
@@ -480,9 +472,11 @@ export function ContactView({ locale: _locale }: Props) {
                 <a
                   href={item.href}
                   className="text-sm font-bold transition-colors"
-                  style={{ color: "#e8eaf0" }}
+                  style={{ color: "var(--text-primary)" }}
                   onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = item.color)}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#e8eaf0")}
+                  onMouseLeave={(e) =>
+                    ((e.currentTarget as HTMLElement).style.color = "var(--text-primary)")
+                  }
                 >
                   {item.value}
                 </a>
@@ -492,13 +486,13 @@ export function ContactView({ locale: _locale }: Props) {
                     <span
                       className="h-1.5 w-1.5 rounded-full"
                       style={{
-                        background: "#00ffb4",
-                        boxShadow: "0 0 6px #00ffb4",
+                        background: "var(--cyan)",
+                        boxShadow: "0 0 6px var(--cyan)",
                         animation: "pulse 1.8s ease-in-out infinite",
                       }}
                     />
                   )}
-                  <p className="text-sm font-bold" style={{ color: "#e8eaf0" }}>
+                  <p className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
                     {item.value}
                   </p>
                 </div>
@@ -506,10 +500,9 @@ export function ContactView({ locale: _locale }: Props) {
             </div>
           ))}
 
-          {/* Social links */}
           <div
             className="border p-4"
-            style={{ borderColor: "rgba(0,255,180,0.1)", background: "rgba(10,15,26,0.6)" }}
+            style={{ borderColor: "var(--cyan-glow)", background: "rgba(10,15,26,0.6)" }}
           >
             <div className="flex flex-col gap-3">
               <a
@@ -517,9 +510,11 @@ export function ContactView({ locale: _locale }: Props) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm transition-colors"
-                style={{ color: "#8899aa" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00ffb4")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#8899aa")}
+                style={{ color: "var(--text-secondary)" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--cyan)")}
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
+                }
               >
                 <GitHubIcon />
                 <span
@@ -528,19 +523,21 @@ export function ContactView({ locale: _locale }: Props) {
                 >
                   {t("social_github")}
                 </span>
-                <span className="ml-auto text-[10px]" style={{ color: "#445566" }}>
+                <span className="ml-auto text-[10px]" style={{ color: "var(--text-dim)" }}>
                   →
                 </span>
               </a>
-              <div className="h-px" style={{ background: "rgba(0,255,180,0.06)" }} />
+              <div className="h-px" style={{ background: "var(--cyan-glow)" }} />
               <a
                 href={LINKEDIN_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-sm transition-colors"
-                style={{ color: "#8899aa" }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#00b4ff")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#8899aa")}
+                style={{ color: "var(--text-secondary)" }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "var(--blue)")}
+                onMouseLeave={(e) =>
+                  ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary)")
+                }
               >
                 <LinkedInIcon />
                 <span
@@ -549,45 +546,37 @@ export function ContactView({ locale: _locale }: Props) {
                 >
                   {t("social_linkedin")}
                 </span>
-                <span className="ml-auto text-[10px]" style={{ color: "#445566" }}>
+                <span className="ml-auto text-[10px]" style={{ color: "var(--text-dim)" }}>
                   →
                 </span>
               </a>
             </div>
           </div>
 
-          {/* Note */}
           <div
             className="relative border p-5"
-            style={{ borderColor: "rgba(191,0,255,0.2)", background: "rgba(191,0,255,0.04)" }}
+            style={{ borderColor: "var(--purple-dim)", background: "var(--purple-glow)" }}
           >
             <div
               className="absolute top-0 left-0 h-3.5 w-3.5"
               style={{
-                borderTop: "2px solid #d44dff",
-                borderLeft: "2px solid #d44dff",
+                borderTop: `2px solid ${PURPLE}`,
+                borderLeft: `2px solid ${PURPLE}`,
                 opacity: 0.5,
               }}
             />
             <p
               className="mb-2 text-[9px] tracking-[2px]"
-              style={{ color: "#d44dff", textTransform: "uppercase" }}
+              style={{ color: "var(--purple)", textTransform: "uppercase" }}
             >
               {t("note_title")}
             </p>
-            <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
+            <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
               {t("note_body")}
             </p>
           </div>
         </motion.div>
       </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.75); }
-        }
-      `}</style>
     </div>
   );
 }
