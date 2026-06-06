@@ -15,7 +15,13 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.5, delay },
 });
 
-function SectionLabel({ text, color = "#00ffb4" }: { text: string; color?: string }) {
+// Raw hex dla NeonCard — CSS variables nie działają w string interpolacji (${color}44)
+const CYAN = "#00ffb4";
+const PURPLE = "#da6aff";
+const BLUE = "#00b4ff";
+const AMBER = "#ffb800";
+
+function SectionLabel({ text, color = CYAN }: { text: string; color?: string }) {
   return (
     <div className="mb-6 flex items-center gap-3">
       <div className="h-px w-6 shrink-0" style={{ background: color }} />
@@ -28,7 +34,7 @@ function SectionLabel({ text, color = "#00ffb4" }: { text: string; color?: strin
 
 function NeonCard({
   children,
-  color = "#00ffb4",
+  color = CYAN,
   className = "",
 }: {
   children: React.ReactNode;
@@ -44,7 +50,7 @@ function NeonCard({
       className={`relative p-5 transition-all duration-300 ${className}`}
       style={{
         border: `1px solid ${border}`,
-        background: "rgba(10,15,26,0.85)",
+        background: "var(--bg-card)",
         boxShadow: `0 0 20px ${glow}, inset 0 0 20px rgba(0,0,0,0.3)`,
       }}
       onMouseEnter={(e) => {
@@ -71,40 +77,30 @@ function NeonCard({
   );
 }
 
-export function AboutView({ locale: _locale }: Props) {
+export function AboutView({ locale }: Props) {
   const t = useTranslations("about");
 
+  const cvHref =
+    locale === "pl"
+      ? "/Engineer_Who_Codes-React_TS_Next_Tailwind-PL.pdf"
+      : "/Engineer_Who_Codes-React_TS_Next_Tailwind-EN.pdf";
+
   const approachItems = [
-    {
-      title: t("approach_item_1_title"),
-      desc: t("approach_item_1_desc"),
-      icon: "01",
-      color: "#00ffb4",
-    },
+    { title: t("approach_item_1_title"), desc: t("approach_item_1_desc"), icon: "01", color: CYAN },
     {
       title: t("approach_item_2_title"),
       desc: t("approach_item_2_desc"),
       icon: "02",
-      color: "#d44dff",
+      color: PURPLE,
     },
-    {
-      title: t("approach_item_3_title"),
-      desc: t("approach_item_3_desc"),
-      icon: "03",
-      color: "#00b4ff",
-    },
-    {
-      title: t("approach_item_4_title"),
-      desc: t("approach_item_4_desc"),
-      icon: "04",
-      color: "#00ffb4",
-    },
+    { title: t("approach_item_3_title"), desc: t("approach_item_3_desc"), icon: "03", color: BLUE },
+    { title: t("approach_item_4_title"), desc: t("approach_item_4_desc"), icon: "04", color: CYAN },
   ];
 
   const values = [
-    { title: t("value_1_title"), desc: t("value_1_desc"), color: "#00ffb4" },
-    { title: t("value_2_title"), desc: t("value_2_desc"), color: "#d44dff" },
-    { title: t("value_3_title"), desc: t("value_3_desc"), color: "#00b4ff" },
+    { title: t("value_1_title"), desc: t("value_1_desc"), color: CYAN },
+    { title: t("value_2_title"), desc: t("value_2_desc"), color: PURPLE },
+    { title: t("value_3_title"), desc: t("value_3_desc"), color: BLUE },
   ];
 
   const timeline = [
@@ -112,21 +108,25 @@ export function AboutView({ locale: _locale }: Props) {
       year: t("bg_timeline_1_year"),
       label: t("bg_timeline_1_label"),
       desc: t("bg_timeline_1_desc"),
+      color: CYAN,
     },
     {
       year: t("bg_timeline_2_year"),
       label: t("bg_timeline_2_label"),
       desc: t("bg_timeline_2_desc"),
+      color: PURPLE,
     },
     {
       year: t("bg_timeline_3_year"),
       label: t("bg_timeline_3_label"),
       desc: t("bg_timeline_3_desc"),
+      color: BLUE,
     },
     {
       year: t("bg_timeline_4_year"),
       label: t("bg_timeline_4_label"),
       desc: t("bg_timeline_4_desc"),
+      color: CYAN,
     },
   ];
 
@@ -141,23 +141,20 @@ export function AboutView({ locale: _locale }: Props) {
             <motion.div {...fadeUp(0)}>
               <p
                 className="mb-2 text-[11px] tracking-[3px]"
-                style={{ color: "#00ffb4", textTransform: "uppercase" }}
+                style={{ color: "var(--cyan)", textTransform: "uppercase" }}
               >
                 {t("label")}
               </p>
-              <p className="mb-1 text-base" style={{ color: "#8899aa" }}>
+              <p className="mb-1 text-base" style={{ color: "var(--text-secondary)" }}>
                 {t("hero_greeting")}
               </p>
               <h1
                 className="mb-2 leading-tight font-bold tracking-tight"
-                style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "#e8eaf0" }}
+                style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "var(--text-primary)" }}
               >
                 {t("hero_name")}
               </h1>
-              <p
-                className="mb-6 text-xl font-bold"
-                style={{ color: "#00ffb4", textShadow: "0 0 20px rgba(0,255,180,0.4)" }}
-              >
+              <p className="glow-cyan mb-6 text-xl font-bold" style={{ color: "var(--cyan)" }}>
                 {t("hero_role")}
               </p>
             </motion.div>
@@ -166,17 +163,17 @@ export function AboutView({ locale: _locale }: Props) {
               <span
                 className="inline-flex items-center gap-2 border px-3 py-1.5 text-[10px] tracking-[2px]"
                 style={{
-                  color: "#00ffb4",
-                  borderColor: "rgba(0,255,180,0.3)",
-                  background: "rgba(0,255,180,0.06)",
+                  color: "var(--cyan)",
+                  borderColor: "var(--cyan-border)",
+                  background: "var(--cyan-subtle)",
                   textTransform: "uppercase",
                 }}
               >
                 <span
                   className="h-1.5 w-1.5 rounded-full"
                   style={{
-                    background: "#00ffb4",
-                    boxShadow: "0 0 6px #00ffb4",
+                    background: "var(--cyan)",
+                    boxShadow: "0 0 6px var(--cyan)",
                     animation: "pulse 1.8s ease-in-out infinite",
                   }}
                 />
@@ -185,7 +182,7 @@ export function AboutView({ locale: _locale }: Props) {
               <span
                 className="inline-flex items-center gap-2 border px-3 py-1.5 text-[10px] tracking-[2px]"
                 style={{
-                  color: "#8899aa",
+                  color: "var(--text-secondary)",
                   borderColor: "rgba(136,153,170,0.2)",
                   background: "transparent",
                   textTransform: "uppercase",
@@ -200,7 +197,7 @@ export function AboutView({ locale: _locale }: Props) {
                 <p
                   key={i}
                   className="text-sm leading-relaxed"
-                  style={{ color: i === 1 ? "#aab8c8" : "#8899aa" }}
+                  style={{ color: i === 1 ? "var(--text-muted)" : "var(--text-secondary)" }}
                 >
                   {bio}
                 </p>
@@ -219,8 +216,8 @@ export function AboutView({ locale: _locale }: Props) {
               <div
                 className="relative h-full w-full overflow-hidden"
                 style={{
-                  border: "1px solid rgba(0,255,180,0.35)",
-                  boxShadow: "0 0 20px rgba(0,255,180,0.12), inset 0 0 30px rgba(0,0,0,0.4)",
+                  border: "1px solid var(--cyan-border)",
+                  boxShadow: "0 0 20px var(--cyan-dim), inset 0 0 30px rgba(0,0,0,0.4)",
                 }}
               >
                 <Image
@@ -229,7 +226,6 @@ export function AboutView({ locale: _locale }: Props) {
                   fill
                   priority
                   className="object-cover object-[center_20%]"
-                  style={{ filter: "grayscale(25%) brightness(0.85) contrast(1.1) saturate(0.75)" }}
                 />
                 <div
                   className="absolute inset-0"
@@ -256,35 +252,39 @@ export function AboutView({ locale: _locale }: Props) {
                 />
                 <div
                   className="absolute top-0 left-0 h-5 w-5"
-                  style={{ borderTop: "2px solid #00ffb4", borderLeft: "2px solid #00ffb4" }}
+                  style={{ borderTop: `2px solid ${CYAN}`, borderLeft: `2px solid ${CYAN}` }}
                 />
                 <div
                   className="absolute right-0 bottom-0 h-5 w-5"
-                  style={{ borderBottom: "2px solid #d44dff", borderRight: "2px solid #d44dff" }}
+                  style={{
+                    borderBottom: `2px solid ${PURPLE}`,
+                    borderRight: `2px solid ${PURPLE}`,
+                  }}
                 />
                 <div
                   className="absolute top-0 right-0 h-5 w-5"
-                  style={{ borderTop: "2px solid #00b4ff", borderRight: "2px solid #00b4ff" }}
+                  style={{ borderTop: `2px solid ${BLUE}`, borderRight: `2px solid ${BLUE}` }}
                 />
                 <div
                   className="absolute bottom-0 left-0 h-5 w-5"
-                  style={{ borderBottom: "2px solid #00b4ff", borderLeft: "2px solid #00b4ff" }}
+                  style={{ borderBottom: `2px solid ${BLUE}`, borderLeft: `2px solid ${BLUE}` }}
                 />
               </div>
             </div>
           </motion.div>
         </div>
+
         <div
           className="mt-16 h-px w-full"
           style={{
-            background: "linear-gradient(90deg, transparent, rgba(0,255,180,0.15), transparent)",
+            background: "linear-gradient(90deg, transparent, var(--cyan-dim), transparent)",
           }}
         />
       </section>
 
       {/* HOW I WORK */}
       <motion.section className="mb-24" {...fadeUp()}>
-        <SectionLabel text={t("section_approach")} color="#00ffb4" />
+        <SectionLabel text={t("section_approach")} color={CYAN} />
         <div className="grid gap-4 sm:grid-cols-2">
           {approachItems.map((item, i) => (
             <motion.div key={i} {...fadeUp(i * 0.08)}>
@@ -293,11 +293,14 @@ export function AboutView({ locale: _locale }: Props) {
                   <span className="text-2xl font-bold" style={{ color: item.color, opacity: 0.25 }}>
                     {item.icon}
                   </span>
-                  <h3 className="text-sm font-bold tracking-wide" style={{ color: "#e8eaf0" }}>
+                  <h3
+                    className="text-sm font-bold tracking-wide"
+                    style={{ color: "var(--text-primary)" }}
+                  >
                     {item.title}
                   </h3>
                 </div>
-                <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {item.desc}
                 </p>
               </NeonCard>
@@ -308,7 +311,7 @@ export function AboutView({ locale: _locale }: Props) {
 
       {/* WHAT MATTERS */}
       <motion.section className="mb-24" {...fadeUp()}>
-        <SectionLabel text={t("section_values")} color="#d44dff" />
+        <SectionLabel text={t("section_values")} color={PURPLE} />
         <div className="grid gap-4 lg:grid-cols-3">
           {values.map((val, i) => (
             <motion.div key={i} {...fadeUp(i * 0.1)}>
@@ -317,10 +320,13 @@ export function AboutView({ locale: _locale }: Props) {
                   className="mb-2 h-px w-full"
                   style={{ background: `linear-gradient(90deg, ${val.color}66, transparent)` }}
                 />
-                <h3 className="mb-3 text-sm font-bold tracking-wide" style={{ color: "#e8eaf0" }}>
+                <h3
+                  className="mb-3 text-sm font-bold tracking-wide"
+                  style={{ color: "var(--text-primary)" }}
+                >
                   {val.title}
                 </h3>
-                <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
+                <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {val.desc}
                 </p>
               </NeonCard>
@@ -331,74 +337,75 @@ export function AboutView({ locale: _locale }: Props) {
 
       {/* BACKGROUND / TIMELINE */}
       <motion.section className="mb-24" {...fadeUp()}>
-        <SectionLabel text={t("section_background")} color="#00b4ff" />
-        <p className="mb-10 max-w-2xl text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+        <SectionLabel text={t("section_background")} color={BLUE} />
+        <p
+          className="mb-10 max-w-2xl text-sm leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {t("bg_intro")}
         </p>
         <div className="relative">
           <div
             className="absolute top-0 bottom-0 left-9.75 hidden w-px sm:block"
             style={{
-              background:
-                "linear-gradient(to bottom, rgba(0,255,180,0.3), rgba(0,180,255,0.15), transparent)",
+              background: `linear-gradient(to bottom, var(--cyan-dim), var(--blue-dim), transparent)`,
             }}
           />
           <div className="space-y-6">
-            {timeline.map((item, i) => {
-              const colors = ["#00ffb4", "#d44dff", "#00b4ff", "#00ffb4"];
-              const color = colors[i];
-              return (
-                <motion.div
-                  key={i}
-                  className="flex gap-6"
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
+            {timeline.map((item, i) => (
+              <motion.div
+                key={i}
+                className="flex gap-6"
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+              >
+                <div className="hidden shrink-0 sm:block">
+                  <div
+                    className="flex items-center justify-center border text-[10px] font-bold tracking-[1px]"
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      color: item.color,
+                      borderColor: `${item.color}55`,
+                      background: `${item.color}0d`,
+                    }}
+                  >
+                    {item.year}
+                  </div>
+                </div>
+                <div
+                  className="flex-1 border p-4"
+                  style={{ borderColor: `${item.color}22`, background: `${item.color}05` }}
                 >
-                  <div className="hidden shrink-0 flex-col items-center sm:flex">
-                    <div
-                      className="flex h-10.5 w-10.5 items-center justify-center border text-[10px] font-bold tracking-[1px]"
-                      style={{ color, borderColor: `${color}55`, background: `${color}0d` }}
+                  <div className="mb-1 flex items-center gap-2">
+                    <span
+                      className="text-[9px] tracking-[2px] sm:hidden"
+                      style={{ color: item.color, textTransform: "uppercase" }}
                     >
                       {item.year}
-                    </div>
-                  </div>
-                  <div
-                    className="flex-1 border p-4"
-                    style={{ borderColor: `${color}22`, background: `${color}05` }}
-                  >
-                    <div className="mb-1 flex items-center gap-2">
-                      <span
-                        className="text-[9px] tracking-[2px] sm:hidden"
-                        style={{ color, textTransform: "uppercase" }}
-                      >
-                        {item.year}
-                      </span>
-                      <span
-                        className="text-[9px] tracking-[2px] sm:hidden"
-                        style={{ color: "#445566" }}
-                      >
-                        ·
-                      </span>
-                      <p className="text-sm font-bold" style={{ color: "#e8eaf0" }}>
-                        {item.label}
-                      </p>
-                    </div>
-                    <p className="text-xs leading-relaxed" style={{ color: "#8899aa" }}>
-                      {item.desc}
+                    </span>
+                    <span className="text-[9px] sm:hidden" style={{ color: "var(--text-dim)" }}>
+                      ·
+                    </span>
+                    <p className="text-sm font-bold" style={{ color: "var(--text-primary)" }}>
+                      {item.label}
                     </p>
                   </div>
-                </motion.div>
-              );
-            })}
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+                    {item.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
 
       {/* OUTSIDE OF CODE */}
       <motion.section className="mb-24" {...fadeUp()}>
-        <SectionLabel text={t("section_outside")} color="#ffb800" />
+        <SectionLabel text={t("section_outside")} color={AMBER} />
         <div className="space-y-3">
           {outside.map((item, i) => (
             <motion.div
@@ -410,10 +417,13 @@ export function AboutView({ locale: _locale }: Props) {
               viewport={{ once: true }}
               transition={{ duration: 0.35, delay: i * 0.08 }}
             >
-              <span className="mt-0.5 shrink-0 text-[10px] font-bold" style={{ color: "#ffb800" }}>
+              <span
+                className="mt-0.5 shrink-0 text-[10px] font-bold"
+                style={{ color: "var(--amber)" }}
+              >
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                 {item}
               </p>
             </motion.div>
@@ -425,38 +435,46 @@ export function AboutView({ locale: _locale }: Props) {
       <motion.section
         className="relative border p-10 text-center"
         style={{
-          borderColor: "rgba(0,255,180,0.2)",
-          background: "rgba(10,15,26,0.85)",
-          boxShadow: "0 0 40px rgba(0,255,180,0.06)",
+          borderColor: "var(--cyan-dim)",
+          background: "var(--bg-card)",
+          boxShadow: "0 0 40px var(--cyan-glow)",
         }}
         {...fadeUp()}
       >
         <div
           className="absolute top-0 left-0 h-5 w-5"
-          style={{ borderTop: "2px solid #00ffb4", borderLeft: "2px solid #00ffb4", opacity: 0.6 }}
+          style={{ borderTop: `2px solid ${CYAN}`, borderLeft: `2px solid ${CYAN}`, opacity: 0.6 }}
         />
         <div
           className="absolute right-0 bottom-0 h-5 w-5"
           style={{
-            borderBottom: "2px solid #00ffb4",
-            borderRight: "2px solid #00ffb4",
+            borderBottom: `2px solid ${CYAN}`,
+            borderRight: `2px solid ${CYAN}`,
             opacity: 0.6,
           }}
         />
-        <SectionLabel text={t("section_contact")} color="#00ffb4" />
-        <h2 className="mb-3 text-2xl font-bold tracking-tight" style={{ color: "#e8eaf0" }}>
+
+        <SectionLabel text={t("section_contact")} color={CYAN} />
+        <h2
+          className="mb-3 text-2xl font-bold tracking-tight"
+          style={{ color: "var(--text-primary)" }}
+        >
           {t("contact_title")}
         </h2>
-        <p className="mx-auto mb-8 max-w-md text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+        <p
+          className="mx-auto mb-8 max-w-md text-sm leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {t("contact_desc")}
         </p>
+
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-2.5 text-[11px] font-bold tracking-[2px] transition-all hover:brightness-110"
             style={{
-              background: "#00ffb4",
-              color: "#050810",
+              background: "var(--cyan)",
+              color: "var(--bg)",
               textTransform: "uppercase",
               clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
             }}
@@ -467,8 +485,8 @@ export function AboutView({ locale: _locale }: Props) {
             href="/projects"
             className="inline-flex items-center gap-2 border px-6 py-2.5 text-[11px] tracking-[2px] transition-all hover:brightness-125"
             style={{
-              color: "#00ffb4",
-              borderColor: "rgba(0,255,180,0.35)",
+              color: "var(--cyan)",
+              borderColor: "var(--cyan-border)",
               background: "transparent",
               textTransform: "uppercase",
               clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
@@ -477,11 +495,11 @@ export function AboutView({ locale: _locale }: Props) {
             {t("contact_projects")}
           </Link>
           <a
-            href="/cv.pdf"
+            href={cvHref}
             download
             className="inline-flex items-center gap-2 border px-6 py-2.5 text-[11px] tracking-[2px] transition-all hover:brightness-125"
             style={{
-              color: "#8899aa",
+              color: "var(--text-secondary)",
               borderColor: "rgba(136,153,170,0.2)",
               background: "transparent",
               textTransform: "uppercase",
@@ -492,13 +510,6 @@ export function AboutView({ locale: _locale }: Props) {
           </a>
         </div>
       </motion.section>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.4; transform: scale(0.75); }
-        }
-      `}</style>
     </div>
   );
 }
