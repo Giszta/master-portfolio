@@ -12,7 +12,13 @@ export const skills: Skill[] = [
       en: "Strict mode, generics, utility types, shared schemas with Zod. No any in production code.",
       pl: "Strict mode, generics, typy pomocnicze, współdzielone schematy z Zod. Żadnego any w kodzie produkcyjnym.",
     },
-    usedIn: ["ticket-dashboard", "photography-portfolio", "twoj-doradca", "postly", "portfolio-website"],
+    usedIn: [
+      "ticket-dashboard",
+      "photography-portfolio",
+      "twoj-doradca",
+      "postly",
+      "portfolio-website",
+    ],
   },
   {
     id: "react",
@@ -24,7 +30,13 @@ export const skills: Skill[] = [
       en: "Hooks, custom hooks, context, composition patterns, controlled components. Daily driver.",
       pl: "Hooks, własne hooki, context, wzorce kompozycji, kontrolowane komponenty. Codzienny użytek.",
     },
-    usedIn: ["ticket-dashboard", "photography-portfolio", "twoj-doradca", "portfolio-website", "sliding-game"],
+    usedIn: [
+      "ticket-dashboard",
+      "photography-portfolio",
+      "twoj-doradca",
+      "portfolio-website",
+      "sliding-game",
+    ],
   },
   {
     id: "nextjs",
@@ -74,7 +86,13 @@ export const skills: Skill[] = [
       en: "Tailwind v4, custom design tokens, responsive utilities, dark mode. No more writing CSS by hand.",
       pl: "Tailwind v4, własne tokeny designu, responsywne utility, dark mode. Koniec ręcznego pisania CSS.",
     },
-    usedIn: ["ticket-dashboard", "photography-portfolio", "twoj-doradca", "postly", "portfolio-website"],
+    usedIn: [
+      "ticket-dashboard",
+      "photography-portfolio",
+      "twoj-doradca",
+      "postly",
+      "portfolio-website",
+    ],
   },
   {
     id: "framer-motion",
@@ -242,24 +260,93 @@ export const skills: Skill[] = [
 
 export type SkillCategoryKey = "core" | "ui" | "state-data" | "testing" | "tooling";
 
-export const categoryMeta: Record<SkillCategoryKey, { labelEn: string; labelPl: string; color: string; border: string; glow: string }> = {
-  core:        { labelEn: "Core languages & frameworks", labelPl: "Języki i frameworki",         color: "#00ffb4", border: "rgba(0,255,180,0.28)",  glow: "rgba(0,255,180,0.06)"  },
-  ui:          { labelEn: "UI & styling",                labelPl: "UI i stylowanie",              color: "#d44dff", border: "rgba(191,0,255,0.28)", glow: "rgba(191,0,255,0.06)" },
-  "state-data":{ labelEn: "State & data",               labelPl: "Stan i dane",                  color: "#00b4ff", border: "rgba(0,180,255,0.28)",  glow: "rgba(0,180,255,0.06)"  },
-  testing:     { labelEn: "Testing",                     labelPl: "Testowanie",                   color: "#ff6b6b", border: "rgba(255,107,107,0.28)", glow: "rgba(255,107,107,0.06)"},
-  tooling:     { labelEn: "Tools & deployment",          labelPl: "Narzędzia i deployment",       color: "#ffb800", border: "rgba(255,184,0,0.28)",  glow: "rgba(255,184,0,0.06)"  },
+export const categoryMeta: Record<
+  SkillCategoryKey,
+  {
+    labelEn: string;
+    labelPl: string;
+    color: string;
+    border: string;
+    glow: string;
+    glowHover: string;
+  }
+> = {
+  core: {
+    labelEn: "Core languages & frameworks",
+    labelPl: "Języki i frameworki",
+    color: "var(--cyan)",
+    border: "var(--cyan-border)",
+    glow: "var(--cyan-glow)",
+    glowHover: "var(--cyan-glow-hover)",
+  },
+  ui: {
+    labelEn: "UI & styling",
+    labelPl: "UI i stylowanie",
+    color: "var(--purple)",
+    border: "var(--purple-border)",
+    glow: "var(--purple-glow)",
+    glowHover: "var(--purple-glow-hover)",
+  },
+  "state-data": {
+    labelEn: "State & data",
+    labelPl: "Stan i dane",
+    color: "var(--blue)",
+    border: "var(--blue-border)",
+    glow: "var(--blue-glow)",
+    glowHover: "var(--blue-glow-hover)",
+  },
+  testing: {
+    labelEn: "Testing",
+    labelPl: "Testowanie",
+    color: "var(--red)",
+    border: "rgba(255,107,107,0.28)",
+    glow: "rgba(255,107,107,0.06)",
+    glowHover: "rgba(255,107,107,0.18)",
+  },
+  tooling: {
+    labelEn: "Tools & deployment",
+    labelPl: "Narzędzia i deployment",
+    color: "var(--amber)",
+    border: "rgba(255,184,0,0.28)",
+    glow: "rgba(255,184,0,0.06)",
+    glowHover: "rgba(255,184,0,0.18)",
+  },
 };
 
 export const levelMeta = {
-  confident:   { labelEn: "Confident",   labelPl: "Pewny",       color: "#00ffb4", desc: { en: "Used in multiple production projects", pl: "Używane w wielu projektach produkcyjnych" } },
-  comfortable: { labelEn: "Comfortable", labelPl: "Komfortowy",  color: "#00b4ff", desc: { en: "Used in projects, still deepening knowledge", pl: "Używane w projektach, nadal pogłębiam wiedzę" } },
-  learning:    { labelEn: "Learning",    labelPl: "W nauce",     color: "#ffb800", desc: { en: "Actively learning, used in practice projects", pl: "Aktywnie się uczę, używane w projektach ćwiczeniowych" } },
+  confident: {
+    labelEn: "Confident",
+    labelPl: "Pewny",
+    color: "var(--cyan)",
+    desc: {
+      en: "Used in multiple production projects",
+      pl: "Używane w wielu projektach produkcyjnych",
+    },
+  },
+  comfortable: {
+    labelEn: "Comfortable",
+    labelPl: "Komfortowy",
+    color: "var(--blue)",
+    desc: {
+      en: "Used in projects, still deepening knowledge",
+      pl: "Używane w projektach, nadal pogłębiam wiedzę",
+    },
+  },
+  learning: {
+    labelEn: "Learning",
+    labelPl: "W nauce",
+    color: "var(--amber)",
+    desc: {
+      en: "Actively learning, used in practice projects",
+      pl: "Aktywnie się uczę, używane w projektach ćwiczeniowych",
+    },
+  },
 };
 
 export function getSkillsByCategory(category: SkillCategoryKey): Skill[] {
-  return skills.filter(s => s.category === category);
+  return skills.filter((s) => s.category === category);
 }
 
 export function getSkillById(id: string): Skill | undefined {
-  return skills.find(s => s.id === id);
+  return skills.find((s) => s.id === id);
 }
