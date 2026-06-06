@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { statusColor, statusLabel, categoryColor } from "@/lib/projectHelpers";
+import { statusColor, statusLabel, categoryColor, cardGlow } from "@/lib/projectHelpers";
 import type { Locale, Project, ProjectCategory } from "@/types";
 
 type Props = {
@@ -43,7 +43,7 @@ const ExternalIcon = () => (
 );
 
 function hoverCyan(e: React.MouseEvent<HTMLElement>) {
-  e.currentTarget.style.color = "#00ffb4";
+  e.currentTarget.style.color = "var(--cyan)";
 }
 function hoverReset(color: string) {
   return (e: React.MouseEvent<HTMLElement>) => {
@@ -63,57 +63,37 @@ function ProjectCard({
   const t = useTranslations("projects");
   const sc = statusColor(project.status);
   const cc = categoryColor(project.category);
-
-  const glowColor = index % 3 === 0 ? "#00ffb4" : index % 3 === 1 ? "#d44dff" : "#00b4ff";
-  const glowRgba =
-    index % 3 === 0
-      ? "rgba(0,255,180,0.06)"
-      : index % 3 === 1
-        ? "rgba(191,0,255,0.06)"
-        : "rgba(0,180,255,0.06)";
-  const glowHover =
-    index % 3 === 0
-      ? "rgba(0,255,180,0.18)"
-      : index % 3 === 1
-        ? "rgba(191,0,255,0.18)"
-        : "rgba(0,180,255,0.18)";
-  const borderClr =
-    index % 3 === 0
-      ? "rgba(0,255,180,0.28)"
-      : index % 3 === 1
-        ? "rgba(191,0,255,0.28)"
-        : "rgba(0,180,255,0.28)";
+  const glow = cardGlow(index % 3);
 
   return (
     <article
       className="group relative flex flex-col transition-all duration-300"
       style={{
-        border: `1px solid ${borderClr}`,
-        background: "rgba(10,15,26,0.85)",
-        boxShadow: `0 0 24px ${glowRgba}, inset 0 0 24px rgba(0,0,0,0.3)`,
+        border: `1px solid ${glow.border}`,
+        background: "var(--bg-card)",
+        boxShadow: `0 0 24px ${glow.glow}, inset 0 0 24px rgba(0,0,0,0.3)`,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 40px ${glowHover}, inset 0 0 24px rgba(0,0,0,0.3)`;
+        e.currentTarget.style.boxShadow = `0 0 40px ${glow.glowHover}, inset 0 0 24px rgba(0,0,0,0.3)`;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 24px ${glowRgba}, inset 0 0 24px rgba(0,0,0,0.3)`;
+        e.currentTarget.style.boxShadow = `0 0 24px ${glow.glow}, inset 0 0 24px rgba(0,0,0,0.3)`;
       }}
     >
-      {/* Corner TL */}
+      {/* Corner TL/BR */}
       <div
         className="absolute top-0 left-0 z-10 h-4 w-4"
         style={{
-          borderTop: `2px solid ${glowColor}`,
-          borderLeft: `2px solid ${glowColor}`,
+          borderTop: `2px solid ${glow.corner}`,
+          borderLeft: `2px solid ${glow.corner}`,
           opacity: 0.7,
         }}
       />
-      {/* Corner BR */}
       <div
         className="absolute right-0 bottom-0 z-10 h-4 w-4"
         style={{
-          borderBottom: `2px solid ${glowColor}`,
-          borderRight: `2px solid ${glowColor}`,
+          borderBottom: `2px solid ${glow.corner}`,
+          borderRight: `2px solid ${glow.corner}`,
           opacity: 0.7,
         }}
       />
@@ -138,15 +118,15 @@ function ProjectCard({
           />
           <div
             className="absolute inset-0"
-            style={{ background: `${glowColor}0a`, mixBlendMode: "color" }}
+            style={{ background: `${glow.cornerRaw}0a`, mixBlendMode: "color" }}
             aria-hidden="true"
           />
           <motion.div
             className="absolute right-0 left-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style={{
               height: "2px",
-              background: `linear-gradient(90deg, transparent, ${glowColor}99, transparent)`,
-              boxShadow: `0 0 8px ${glowColor}66`,
+              background: `linear-gradient(90deg, transparent, ${glow.cornerRaw}99, transparent)`,
+              boxShadow: `0 0 8px ${glow.cornerRaw}66`,
             }}
             animate={{ top: ["0%", "100%"] }}
             transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
@@ -159,13 +139,13 @@ function ProjectCard({
                 rel="noopener noreferrer"
                 className="flex items-center justify-center border p-1.5 backdrop-blur-sm transition-colors"
                 style={{
-                  color: "#e8eaf0",
+                  color: "var(--text-primary)",
                   borderColor: "rgba(255,255,255,0.2)",
                   background: "rgba(5,8,16,0.7)",
                 }}
                 aria-label={`Live: ${project.title}`}
                 onMouseEnter={hoverCyan}
-                onMouseLeave={hoverReset("#e8eaf0")}
+                onMouseLeave={hoverReset("var(--text-primary)")}
               >
                 <ExternalIcon />
               </a>
@@ -176,13 +156,13 @@ function ProjectCard({
               rel="noopener noreferrer"
               className="flex items-center justify-center border p-1.5 backdrop-blur-sm transition-colors"
               style={{
-                color: "#e8eaf0",
+                color: "var(--text-primary)",
                 borderColor: "rgba(255,255,255,0.2)",
                 background: "rgba(5,8,16,0.7)",
               }}
               aria-label={`GitHub: ${project.title}`}
               onMouseEnter={hoverCyan}
-              onMouseLeave={hoverReset("#e8eaf0")}
+              onMouseLeave={hoverReset("var(--text-primary)")}
             >
               <GitHubIcon />
             </a>
@@ -207,9 +187,9 @@ function ProjectCard({
           <span
             className="border px-2 py-0.5 text-[9px] tracking-[2px]"
             style={{
-              color: cc,
-              borderColor: `${cc}44`,
-              background: `${cc}0d`,
+              color: cc.var,
+              borderColor: `${cc.raw}44`,
+              background: `${cc.raw}0d`,
               textTransform: "uppercase",
             }}
           >
@@ -217,50 +197,44 @@ function ProjectCard({
           </span>
         </div>
 
-        <h2 className="mb-2 text-base font-bold tracking-wide" style={{ color: "#e8eaf0" }}>
+        <h2
+          className="mb-2 text-base font-bold tracking-wide"
+          style={{ color: "var(--text-primary)" }}
+        >
           {project.title}
         </h2>
 
-        <p className="mb-5 flex-1 text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+        <p
+          className="mb-5 flex-1 text-sm leading-relaxed"
+          style={{ color: "var(--text-secondary)" }}
+        >
           {project.shortDescription[locale]}
         </p>
 
         <div className="mb-4 flex flex-wrap gap-1.5">
-          {project.stack.slice(0, 4).map((tech) => (
+          {project.stack.map((tech) => (
             <span
               key={tech}
               className="border px-2 py-0.5 text-[9px] tracking-[1.5px]"
               style={{
-                color: "rgba(0,255,180,0.6)",
-                borderColor: "rgba(0,255,180,0.12)",
-                background: "rgba(0,255,180,0.03)",
+                color: "var(--cyan-muted)",
+                borderColor: "var(--cyan-dim)",
+                background: "var(--cyan-subtle)",
                 textTransform: "uppercase",
               }}
             >
               {tech}
             </span>
           ))}
-          {project.stack.length > 4 && (
-            <span
-              className="border px-2 py-0.5 text-[9px] tracking-[1.5px]"
-              style={{
-                color: "#445566",
-                borderColor: "rgba(68,85,102,0.3)",
-                textTransform: "uppercase",
-              }}
-            >
-              +{project.stack.length - 4}
-            </span>
-          )}
         </div>
 
-        <div className="border-t pt-4" style={{ borderColor: `${glowColor}18` }}>
+        <div className="border-t pt-4" style={{ borderColor: `${glow.cornerRaw}18` }}>
           <Link
             href={`/projects/${project.slug}`}
             className="text-[10px] tracking-[2px] transition-colors"
-            style={{ color: "#445566", textTransform: "uppercase" }}
+            style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
             onMouseEnter={hoverCyan}
-            onMouseLeave={hoverReset("#445566")}
+            onMouseLeave={hoverReset("var(--text-dim)")}
           >
             {t("case_study")} →
           </Link>
@@ -287,56 +261,58 @@ export function ProjectsGrid({ projects, locale }: Props) {
       >
         <p
           className="mb-3 text-[11px] tracking-[3px]"
-          style={{ color: "#00ffb4", textTransform: "uppercase" }}
+          style={{ color: "var(--cyan)", textTransform: "uppercase" }}
         >
           {t("label")}
         </p>
         <h1
           className="mb-3 text-3xl font-bold tracking-tight lg:text-4xl"
-          style={{ color: "#e8eaf0" }}
+          style={{ color: "var(--text-primary)" }}
         >
           {t("page_title")}
         </h1>
-        <p className="max-w-xl text-sm leading-relaxed" style={{ color: "#8899aa" }}>
+        <p className="max-w-xl text-sm leading-relaxed" style={{ color: "var(--text-secondary)" }}>
           {t("page_description")}
         </p>
       </motion.div>
 
-      {/* Filters */}
+      {/* Filters + counter */}
       <motion.div
-        className="mb-10 flex flex-wrap gap-2"
+        className="mb-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        {FILTERS.map((f) => {
-          const isActive = active === f.key;
-          return (
-            <button
-              key={f.key}
-              onClick={() => setActive(f.key)}
-              className="border px-4 py-1.5 text-[10px] tracking-[2px] transition-all"
-              style={{
-                textTransform: "uppercase",
-                color: isActive ? "#050810" : "#8899aa",
-                background: isActive ? "#00ffb4" : "transparent",
-                borderColor: isActive ? "#00ffb4" : "rgba(136,153,170,0.2)",
-                clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-              }}
-            >
-              {locale === "pl" ? f.labelPl : f.labelEn}
-            </button>
-          );
-        })}
-        <span
-          className="ml-auto self-center text-[10px] tracking-[2px]"
-          style={{ color: "#445566", textTransform: "uppercase" }}
+        <div className="mb-3 flex flex-wrap gap-2">
+          {FILTERS.map((f) => {
+            const isActive = active === f.key;
+            return (
+              <button
+                key={f.key}
+                onClick={() => setActive(f.key)}
+                className="border px-4 py-1.5 text-[10px] tracking-[2px] transition-all"
+                style={{
+                  textTransform: "uppercase",
+                  color: isActive ? "var(--bg)" : "var(--text-secondary)",
+                  background: isActive ? "var(--cyan)" : "transparent",
+                  borderColor: isActive ? "var(--cyan)" : "rgba(136,153,170,0.2)",
+                  clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+                }}
+              >
+                {locale === "pl" ? f.labelPl : f.labelEn}
+              </button>
+            );
+          })}
+        </div>
+        <p
+          className="text-[10px] tracking-[2px]"
+          style={{ color: "var(--text-dim)", textTransform: "uppercase" }}
         >
           {filtered.length} {locale === "pl" ? "projektów" : "projects"}
-        </span>
+        </p>
       </motion.div>
 
-      {/* Grid — AnimatePresence na całym gridzie, nie na kartach */}
+      {/* Grid */}
       <AnimatePresence mode="wait">
         {filtered.length > 0 ? (
           <motion.div
@@ -355,7 +331,7 @@ export function ProjectsGrid({ projects, locale }: Props) {
           <motion.p
             key="empty"
             className="py-24 text-center text-sm"
-            style={{ color: "#445566" }}
+            style={{ color: "var(--text-dim)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
