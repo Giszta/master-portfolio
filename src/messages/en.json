@@ -104,7 +104,10 @@
     "next_title": "What's next",
     "next_desc": "After testing becomes comfortable, the next focus is full-stack fundamentals — databases, proper auth, and deployment pipelines.",
     "next_cta_projects": "See projects →",
-    "next_cta_skills": "Skills"
+    "next_cta_skills": "Skills",
+    "title": "My learning roadmap",
+    "description": "Every stage confirmed by a real project — not just a tutorial certificate.",
+    "cta": "Full roadmap"
   },
   "contact_cta": {
     "label": "Contact",

@@ -44,6 +44,7 @@ export function PhotoFrame({ statDeploy, statTs }: Props) {
             src="/images/my-photo.jpg"
             alt="Profile photo"
             fill
+            sizes="(max-width: 1024px) 224px, 288px"
             priority
             className="object-cover object-[center_20%]"
           />

@@ -105,6 +105,7 @@ function ProjectCard({
             src={project.image}
             alt={`${project.title} screenshot`}
             fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
             style={{ filter: "brightness(0.75) saturate(0.85)" }}
           />
