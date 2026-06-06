@@ -101,7 +101,9 @@
     "philosophy_2": "Śledzę co się uczę i dlaczego. Bez losowego akumulowania umiejętności — każda technologia rozwiązuje prawdziwy problem który napotkałem.",
     "philosophy_3": "Uczciwa samoocena. Pewny oznacza użyte w produkcji. Komfortowy oznacza użyte w projektach. W nauce oznacza aktywną praktykę.",
     "next_title": "Co dalej",
-    "next_desc": "Gdy testowanie stanie się komfortowe, kolejny fokus to podstawy full-stack — bazy danych, właściwa autoryzacja i pipeline'y deployment."
+    "next_desc": "Gdy testowanie stanie się komfortowe, kolejny fokus to podstawy full-stack — bazy danych, właściwa autoryzacja i pipeline'y deployment.",
+    "next_cta_projects": "Zobacz projekty →",
+    "next_cta_skills": "Umiejętności"
   },
   "contact_cta": {
     "label": "Kontakt",
