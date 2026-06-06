@@ -103,7 +103,10 @@
     "next_title": "Co dalej",
     "next_desc": "Gdy testowanie stanie się komfortowe, kolejny fokus to podstawy full-stack — bazy danych, właściwa autoryzacja i pipeline'y deployment.",
     "next_cta_projects": "Zobacz projekty →",
-    "next_cta_skills": "Umiejętności"
+    "next_cta_skills": "Umiejętności",
+    "title": "Moja roadmapa nauki",
+    "description": "Każdy etap potwierdzony prawdziwym projektem — nie tylko certyfikatem z kursu.",
+    "cta": "Pełna roadmapa"
   },
   "contact_cta": {
     "label": "Kontakt",

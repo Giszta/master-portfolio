@@ -224,6 +224,7 @@ export function AboutView({ locale }: Props) {
                   src="/images/my-photo.jpg"
                   alt={t("hero_name")}
                   fill
+                  sizes="208px"
                   priority
                   className="object-cover object-[center_20%]"
                 />
