@@ -1,6 +1,5 @@
 import { ContactView } from "@/components/contact/ContactView";
 import { getTranslations } from "next-intl/server";
-import type { Locale } from "@/types";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -15,12 +14,10 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-export default async function ContactPage({ params }: Props) {
-  const { locale } = await params;
-
+export default async function ContactPage() {
   return (
-    <main className="min-h-screen pb-24 pt-24">
-      <ContactView locale={locale as Locale} />
+    <main className="min-h-screen pt-24 pb-24">
+      <ContactView />
     </main>
   );
 }
