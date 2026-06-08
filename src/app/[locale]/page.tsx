@@ -16,8 +16,8 @@ export default async function HomePage({ params }: Props) {
     <main>
       <HeroSection locale={locale as Locale} />
       <FeaturedProjectsSection locale={locale as Locale} />
-      <TechnicalProofSection locale={locale as Locale} />
-      <LearningPreviewSection locale={locale as Locale} />
+      <TechnicalProofSection />
+      <LearningPreviewSection />
       <ContactCtaSection />
     </main>
   );
