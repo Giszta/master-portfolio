@@ -5,12 +5,12 @@ export const projects: Project[] = [
     slug: "ticket-dashboard",
     title: "Support Tickets Dashboard",
     shortDescription: {
-      en: "Full-stack ticket management with role-based access, filtering and Cloudinary uploads.",
-      pl: "Fullstackowy system ticketów z dostępem opartym na rolach i uploadem przez Cloudinary.",
+      en: "A full-stack helpdesk application built with Next.js, TypeScript and PostgreSQL, featuring role-based access, activity history, ticket filtering and E2E tests.",
+      pl: "Full-stackowa aplikacja helpdeskowa w Next.js, TypeScript i PostgreSQL, z rolami użytkowników, historią aktywności, filtrowaniem zgłoszeń i testami E2E.",
     },
     longDescription: {
-      en: "A production-ready support ticket platform built with Next.js App Router. Features role-based access control (admin/agent/user), advanced filtering and sorting, Cloudinary image attachments, API routes with Zod validation, and E2E tests with Playwright.",
-      pl: "Produkcyjny system ticketów wsparcia zbudowany w Next.js App Router. Zawiera kontrolę dostępu opartą na rolach (admin/agent/user), zaawansowane filtrowanie, załączniki przez Cloudinary, API routes z walidacją Zod oraz testy E2E z Playwright.",
+      en: "A full-stack helpdesk application built with Next.js, TypeScript and PostgreSQL. It simulates a real-world support ticket workflow, including role-based access for three user types, activity history, ticket filtering and E2E tests for critical user flows.",
+      pl: "Full-stackowa aplikacja helpdeskowa zbudowana w Next.js, TypeScript i PostgreSQL. Projekt symuluje realny proces obsługi zgłoszeń — z dostępem opartym na rolach dla trzech typów użytkowników, historią aktywności, filtrowaniem zgłoszeń i testami E2E dla kluczowych przepływów.",
     },
     category: "fullstack",
     status: "live",
@@ -21,106 +21,114 @@ export const projects: Project[] = [
       "Next.js",
       "TypeScript",
       "Tailwind CSS",
+      "Prisma",
+      "PostgreSQL",
+      "Auth.js",
       "Zod",
-      "Playwright",
-      "Cloudinary",
       "React Hook Form",
+      "Playwright",
     ],
     features: [
       {
-        en: "Role-based access control (Admin / Agent / User)",
-        pl: "Kontrola dostępu oparta na rolach (Admin / Agent / User)",
+        en: "Three user roles — Admin, Agent and Customer — each with different permissions",
+        pl: "Trzy role użytkowników — Administrator, Agent i Klient — każda z innymi uprawnieniami",
       },
       {
-        en: "Advanced filtering, sorting and full-text search",
-        pl: "Zaawansowane filtrowanie, sortowanie i wyszukiwanie pełnotekstowe",
+        en: "Ticket filtering, sorting and search stored in the URL",
+        pl: "Filtrowanie, sortowanie i wyszukiwanie ticketów zapisane w URL",
       },
-      { en: "Image attachments via Cloudinary CDN", pl: "Załączniki zdjęć przez Cloudinary CDN" },
-      { en: "API routes with Zod schema validation", pl: "API routes z walidacją schematów Zod" },
       {
-        en: "E2E tests covering critical user flows",
-        pl: "Testy E2E pokrywające krytyczne przepływy użytkownika",
+        en: "Activity log that tracks every change made to a ticket",
+        pl: "Historia aktywności śledząca każdą zmianę wprowadzoną w tickecie",
+      },
+      {
+        en: "Internal comments visible only to agents and admins",
+        pl: "Wewnętrzne komentarze widoczne tylko dla agentów i adminów",
+      },
+      {
+        en: "E2E tests covering login and core ticket flows",
+        pl: "Testy E2E pokrywające logowanie i główne przepływy ticketów",
       },
     ],
     techDecisions: [
       {
         problem: {
-          en: "How to protect routes based on user role without a dedicated backend?",
-          pl: "Jak chronić trasy na podstawie roli użytkownika bez dedykowanego backendu?",
+          en: "How to restrict pages based on user role without repeating auth logic on every page?",
+          pl: "Jak ograniczać dostęp do stron na podstawie roli bez powtarzania logiki autoryzacji na każdej stronie?",
         },
         decision: {
-          en: "Used Next.js middleware with session-based role checking and redirect logic per route group.",
-          pl: "Użyłem middleware Next.js z weryfikacją roli z sesji i logiką przekierowania per grupa tras.",
+          en: "Used Next.js middleware that reads the session and redirects based on the user's role before the page loads.",
+          pl: "Użyłem middleware Next.js, który odczytuje sesję i przekierowuje na podstawie roli użytkownika zanim strona się załaduje.",
         },
         result: {
-          en: "Clean separation of access levels without duplicating auth logic in every page component.",
-          pl: "Czyste rozdzielenie poziomów dostępu bez duplikowania logiki autoryzacji na każdej stronie.",
+          en: "One place handles all access control — no duplicated checks across page components.",
+          pl: "Jedno miejsce obsługuje całą kontrolę dostępu — brak zduplikowanych sprawdzeń w komponentach stron.",
         },
       },
       {
         problem: {
-          en: "How to validate API data consistently on both client and server side?",
-          pl: "Jak spójnie walidować dane API zarówno po stronie klienta jak i serwera?",
+          en: "How to avoid writing the same validation rules twice — once for the form and once for the server?",
+          pl: "Jak uniknąć pisania tych samych reguł walidacji dwa razy — raz dla formularza i raz dla serwera?",
         },
         decision: {
-          en: "Shared Zod schemas used in both React Hook Form and API route handlers.",
-          pl: "Współdzielone schematy Zod używane zarówno w React Hook Form jak i w handlerach API route.",
+          en: "Created shared Zod schemas imported by both React Hook Form on the client and Server Actions on the server.",
+          pl: "Stworzyłem współdzielone schematy Zod importowane zarówno przez React Hook Form po stronie klienta, jak i przez Server Actions po stronie serwera.",
         },
         result: {
-          en: "Single source of truth for validation rules — no duplication, no drift between client and server.",
-          pl: "Jedno źródło prawdy dla reguł walidacji — brak duplikacji i rozbieżności między klientem a serwerem.",
+          en: "One schema per form — changing a validation rule updates both sides automatically.",
+          pl: "Jeden schemat dla każdego formularza — zmiana reguły walidacji aktualizuje obie strony automatycznie.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Cloudinary uploads failing silently in production environment.",
-          pl: "Uploady Cloudinary cicho zawodzące w środowisku produkcyjnym.",
+          en: "Keeping filter and search state in sync with the URL without managing it in React state.",
+          pl: "Utrzymanie stanu filtrów i wyszukiwania zsynchronizowanego z URL bez trzymania go w stanie Reacta.",
         },
         solution: {
-          en: "Added explicit error boundaries, server-side validation of upload response, and user-facing error messages.",
-          pl: "Dodałem explicite error boundaries, walidację odpowiedzi uploadu po stronie serwera i czytelne komunikaty błędów.",
+          en: "Used Next.js search params as the single source of truth — filters read from the URL, updated via router.push.",
+          pl: "Użyłem search params Next.js jako jedynego źródła prawdy — filtry odczytywane z URL, aktualizowane przez router.push.",
         },
         result: {
-          en: "Reliable file uploads with graceful degradation and clear feedback on failure.",
-          pl: "Niezawodny upload plików z graceful degradation i czytelnym feedbackiem przy błędzie.",
+          en: "Filters work with browser back/forward and can be shared as a link.",
+          pl: "Filtry działają z przyciskami wstecz/dalej w przeglądarce i można je udostępnić jako link.",
         },
       },
     ],
     learnings: [
       {
-        en: "Role-based access patterns in Next.js App Router",
-        pl: "Wzorce dostępu opartego na rolach w Next.js App Router",
+        en: "How middleware-based auth works in Next.js App Router",
+        pl: "Jak działa autoryzacja przez middleware w Next.js App Router",
       },
       {
-        en: "Shared Zod schemas across client and server boundaries",
-        pl: "Współdzielone schematy Zod między granicami klient-serwer",
+        en: "Sharing Zod schemas between client forms and Server Actions",
+        pl: "Współdzielenie schematów Zod między formularzami klienta a Server Actions",
       },
       {
-        en: "E2E testing with Playwright for auth flows",
-        pl: "Testy E2E z Playwright dla przepływów autoryzacji",
+        en: "Using URL search params as state for filters and pagination",
+        pl: "Używanie search params URL jako stanu dla filtrów i paginacji",
       },
       {
-        en: "Cloudinary API integration with proper error handling",
-        pl: "Integracja Cloudinary API z właściwą obsługą błędów",
+        en: "Writing E2E tests with Playwright for authenticated user flows",
+        pl: "Pisanie testów E2E w Playwright dla przepływów z zalogowanym użytkownikiem",
       },
     ],
     githubUrl: "https://github.com/Giszta/ticket-dashboard",
-    liveUrl: "https://ticket-dashboard.vercel.app",
+    liveUrl: "https://ticket-dashboard-black.vercel.app",
     image: "/images/projects/ticket-dashboard.png",
-    createdAt: "2024-11-01",
+    createdAt: "2026-04-26",
   },
   {
     slug: "photography-portfolio",
     title: "Photography Portfolio",
     shortDescription: {
-      en: "Minimalist photography portfolio with Cloudinary gallery and lightbox viewer.",
-      pl: "Minimalistyczne portfolio fotograficzne z galerią Cloudinary i przeglądarką lightbox.",
+      en: "Photography portfolio built with Next.js and Cloudinary — album gallery with tag filtering and lightbox viewer.",
+      pl: "Portfolio fotograficzne w Next.js z Cloudinary — galeria albumów z filtrowaniem po tagach i przeglądarką lightbox.",
     },
     longDescription: {
-      en: "A clean, performance-focused photography portfolio. Images served through Cloudinary CDN with automatic optimization. Features category filtering, fullscreen lightbox, lazy loading and smooth Framer Motion transitions.",
-      pl: "Czyste, wydajne portfolio fotograficzne. Zdjęcia serwowane przez Cloudinary CDN z automatyczną optymalizacją. Filtrowanie kategorii, lightbox pełnoekranowy, lazy loading i płynne przejścia Framer Motion.",
+      en: "A portfolio site for a photographer friend. Photos are stored and served from Cloudinary, organized into albums by folder structure. The gallery fetches all resources in one request, builds a manifest cached for an hour, and invalidates it automatically via a Cloudinary webhook when new photos are uploaded. Albums can be filtered by tags and open in a fullscreen lightbox with thumbnails and slideshow.",
+      pl: "Strona portfolio dla fotografa. Zdjęcia przechowywane i serwowane z Cloudinary, podzielone na albumy według struktury folderów. Galeria pobiera wszystkie zasoby jednym requestem, buduje manifest cache'owany na godzinę i unieważnia go automatycznie przez webhook Cloudinary po wgraniu nowych zdjęć. Albumy można filtrować po tagach, a zdjęcia otwierają się w pełnoekranowym lightboxie z miniaturkami i trybem slideshow.",
     },
     category: "frontend",
     status: "live",
@@ -130,152 +138,230 @@ export const projects: Project[] = [
     stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Cloudinary"],
     features: [
       {
-        en: "Cloudinary CDN with automatic image optimization",
-        pl: "Cloudinary CDN z automatyczną optymalizacją zdjęć",
+        en: "Gallery manifest cached server-side with Next.js unstable_cache (1h revalidation)",
+        pl: "Manifest galerii cache'owany po stronie serwera przez Next.js unstable_cache (rewalidacja co 1h)",
       },
       {
-        en: "Category filtering with smooth animated transitions",
-        pl: "Filtrowanie kategorii z płynnymi animowanymi przejściami",
+        en: "Cloudinary webhook automatically invalidates cache after uploading new photos",
+        pl: "Webhook Cloudinary automatycznie unieważnia cache po wgraniu nowych zdjęć",
       },
       {
-        en: "Fullscreen lightbox with keyboard navigation",
-        pl: "Przeglądarka lightbox pełnoekranowa z nawigacją klawiaturą",
+        en: "Tag-based album filtering with staggered reveal animation",
+        pl: "Filtrowanie albumów po tagach z animowanym stopniowym pojawianiem się kart",
       },
-      { en: "Lazy loading for optimal performance", pl: "Lazy loading dla optymalnej wydajności" },
+      {
+        en: "Fullscreen lightbox with thumbnails, slideshow and counter",
+        pl: "Pełnoekranowy lightbox z miniaturkami, trybem slideshow i licznikiem",
+      },
+      {
+        en: "Cloudinary URL optimization — automatic format (WebP/AVIF) and quality via f_auto,q_auto",
+        pl: "Optymalizacja URL Cloudinary — automatyczny format (WebP/AVIF) i jakość przez f_auto,q_auto",
+      },
     ],
     techDecisions: [
       {
         problem: {
-          en: "How to serve high-quality images without sacrificing page performance?",
-          pl: "Jak serwować wysokiej jakości zdjęcia bez poświęcania wydajności strony?",
+          en: "Fetching photos separately for each album would mean a lot of Cloudinary API calls on every page load.",
+          pl: "Pobieranie zdjęć osobno dla każdego albumu oznaczałoby dużo wywołań Cloudinary API przy każdym ładowaniu strony.",
         },
         decision: {
-          en: "Cloudinary CDN with automatic format conversion (WebP/AVIF) and responsive transformations via URL parameters.",
-          pl: "Cloudinary CDN z automatyczną konwersją formatów (WebP/AVIF) i responsywnymi transformacjami przez parametry URL.",
+          en: "One paginated request fetches all gallery resources from Cloudinary, then a manifest is built in memory — albums grouped by folder, sorted alphabetically. The whole thing is cached with Next.js unstable_cache for an hour.",
+          pl: "Jeden paginowany request pobiera wszystkie zasoby galerii z Cloudinary, potem manifest jest budowany w pamięci — albumy pogrupowane po folderach, posortowane alfabetycznie. Całość jest cache'owana przez Next.js unstable_cache na godzinę.",
         },
         result: {
-          en: "Images load significantly faster with zero manual optimization work.",
-          pl: "Zdjęcia ładują się znacznie szybciej bez ręcznej optymalizacji.",
+          en: "API routes for albums and individual album photos both serve from the same cached manifest — fast response times without hitting Cloudinary on every request.",
+          pl: "Endpointy dla listy albumów i zdjęć konkretnego albumu serwują z tego samego cache'owanego manifestu — szybkie czasy odpowiedzi bez odpytywania Cloudinary przy każdym requeście.",
+        },
+      },
+      {
+        problem: {
+          en: "Cache cached for an hour means newly uploaded photos wouldn't appear until the next revalidation cycle.",
+          pl: "Cache trzymany przez godzinę oznaczał, że nowo wgrane zdjęcia nie pojawiałyby się aż do kolejnego cyklu rewalidacji.",
+        },
+        decision: {
+          en: "Set up a Cloudinary webhook pointing to /api/cloudinary-webhook. On upload, Cloudinary calls the endpoint which calls revalidateTag on all three cache tags and revalidatePath on all pages.",
+          pl: "Skonfigurowałem webhook Cloudinary wskazujący na /api/cloudinary-webhook. Po wgraniu zdjęć Cloudinary wywołuje endpoint, który wywołuje revalidateTag na wszystkich trzech tagach cache i revalidatePath na wszystkich stronach.",
+        },
+        result: {
+          en: "New photos show up immediately after upload without any manual action.",
+          pl: "Nowe zdjęcia pojawiają się od razu po wgraniu bez żadnej ręcznej akcji.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Lightbox breaking scroll position and causing layout shift on mobile.",
-          pl: "Lightbox psujący pozycję scrolla i powodujący layout shift na mobile.",
+          en: "After implementing album filtering, switching tags caused all albums to flash in at once instead of animating in one by one.",
+          pl: "Po zaimplementowaniu filtrowania albumów, przełączanie tagów powodowało że wszystkie albumy pojawiały się naraz zamiast animować się jeden po drugim.",
         },
         solution: {
-          en: "Used body scroll lock with proper cleanup, and CSS contain property to isolate lightbox from document flow.",
-          pl: "Użyłem body scroll lock z właściwym cleanup i właściwości CSS contain do izolacji lightboxa od document flow.",
+          en: "Used a setInterval that increments a visible count every 180ms — only albums up to that count render. On tag change the counter resets to 0. Framer Motion handles the individual card entrance animation.",
+          pl: "Użyłem setInterval który co 180ms zwiększa licznik widocznych albumów — renderują się tylko albumy do tej liczby. Przy zmianie tagu licznik resetuje się do 0. Framer Motion obsługuje animację wejścia pojedynczych kart.",
         },
         result: {
-          en: "Smooth lightbox experience on all devices with no layout shift or scroll issues.",
-          pl: "Płynne działanie lightboxa na wszystkich urządzeniach bez layout shift i problemów ze scrollem.",
+          en: "Albums reveal one by one on every filter change, which feels much more intentional than all appearing at once.",
+          pl: "Albumy pojawiają się jeden po drugim przy każdej zmianie filtra, co wygląda o wiele bardziej zamierzenie niż pojawienie się wszystkich naraz.",
+        },
+      },
+      {
+        challenge: {
+          en: "Photos inside an album were showing up in random order depending on Cloudinary's response — not the order they were uploaded in.",
+          pl: "Zdjęcia wewnątrz albumu wyświetlały się w losowej kolejności zależnej od odpowiedzi Cloudinary — nie w kolejności wgrywania.",
+        },
+        solution: {
+          en: "Added alphabetical sort by filename using localeCompare with numeric:true option, so files named 001, 002, 003 sort correctly.",
+          pl: "Dodałem sortowanie alfabetyczne po nazwie pliku używając localeCompare z opcją numeric:true, żeby pliki nazwane 001, 002, 003 sortowały się poprawnie.",
+        },
+        result: {
+          en: "Photos in every album now appear in the intended sequence.",
+          pl: "Zdjęcia w każdym albumie pojawiają się teraz we właściwej kolejności.",
         },
       },
     ],
     learnings: [
       {
-        en: "Cloudinary image transformations and responsive delivery",
-        pl: "Transformacje zdjęć Cloudinary i responsywne dostarczanie",
+        en: "Next.js unstable_cache and cache tag invalidation — how to cache expensive fetches and selectively revalidate them",
+        pl: "Next.js unstable_cache i inwalidacja tagów cache — jak cache'ować kosztowne requesty i selektywnie je rewalidować",
       },
       {
-        en: "Framer Motion layout animations with AnimatePresence",
-        pl: "Animacje layoutu Framer Motion z AnimatePresence",
+        en: "Cloudinary API — paginated resource fetching, URL transformation parameters, webhook setup",
+        pl: "Cloudinary API — paginowane pobieranie zasobów, parametry transformacji URL, konfiguracja webhooków",
       },
-      { en: "Body scroll management in React", pl: "Zarządzanie scrollem body w React" },
+      {
+        en: "Framer Motion animations combined with interval-based rendering for staggered list reveals",
+        pl: "Animacje Framer Motion w połączeniu z renderowaniem opartym o interwał do stopniowego ujawniania listy",
+      },
     ],
     githubUrl: "https://github.com/Giszta/photography-portfolio",
-    liveUrl: "https://photography.vercel.app",
+    liveUrl: "https://www.fotoroman.pl/",
     image: "/images/projects/photography-portfolio.png",
-    createdAt: "2024-09-01",
+    createdAt: "2025-02-04",
   },
   {
     slug: "twoj-doradca",
     title: "Twój Doradca",
     shortDescription: {
-      en: "Landing page for a financial advisory business with contact form and SEO optimization.",
-      pl: "Landing page dla firmy doradztwa finansowego z formularzem kontaktowym i SEO.",
+      en: "Landing page for a renewable energy advisor with a multi-step contact form and email integration.",
+      pl: "Landing page dla doradcy OZE z wielokrokowym formularzem kontaktowym i integracją emailową.",
     },
     longDescription: {
-      en: "A professional landing page built for a real client in the renewable energy advisory space. Includes structured service presentation, validated contact form, SEO metadata, Open Graph tags, and responsive design optimized for conversion.",
-      pl: "Profesjonalna strona landing page zbudowana dla prawdziwego klienta z branży doradztwa OZE. Zawiera strukturalne przedstawienie usług, walidowany formularz kontaktowy, metadane SEO, tagi Open Graph i responsywny design zoptymalizowany pod konwersję.",
+      en: "A landing page built for a real client running a renewable energy advisory business. The site covers the full sales funnel — from presenting services and government grants, through a photo gallery of past realizations, to a multi-step contact form that collects product-specific answers and sends a formatted email to the client via Resend. The project went through many rounds of client feedback and multiple redesigns of nearly every section.",
+      pl: "Landing page zbudowany dla prawdziwego klienta prowadzącego firmę doradztwa OZE. Strona obsługuje cały lejek sprzedażowy — od prezentacji usług i dofinansowań rządowych, przez galerię zdjęć realizacji, po wielokrokowy formularz kontaktowy zbierający odpowiedzi specyficzne dla produktu i wysyłający sformatowanego emaila do klienta przez Resend. Projekt przechodził przez wiele rund feedbacku klienta i kilka przeprojektowań prawie każdej sekcji.",
     },
     category: "landing-page",
     status: "live",
     difficulty: "intermediate",
     featured: true,
     priority: 3,
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "React Hook Form", "Zod"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Motion", "Resend"],
     features: [
       {
-        en: "Service sections with structured content hierarchy",
-        pl: "Sekcje usług ze strukturalną hierarchią treści",
+        en: "Multi-step contact form with dynamic questions based on selected product (6 product types)",
+        pl: "Wielokrokowy formularz kontaktowy z dynamicznymi pytaniami zależnymi od wybranego produktu (6 typów)",
       },
       {
-        en: "Contact form with client-side and server-side validation",
-        pl: "Formularz kontaktowy z walidacją po stronie klienta i serwera",
+        en: "Email delivery via Resend — formatted HTML email sent to the client on every submission",
+        pl: "Wysyłka emaili przez Resend — sformatowany HTML email trafia do klienta przy każdym zgłoszeniu",
       },
       {
-        en: "SEO metadata and Open Graph for social sharing",
-        pl: "Metadane SEO i Open Graph dla udostępniania w mediach społecznościowych",
+        en: "Government grants section with expandable cards and requirements per program",
+        pl: "Sekcja dofinansowań rządowych z rozwijanymi kartami i wymaganiami dla każdego programu",
       },
       {
-        en: "Fully responsive layout optimized for conversion",
-        pl: "W pełni responsywny layout zoptymalizowany pod konwersję",
+        en: "Realizations photo gallery with marquee animation and lightbox",
+        pl: "Galeria zdjęć realizacji z animacją marquee i lightboxem",
+      },
+      {
+        en: "GDPR-compliant cookie banner and legal pages (privacy policy, terms, social media policy)",
+        pl: "Banner cookies zgodny z RODO oraz strony prawne (polityka prywatności, regulamin, polityka SM)",
+      },
+      {
+        en: "Fully responsive layout with scroll animations via Motion",
+        pl: "W pełni responsywny layout z animacjami przewijania przez Motion",
       },
     ],
     techDecisions: [
       {
         problem: {
-          en: "Client wanted content updates without touching code — how to balance simplicity with maintainability?",
-          pl: "Klient chciał aktualizować treści bez dotykania kodu — jak balansować prostotę z utrzymywalnością?",
+          en: "The contact form needed to collect very different information depending on which product the user was interested in — a heat pump inquiry needs different questions than a photovoltaics one.",
+          pl: "Formularz kontaktowy musiał zbierać zupełnie inne dane w zależności od produktu — zapytanie o pompę ciepła wymaga innych pytań niż o fotowoltaikę.",
         },
         decision: {
-          en: "Centralized content in a single TypeScript data file with typed structures — easy to update, no CMS overhead.",
-          pl: "Scentralizowana treść w jednym pliku TypeScript z typowanymi strukturami — łatwa do aktualizacji, bez narzutu CMS.",
+          en: "Built a multi-step wizard driven by a config file — each product has its own question array, and a custom useContactForm hook manages step state, validation, and submission.",
+          pl: "Zbudowałem wielokrokowy wizard sterowany plikiem konfiguracyjnym — każdy produkt ma własną tablicę pytań, a customowy hook useContactForm zarządza stanem kroków, walidacją i wysyłką.",
         },
         result: {
-          en: "Client can request content changes as a single file update, no deployment complexity.",
-          pl: "Klient może zlecać zmiany treści jako aktualizację jednego pliku, bez złożoności deploymentu.",
+          en: "Adding a new product or changing questions requires editing one config file, no logic changes needed.",
+          pl: "Dodanie nowego produktu lub zmiana pytań wymaga edycji jednego pliku konfiguracyjnego, bez zmian w logice.",
+        },
+      },
+      {
+        problem: {
+          en: "Client needed to receive structured lead data by email without any backend infrastructure or database.",
+          pl: "Klient potrzebował otrzymywać ustrukturyzowane dane leadów emailem bez żadnej infrastruktury backendowej ani bazy danych.",
+        },
+        decision: {
+          en: "Used Resend with a Next.js API route — the route assembles an HTML email with the user's answers, contact details, and marketing consents, then sends it directly to the client.",
+          pl: "Użyłem Resend z API route Next.js — route składa HTML email z odpowiedziami użytkownika, danymi kontaktowymi i zgodami marketingowymi, a następnie wysyła go bezpośrednio do klienta.",
+        },
+        result: {
+          en: "Zero database, zero admin panel — client gets a clean, readable email for every lead.",
+          pl: "Zero bazy danych, zero panelu admina — klient dostaje czytelny email dla każdego leada.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Balancing client's design preferences with web performance best practices.",
-          pl: "Balansowanie preferencji designu klienta z najlepszymi praktykami wydajności webowej.",
+          en: "The client had a lot of feedback across many iterations — almost every section went through at least two redesigns based on their input.",
+          pl: "Klient miał dużo uwag w wielu iteracjach — prawie każda sekcja przeszła co najmniej dwa przeprojektowania na podstawie jego feedbacku.",
         },
         solution: {
-          en: "Used Next.js Image component with priority loading for above-fold content, deferred loading for the rest.",
-          pl: "Użyłem komponentu Image Next.js z priority loading dla treści above-fold i deferred loading dla reszty.",
+          en: "Kept the codebase component-based and data-driven from the start, which made swapping layouts and updating content much less painful.",
+          pl: "Od początku trzymałem codebase oparty na komponentach i danych, co sprawiło, że zamiana layoutów i aktualizacja treści była znacznie mniej bolesna.",
         },
         result: {
-          en: "Lighthouse score above 90 across all categories while meeting all visual requirements.",
-          pl: "Wynik Lighthouse powyżej 90 we wszystkich kategoriach przy spełnieniu wszystkich wymagań wizualnych.",
+          en: "Changes that would have been painful in a monolithic structure took minutes — and I learned to scope client feedback early.",
+          pl: "Zmiany, które byłyby bolesne w monolitycznej strukturze, zajmowały minuty — i nauczyłem się wcześniej precyzować feedback klienta.",
+        },
+      },
+      {
+        challenge: {
+          en: "Implementing GDPR-compliant consent handling — the form captures marketing consents and the cookie banner needs to respect user choices.",
+          pl: "Implementacja obsługi zgód zgodnej z RODO — formularz zbiera zgody marketingowe, a baner cookies musi respektować wybory użytkownika.",
+        },
+        solution: {
+          en: "Added three separate marketing consent checkboxes to the form (email, phone, newsletter) and built a cookie banner with persistent preference storage.",
+          pl: "Dodałem trzy osobne checkboxy zgód marketingowych w formularzu (email, telefon, newsletter) i zbudowałem baner cookies z trwałym przechowywaniem preferencji.",
+        },
+        result: {
+          en: "Legal requirements met, and client's submitted leads come with clearly recorded consent state.",
+          pl: "Wymagania prawne spełnione, a zgłoszenia klienta przychodzą z wyraźnie zapisanym stanem zgód.",
         },
       },
     ],
     learnings: [
       {
-        en: "Real client requirements vs developer preferences",
-        pl: "Wymagania prawdziwego klienta vs preferencje developera",
+        en: "Client feedback rarely comes in one batch — building for iteration from the start saves a lot of refactoring later",
+        pl: "Feedback klienta rzadko przychodzi jednorazowo — budowanie pod iteracje od początku oszczędza dużo refaktoringu później",
       },
       {
-        en: "SEO optimization patterns in Next.js App Router",
-        pl: "Wzorce optymalizacji SEO w Next.js App Router",
+        en: "Email as an integration layer — Resend + API route covers a lot of use cases without needing a database",
+        pl: "Email jako warstwa integracyjna — Resend + API route pokrywa wiele przypadków bez potrzeby bazy danych",
       },
       {
-        en: "Form UX — validation feedback timing and error messaging",
-        pl: "UX formularzy — timing feedbacku walidacji i komunikaty błędów",
+        en: "Multi-step forms UX — managing step state, validation per step, and error recovery is more complex than it looks",
+        pl: "UX wielokrokowych formularzy — zarządzanie stanem kroków, walidacją per krok i obsługą błędów jest bardziej złożone niż wygląda",
+      },
+      {
+        en: "GDPR basics in practice — consent fields, cookie banners, and why legal pages matter for real clients",
+        pl: "Podstawy RODO w praktyce — pola zgód, bannery cookies i dlaczego strony prawne mają znaczenie dla prawdziwych klientów",
       },
     ],
     githubUrl: "https://github.com/Giszta/twoj-doradca",
     liveUrl: "https://twojdoradca.pl",
     image: "/images/projects/twoj-doradca.png",
-    createdAt: "2024-07-01",
+    createdAt: "2025-08-28",
   },
   {
     slug: "postly",
