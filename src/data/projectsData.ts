@@ -367,272 +367,378 @@ export const projects: Project[] = [
     slug: "postly",
     title: "Postly",
     shortDescription: {
-      en: "Minimalist forum-like app built with Vue 3 and TypeScript — posts, pagination, Vuex state management.",
-      pl: "Minimalistyczna aplikacja forum zbudowana w Vue 3 i TypeScript — posty, paginacja, zarządzanie stanem Vuex.",
+      en: "Forum-like app built with Vue 3 and TypeScript — posts, pagination, Vuex state management. A learning project from a React developer's perspective.",
+      pl: "Aplikacja forum zbudowana w Vue 3 i TypeScript — posty, paginacja, zarządzanie stanem Vuex. Projekt nauki z perspektywy developera React.",
     },
     longDescription: {
-      en: "A clean forum-like application built with Vue 3, TypeScript, Vuex, and Tailwind CSS. Fetches posts from JSONPlaceholder API, supports pagination without full page reload, expandable post content with smooth animations, random author assignment, and post deletion. A deliberate practice project to learn Vue 3 ecosystem as a React developer.",
-      pl: "Czysta aplikacja forum zbudowana w Vue 3, TypeScript, Vuex i Tailwind CSS. Pobiera posty z JSONPlaceholder API, obsługuje paginację bez przeładowania strony, rozwijalne treści z animacjami, losowe przypisanie autorów i usuwanie postów. Świadomy projekt ćwiczeniowy do nauki ekosystemu Vue 3 jako developer React.",
+      en: "A forum-style application built with Vue 3, TypeScript, Vuex, Tailwind CSS v4, and Vite. Fetches posts and users from the JSONPlaceholder API, implements client-side pagination, expandable post bodies with smooth CSS transitions, post deletion with fade-out animation, and scroll-to-top/bottom buttons. Built intentionally to learn the Vue 3 ecosystem coming from React — every feature was a chance to compare how things work differently.",
+      pl: "Aplikacja w stylu forum zbudowana w Vue 3, TypeScript, Vuex, Tailwind CSS v4 i Vite. Pobiera posty i użytkowników z API JSONPlaceholder, implementuje paginację po stronie klienta, rozwijalne treści z płynnymi przejściami CSS, usuwanie postów z animacją zanikania i przyciski przewijania. Zbudowana świadomie, żeby nauczyć się ekosystemu Vue 3 przychodząc z React — każda funkcja była okazją do porównania jak rzeczy działają inaczej.",
     },
     category: "practice",
     status: "live",
     difficulty: "intermediate",
     featured: false,
     priority: 4,
-    stack: ["Vue 3", "TypeScript", "Vuex", "Axios", "Tailwind CSS"],
+    stack: ["Vue 3", "TypeScript", "Vuex", "Axios", "Tailwind CSS", "Vite"],
     features: [
       {
-        en: "Posts fetched from JSONPlaceholder public API",
-        pl: "Posty pobierane z publicznego API JSONPlaceholder",
+        en: "Posts and users fetched from JSONPlaceholder public API",
+        pl: "Posty i użytkownicy pobierani z publicznego API JSONPlaceholder",
       },
       {
-        en: "Pagination — 10 posts per page without full reload",
-        pl: "Paginacja — 10 postów na stronę bez przeładowania",
+        en: "Client-side pagination — 10 posts per page, no full reload",
+        pl: "Paginacja po stronie klienta — 10 postów na stronę, bez przeładowania",
       },
       {
-        en: "Expandable/collapsible post content with animation",
-        pl: "Rozwijalna/zwijalna treść posta z animacją",
+        en: "Expandable post content — height animated via measured scrollHeight",
+        pl: "Rozwijalna treść posta — wysokość animowana na podstawie zmierzonego scrollHeight",
       },
       {
-        en: "Random author assignment and post deletion",
-        pl: "Losowe przypisanie autorów i usuwanie postów",
+        en: "Post deletion with fade-out animation using transition-group",
+        pl: "Usuwanie postów z animacją zanikania przy użyciu transition-group",
       },
-      { en: "Modular component architecture", pl: "Modularna architektura komponentów" },
+      {
+        en: "Scroll-to-top and scroll-to-bottom floating buttons with visibility logic",
+        pl: "Pływające przyciski przewijania w górę i w dół z logiką widoczności",
+      },
+      {
+        en: "Modular Vuex store — state, actions, mutations, getters in separate files",
+        pl: "Modularny store Vuex — state, actions, mutations, getters w osobnych plikach",
+      },
     ],
     techDecisions: [
       {
         problem: {
-          en: "As a React developer, how to approach state management in Vue without overcomplicating it?",
-          pl: "Jako developer React, jak podejść do zarządzania stanem w Vue bez nadmiernego komplikowania?",
+          en: "As a React developer, how to approach state management in Vue without just recreating Redux patterns blindly?",
+          pl: "Jako developer React, jak podejść do zarządzania stanem w Vue nie odtwarzając po prostu wzorców Redux na ślepo?",
         },
         decision: {
-          en: "Used Vuex with a single store module — mirrors Redux/Context patterns familiar from React, making the transition intentional.",
-          pl: "Użyłem Vuex z jednym modułem store — odzwierciedla wzorce Redux/Context znane z React, czyniąc przejście świadomym.",
+          en: "Used Vuex 4 with a single namespaced module, split into separate files per responsibility (state, actions, mutations, getters). The structure mirrors Redux intentionally — it made the mental model easier to transfer while forcing me to understand what's different.",
+          pl: "Użyłem Vuex 4 z jednym modułem z przestrzenią nazw, podzielonym na osobne pliki według odpowiedzialności (state, actions, mutations, getters). Struktura celowo przypomina Redux — ułatwiło to transfer modelu mentalnego, jednocześnie zmuszając do zrozumienia różnic.",
         },
         result: {
-          en: "Clean state flow, easy to reason about, and a solid understanding of how Vue's reactivity differs from React.",
-          pl: "Czysty przepływ stanu, łatwy do zrozumienia i solidne pojęcie jak reaktywność Vue różni się od React.",
+          en: "Clear state flow and a solid understanding of how Vuex mutations differ from Redux reducers — and why Vue's reactivity makes some patterns unnecessary.",
+          pl: "Przejrzysty przepływ stanu i solidne zrozumienie jak mutacje Vuex różnią się od reducerów Redux — i dlaczego reaktywność Vue sprawia, że niektóre wzorce są zbędne.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Pagination state getting out of sync when posts are deleted mid-page.",
-          pl: "Stan paginacji wychodzący z synchronizacji przy usuwaniu postów w środku strony.",
+          en: "Animating expand/collapse of post bodies when the content height is unknown — CSS can't transition from height: auto.",
+          pl: "Animowanie rozwijania/zwijania treści postów gdy wysokość treści jest nieznana — CSS nie może animować z height: auto.",
         },
         solution: {
-          en: "Computed current page posts from filtered store state, auto-redirecting to previous page when current becomes empty.",
-          pl: "Obliczanie postów bieżącej strony z filtrowanego stanu store, automatyczny powrót do poprzedniej strony gdy bieżąca jest pusta.",
+          en: "Measured each post's real scrollHeight via a template ref inside onMounted + nextTick, stored it per post ID in a ref object, and used it as the maxHeight target in the inline style during transition.",
+          pl: "Zmierzyłem prawdziwy scrollHeight każdego posta przez ref szablonu w onMounted + nextTick, zapisałem per ID posta w obiekcie ref i użyłem go jako docelowy maxHeight w inline style podczas przejścia.",
         },
         result: {
-          en: "Consistent pagination behavior regardless of deletion order or current page position.",
-          pl: "Spójne zachowanie paginacji niezależnie od kolejności usuwania i pozycji bieżącej strony.",
+          en: "Smooth CSS height animation that works for any post length without JavaScript animation libraries.",
+          pl: "Płynna animacja wysokości CSS działająca dla dowolnej długości posta bez bibliotek animacji JavaScript.",
+        },
+      },
+      {
+        challenge: {
+          en: "Making post deletion feel smooth — removing from store immediately causes the list to jump.",
+          pl: "Płynne usuwanie postów — natychmiastowe usunięcie ze store powoduje skok listy.",
+        },
+        solution: {
+          en: "Tracked removing post IDs in a local Set, hid them with v-show immediately, then committed the actual store removal after a 300ms timeout — letting the CSS transition finish first. Used transition-group on the list for coordinated exit animations.",
+          pl: "Śledzę usuwane ID postów w lokalnym Set, ukrywam je v-show natychmiast, a dopiero po 300ms timeout committuję faktyczne usunięcie ze store — pozwalając przejściu CSS skończyć się. Użyłem transition-group na liście dla skoordynowanych animacji wyjścia.",
+        },
+        result: {
+          en: "Deletion feels instant to the user but plays the fade animation through to completion.",
+          pl: "Usunięcie czuje się natychmiastowe dla użytkownika, ale animacja zanikania gra do końca.",
         },
       },
     ],
     learnings: [
       {
-        en: "Vue 3 Composition API vs React Hooks — key differences",
-        pl: "Vue 3 Composition API vs React Hooks — kluczowe różnice",
+        en: "Vue 3 Composition API feels similar to React Hooks but the mental model is different — reactivity is opt-in in React, automatic in Vue",
+        pl: "Composition API Vue 3 jest podobne do React Hooks, ale model mentalny jest inny — reaktywność jest opt-in w React, automatyczna w Vue",
       },
       {
-        en: "Vuex state management patterns compared to Redux/Context",
-        pl: "Wzorce zarządzania stanem Vuex w porównaniu do Redux/Context",
+        en: "Vuex mutations vs Redux reducers — both are pure state updates, but Vuex mutates directly while Redux returns new state",
+        pl: "Mutacje Vuex vs reducery Redux — oba to czyste aktualizacje stanu, ale Vuex mutuje bezpośrednio, a Redux zwraca nowy stan",
       },
       {
-        en: "Vue's template syntax and reactivity system",
-        pl: "Składnia szablonów Vue i system reaktywności",
+        en: "How to animate unknown heights in CSS using scrollHeight measured at runtime",
+        pl: "Jak animować nieznane wysokości w CSS używając scrollHeight mierzonego w runtime",
       },
       {
-        en: "How to approach learning a new framework as a developer",
-        pl: "Jak podejść do nauki nowego frameworka jako developer",
+        en: "The importance of syncing UI state (animation) with data state (store) — removing too early causes visual glitches",
+        pl: "Znaczenie synchronizacji stanu UI (animacja) z stanem danych (store) — zbyt wczesne usunięcie powoduje glitche wizualne",
+      },
+      {
+        en: "Created an axiosClient with baseURL but forgot to use it in actions — noticed only later. A reminder to actually use abstractions you create",
+        pl: "Stworzyłem axiosClient z baseURL, ale zapomniałem go użyć w akcjach — zauważyłem dopiero później. Przypomnienie, żeby faktycznie używać abstrakcji które się tworzy",
       },
     ],
     githubUrl: "https://github.com/Giszta/Postly",
     liveUrl: "https://postly-seven.vercel.app/",
     image: "/images/projects/postly.png",
-    createdAt: "2024-05-01",
+    createdAt: "2025-08-04",
   },
   {
     slug: "portfolio-website",
     title: "Portfolio v1",
     shortDescription: {
-      en: "First version of my personal portfolio — Next.js, Tailwind CSS, Framer Motion, contact form.",
-      pl: "Pierwsza wersja mojego portfolio — Next.js, Tailwind CSS, Framer Motion, formularz kontaktowy.",
+      en: "My first personal portfolio — a single-page Next.js app with Framer Motion animations, a tabbed About section and a contact form powered by Resend.",
+      pl: "Moje pierwsze portfolio — jednostronicowa aplikacja Next.js z animacjami Framer Motion, sekcją About z zakładkami i formularzem kontaktowym opartym na Resend.",
     },
     longDescription: {
-      en: "My first personal portfolio website built to showcase projects, skills and professional background. Features a modern responsive design with Framer Motion animations, project showcase, social links, and a functional contact form. The predecessor to this portfolio — built before I knew about i18n, testing, or proper component architecture.",
-      pl: "Moja pierwsza strona portfolio zbudowana do prezentacji projektów, umiejętności i doświadczenia. Nowoczesny responsywny design z animacjami Framer Motion, showcase projektów, linki społecznościowe i działający formularz kontaktowy. Poprzednik tego portfolio — zbudowany zanim poznałem i18n, testy i właściwą architekturę komponentów.",
+      en: "A single-page portfolio built to publish my first personal website quickly and start showing my projects online. It includes a Hero section with a TypeAnimation typewriter effect, an About section with tabs for skills, education and certifications, a project grid with staggered viewport animations, an Engineer Manifest section and a contact form connected to Resend. The project fulfilled its purpose, but it also exposed the limitations of my first architecture: content was stored directly in components, there was no i18n, no tests and the component structure was flat. Those limitations became the direct motivation for designing Portfolio v2 with a stronger architecture from the start.",
+      pl: "Jednostronicowe portfolio zbudowane po to, żeby szybko opublikować pierwszą wersję strony osobistej i zacząć prezentować projekty online. Zawiera Hero z efektem maszyny do pisania TypeAnimation, sekcję About z zakładkami dotyczącymi umiejętności, edukacji i certyfikatów, siatkę projektów z animacjami przy wejściu w viewport, sekcję Engineer Manifest oraz formularz kontaktowy połączony z Resend. Projekt spełnił swoje zadanie, ale pokazał też ograniczenia pierwszej architektury: treści były trzymane bezpośrednio w komponentach, nie było i18n, testów ani wyraźnego podziału struktury komponentów. Te ograniczenia stały się bezpośrednią motywacją do zaprojektowania Portfolio v2 od początku z mocniejszą architekturą.",
     },
     category: "frontend",
     status: "live",
     difficulty: "beginner",
     featured: false,
     priority: 5,
-    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    stack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion", "Resend"],
     features: [
       {
-        en: "Modern responsive design for all screen sizes",
-        pl: "Nowoczesny responsywny design na wszystkie rozmiary ekranu",
+        en: "Single-page layout with smooth scroll navigation between sections",
+        pl: "Układ jednostronicowy z płynną nawigacją między sekcjami",
       },
-      { en: "Framer Motion animations and transitions", pl: "Animacje i przejścia Framer Motion" },
       {
-        en: "Project showcase with dynamic content",
-        pl: "Showcase projektów z dynamiczną treścią",
+        en: "Animated profile photo with a rotating SVG circle built with Framer Motion",
+        pl: "Animowane zdjęcie profilowe z obracającym się okręgiem SVG zbudowanym we Framer Motion",
       },
-      { en: "Contact form with email integration", pl: "Formularz kontaktowy z integracją email" },
       {
-        en: "Social media links and personal branding",
-        pl: "Linki społecznościowe i personal branding",
+        en: "Hero heading with a typewriter effect using react-type-animation",
+        pl: "Nagłówek Hero z efektem maszyny do pisania opartym na react-type-animation",
+      },
+      {
+        en: "Tabbed About section for skills, education and certifications with AnimatePresence transitions",
+        pl: "Sekcja About z zakładkami dotyczącymi umiejętności, edukacji i certyfikatów oraz przejściami AnimatePresence",
+      },
+      {
+        en: "Project grid with staggered Framer Motion animations on viewport entry",
+        pl: "Siatka projektów ze stopniowanymi animacjami Framer Motion przy wejściu w viewport",
+      },
+      {
+        en: "Contact form with Resend integration and react-hot-toast notifications",
+        pl: "Formularz kontaktowy z integracją Resend i powiadomieniami react-hot-toast",
+      },
+      {
+        en: "CV download button with delayed reveal animation",
+        pl: "Przycisk pobierania CV z animacją opóźnionego pojawienia się",
       },
     ],
     techDecisions: [
       {
         problem: {
-          en: "First real Next.js project — how to structure it without overengineering?",
-          pl: "Pierwszy prawdziwy projekt Next.js — jak go ustrukturyzować bez nadmiernej inżynierii?",
+          en: "I needed a working contact form without setting up a separate backend or SMTP server.",
+          pl: "Potrzebowałem działającego formularza kontaktowego bez tworzenia osobnego backendu ani konfiguracji serwera SMTP.",
         },
         decision: {
-          en: "Flat component structure with no abstractions — prioritized shipping over architecture at this stage of learning.",
-          pl: "Płaska struktura komponentów bez abstrakcji — priorytet dostarczenia nad architekturą na tym etapie nauki.",
+          en: "Used Resend with a Next.js API route, which allowed me to send emails with minimal infrastructure and keep the implementation inside the Next.js project.",
+          pl: "Użyłem Resend z trasą API w Next.js, co pozwoliło wysyłać wiadomości bez dodatkowej infrastruktury i utrzymać implementację wewnątrz projektu Next.js.",
         },
         result: {
-          en: "Portfolio live and functional. The technical debt became the motivation to build a better v2 (this site).",
-          pl: "Portfolio live i funkcjonalne. Dług techniczny stał się motywacją do zbudowania lepszej wersji v2 (tej strony).",
+          en: "The contact form worked reliably and Resend became my default choice for simple email flows in later Next.js projects.",
+          pl: "Formularz kontaktowy działał stabilnie, a Resend stał się moim domyślnym wyborem do prostych przepływów emailowych w kolejnych projektach Next.js.",
+        },
+      },
+      {
+        problem: {
+          en: "I was still learning how to structure a Next.js project and how to split UI, content and reusable components.",
+          pl: "Dopiero uczyłem się, jak strukturyzować projekt Next.js oraz jak rozdzielać UI, treści i komponenty wielokrotnego użycia.",
+        },
+        decision: {
+          en: "I used the App Router and kept the structure simple, with most components placed in one flat components directory.",
+          pl: "Użyłem App Routera i utrzymałem prostą strukturę, umieszczając większość komponentów w jednym płaskim katalogu components.",
+        },
+        result: {
+          en: "The project worked, but the lack of structure quickly showed why folder conventions, content separation and component co-location matter.",
+          pl: "Projekt działał, ale brak struktury szybko pokazał mi, dlaczego konwencje folderów, oddzielenie treści od UI i co-location komponentów mają znaczenie.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "No understanding of performance optimization — images causing slow initial load.",
-          pl: "Brak wiedzy o optymalizacji wydajności — zdjęcia powodujące wolne pierwsze ładowanie.",
+          en: "The contact form initially failed without clear feedback when something went wrong.",
+          pl: "Formularz kontaktowy początkowo kończył się błędem bez czytelnej informacji dla użytkownika.",
         },
         solution: {
-          en: "Switched to Next.js Image component and added proper loading states — discovered the impact of LCP on user experience.",
-          pl: "Przejście na komponent Image Next.js i dodanie właściwych stanów ładowania — odkrycie wpływu LCP na UX.",
+          en: "Added react-hot-toast for success and error notifications, and improved API route error handling so it always returned a proper JSON response.",
+          pl: "Dodałem react-hot-toast do komunikatów sukcesu i błędu oraz poprawiłem obsługę błędów w trasie API, aby zawsze zwracała poprawną odpowiedź JSON.",
         },
         result: {
-          en: "Significantly faster load time and a lesson about web performance fundamentals that shaped future projects.",
-          pl: "Znacząco szybszy czas ładowania i lekcja o podstawach wydajności webowej kształtująca kolejne projekty.",
+          en: "The form started giving clear feedback in both success and error states. It was my first practical lesson in why async UI feedback matters.",
+          pl: "Formularz zaczął dawać czytelny komunikat zarówno przy sukcesie, jak i błędzie. To była moja pierwsza praktyczna lekcja, dlaczego informacja zwrotna przy akcjach asynchronicznych ma znaczenie.",
+        },
+      },
+      {
+        challenge: {
+          en: "Project card hover effects did not work well on touch devices.",
+          pl: "Efekty hover na kartach projektów nie działały dobrze na urządzeniach dotykowych.",
+        },
+        solution: {
+          en: "Adjusted the card interaction logic for touch devices and tested it on a real phone instead of relying only on DevTools simulation.",
+          pl: "Dostosowałem logikę interakcji kart do urządzeń dotykowych i przetestowałem ją na prawdziwym telefonie zamiast polegać wyłącznie na symulacji w DevTools.",
+        },
+        result: {
+          en: "Cards became usable on mobile and I learned that real-device testing can reveal issues that DevTools does not show clearly.",
+          pl: "Karty stały się wygodne w użyciu na mobile, a ja nauczyłem się, że testowanie na prawdziwym urządzeniu potrafi ujawnić problemy niewidoczne w samej symulacji DevTools.",
         },
       },
     ],
     learnings: [
       {
-        en: "Next.js fundamentals — routing, pages, Image optimization",
-        pl: "Podstawy Next.js — routing, strony, optymalizacja Image",
+        en: "Next.js App Router basics — layouts, API routes and the difference between Server and Client Components",
+        pl: "Podstawy Next.js App Router — layouty, trasy API oraz różnica między komponentami server i client",
       },
       {
-        en: "Framer Motion basics — variants, transitions, viewport triggers",
-        pl: "Podstawy Framer Motion — warianty, przejścia, wyzwalacze viewport",
+        en: "Framer Motion in practice — variants, AnimatePresence, viewport triggers and SVG animation",
+        pl: "Framer Motion w praktyce — warianty, AnimatePresence, animacje przy wejściu w viewport i animacje SVG",
       },
       {
-        en: "The value of component architecture learned from shipping messy code first",
-        pl: "Wartość architektury komponentów poznana po wysłaniu nieporządnego kodu",
+        en: "Integrating Resend for transactional email inside a Next.js API route",
+        pl: "Integracja Resend do emaili transakcyjnych w trasie API Next.js",
       },
       {
-        en: "What to do differently in v2 — i18n, testing, structure",
-        pl: "Co zrobić inaczej w v2 — i18n, testy, struktura",
+        en: "Hardcoded content inside components becomes difficult to maintain as a project grows",
+        pl: "Treści wpisane bezpośrednio w komponentach stają się trudne w utrzymaniu, gdy projekt rośnie",
+      },
+      {
+        en: "Mobile testing on a real device is not the same as DevTools simulation",
+        pl: "Testowanie mobile na prawdziwym urządzeniu to nie to samo co symulacja w DevTools",
+      },
+      {
+        en: "What to build differently in v2 — i18n, component architecture, data layer and testing",
+        pl: "Co zbudować inaczej w v2 — i18n, architektura komponentów, warstwa danych i testy",
       },
     ],
     githubUrl: "https://github.com/Giszta/portfolio-website",
     liveUrl: "https://www.giszter.com/",
     image: "/images/projects/portfolio-v1.png",
-    createdAt: "2024-03-01",
+    createdAt: "2025-03-11",
   },
   {
     slug: "sliding-game",
     title: "Sliding Puzzle Game",
     shortDescription: {
-      en: "Classic sliding puzzle game built with React — shuffled tiles, timer, solvability check.",
-      pl: "Klasyczna gra puzzle przesuwanych kafelków w React — tasowanie, timer, weryfikacja rozwiązywalności.",
+      en: "Classic 15-puzzle built with React and TypeScript — shuffled tiles, timer, keyboard support and solvability check.",
+      pl: "Klasyczna gra 15-puzzle w React i TypeScript — tasowanie, timer, obsługa klawiatury i weryfikacja rozwiązywalności.",
     },
     longDescription: {
-      en: "A classic sliding puzzle game built with React and Vite as a deliberate practice project for state management and game logic. Features shuffled tile generation with guaranteed solvability, move counter, timer, and win detection. Fixed a tricky bug where randomly generated boards were mathematically unsolvable.",
-      pl: "Klasyczna gra puzzle przesuwanych kafelków zbudowana w React i Vite jako świadomy projekt ćwiczeniowy dla zarządzania stanem i logiki gry. Tasowanie z gwarancją rozwiązywalności, licznik ruchów, timer i detekcja wygranej. Naprawiony trudny bug gdzie losowo generowane plansze były matematycznie nierozwiązywalne.",
+      en: "A classic 15-puzzle game built with React, TypeScript and Vite as a practice project for state management and game logic. I implemented shuffled tile generation with guaranteed solvability using a parity algorithm, a timer that starts on the first move, keyboard arrow controls and CSS transition animations. The trickiest part was handling mathematically unsolvable boards — about half of all random shuffles are unsolvable, which I did not know when starting the project.",
+      pl: "Klasyczna gra 15-puzzle zbudowana w React, TypeScript i Vite jako projekt ćwiczeniowy do nauki zarządzania stanem i logiki gry. Zaimplementowałem tasowanie z gwarancją rozwiązywalności oparte na algorytmie parzystości, timer startujący przy pierwszym ruchu, sterowanie strzałkami oraz animacje CSS. Najtrudniejszą częścią było obsłużenie plansz matematycznie nierozwiązywalnych — około połowa losowych tasowań jest niemożliwa do ukończenia, czego wcześniej nie wiedziałem.",
     },
     category: "practice",
     status: "live",
     difficulty: "beginner",
     featured: false,
     priority: 6,
-    stack: ["React", "JavaScript", "Vite", "CSS Modules"],
+    stack: ["React", "TypeScript", "Vite", "CSS", "Firebase"],
     features: [
       {
-        en: "Shuffled board with guaranteed solvability algorithm",
-        pl: "Tasowanie planszy z algorytmem gwarancji rozwiązywalności",
+        en: "Shuffled board with guaranteed solvability using a parity algorithm",
+        pl: "Tasowanie planszy z gwarancją rozwiązywalności dzięki algorytmowi parzystości",
       },
-      { en: "Move counter and game timer", pl: "Licznik ruchów i timer gry" },
-      { en: "Win detection and completion screen", pl: "Detekcja wygranej i ekran ukończenia" },
-      { en: "Responsive tile grid layout", pl: "Responsywny grid układ kafelków" },
+      {
+        en: "Smooth CSS transition animations — tiles slide into place",
+        pl: "Płynne animacje CSS — kafelki wsuwają się na swoje miejsce",
+      },
+      {
+        en: "Keyboard arrow support alongside click controls",
+        pl: "Obsługa strzałek klawiatury obok sterowania kliknięciem",
+      },
+      {
+        en: "Timer that starts on the first move and stops on win",
+        pl: "Timer startujący przy pierwszym ruchu i zatrzymujący się po wygranej",
+      },
+      {
+        en: "Visual highlight for correctly placed tiles",
+        pl: "Wizualne podświetlenie poprawnie ustawionych kafelków",
+      },
     ],
     techDecisions: [
       {
         problem: {
-          en: "How to model tile positions as React state without performance issues from frequent updates?",
-          pl: "Jak modelować pozycje kafelków jako stan React bez problemów wydajnościowych przy częstych aktualizacjach?",
+          en: "How to animate tiles moving across the board without a heavy animation library?",
+          pl: "Jak animować kafelki poruszające się po planszy bez ciężkiej biblioteki animacji?",
         },
         decision: {
-          en: "Flat array of tile values with index representing position — simple to update, easy to compare against solved state.",
-          pl: "Płaska tablica wartości kafelków z indeksem reprezentującym pozycję — prosta do aktualizacji, łatwa do porównania ze stanem rozwiązanym.",
+          en: "Tiles are absolutely positioned inside the board. Each tile gets a slot--{index} CSS class that maps to fixed left/top coordinates. Swapping the class triggers CSS transitions automatically.",
+          pl: "Kafelki są pozycjonowane absolutnie wewnątrz planszy. Każdy kafelek dostaje klasę slot--{index}, która mapuje się na stałe wartości left/top. Zamiana klasy automatycznie wyzwala przejścia CSS.",
         },
         result: {
-          en: "Fast re-renders, simple win-check logic, and a data model easy to reason about.",
-          pl: "Szybkie re-rendery, prosta logika sprawdzania wygranej i model danych łatwy do zrozumienia.",
+          en: "Smooth slide animations with zero JavaScript animation logic — just CSS transition: left 0.4s, top 0.4s. Simple and performant.",
+          pl: "Płynne animacje przesuwania bez logiki animacji w JavaScripcie — tylko CSS transition: left 0.4s, top 0.4s. Proste i wydajne.",
+        },
+      },
+      {
+        problem: {
+          en: "How to represent tile positions as React state in a way that is easy to update and check for win?",
+          pl: "Jak reprezentować pozycje kafelków jako stan Reacta w sposób łatwy do aktualizacji i sprawdzania wygranej?",
+        },
+        decision: {
+          en: "Used a flat array of { value, index } objects — value is the tile number, index is its current board position. The blank tile is represented as value 16.",
+          pl: "Użyłem płaskiej tablicy obiektów { value, index } — value to numer kafelka, a index to jego aktualna pozycja na planszy. Pusty kafelek jest reprezentowany jako value 16.",
+        },
+        result: {
+          en: "Win check becomes every(n => n.value === n.index + 1), and moving a tile is just swapping two indexes. The state stays simple and easy to reason about.",
+          pl: "Sprawdzenie wygranej sprowadza się do every(n => n.value === n.index + 1), a ruch kafelka to zamiana dwóch indeksów. Stan pozostaje prosty i łatwy do zrozumienia.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Randomly shuffled boards were sometimes mathematically unsolvable — game would be impossible to complete.",
-          pl: "Losowo tasowane plansze były czasem matematycznie nierozwiązywalne — gra byłaby niemożliwa do ukończenia.",
+          en: "About half of all randomly shuffled 15-puzzle boards are mathematically unsolvable, so a player could end up with a board that has no solution.",
+          pl: "Około połowa losowo potasowanych plansz 15-puzzle jest matematycznie nierozwiązywalna, więc gracz mógłby trafić na układ bez rozwiązania.",
         },
         solution: {
-          en: "Implemented parity-based solvability check — counts inversions to determine if a board configuration is reachable from the solved state.",
-          pl: "Zaimplementowałem sprawdzanie rozwiązywalności opartej na parzystości — liczy inwersje by sprawdzić czy konfiguracja planszy jest osiągalna ze stanu rozwiązanego.",
+          en: "Implemented a parity check based on inversion counting. For a 4x4 grid, solvability depends on both the number of inversions and the row position of the blank tile. Shuffling repeats in a do...while loop until the board passes the check.",
+          pl: "Zaimplementowałem sprawdzanie parzystości oparte na liczeniu inwersji. Dla siatki 4x4 rozwiązywalność zależy zarówno od liczby inwersji, jak i od wiersza, w którym znajduje się pusty kafelek. Tasowanie powtarza się w pętli do...while, aż plansza przejdzie sprawdzanie.",
         },
         result: {
-          en: "Every generated board is guaranteed solvable. Learned a valuable algorithm with real mathematical grounding.",
-          pl: "Każda wygenerowana plansza jest gwarantowanie rozwiązywalna. Nauczyłem się cennego algorytmu z prawdziwymi podstawami matematycznymi.",
+          en: "Every generated board is guaranteed to be solvable. I learned a real algorithm with actual math behind it — probably the most interesting thing I took from this project.",
+          pl: "Każda wygenerowana plansza jest możliwa do rozwiązania. Nauczyłem się prawdziwego algorytmu z matematyką w tle — to chyba najciekawsza rzecz, jaką wyniosłem z tego projektu.",
         },
       },
     ],
     learnings: [
       {
-        en: "React useState and useEffect for game loop logic",
-        pl: "React useState i useEffect dla logiki pętli gry",
+        en: "TypeScript interfaces for component props and shared data shapes",
+        pl: "Interfejsy TypeScript dla propsów komponentów i współdzielonych struktur danych",
       },
       {
-        en: "Parity algorithm for puzzle solvability verification",
-        pl: "Algorytm parzystości do weryfikacji rozwiązywalności puzzli",
+        en: "Parity algorithm for 15-puzzle solvability — inversion counting on even-sized grids",
+        pl: "Algorytm parzystości dla rozwiązywalności 15-puzzle — liczenie inwersji na siatkach o parzystym rozmiarze",
       },
       {
-        en: "CSS Modules for component-scoped styling",
-        pl: "CSS Modules dla stylowania w zakresie komponentu",
+        en: "CSS absolute positioning and class swapping as a simple animation technique",
+        pl: "Absolutne pozycjonowanie CSS i zamiana klas jako prosta technika animacji",
       },
       {
-        en: "Importance of edge case testing in game logic",
-        pl: "Ważność testowania przypadków brzegowych w logice gry",
+        en: "Keyboard event listeners in React with proper cleanup in useEffect",
+        pl: "Nasłuchiwanie zdarzeń klawiatury w React z poprawnym czyszczeniem w useEffect",
+      },
+      {
+        en: "Firebase Hosting deployment for a Vite project",
+        pl: "Deploy projektu Vite na Firebase Hosting",
       },
     ],
     githubUrl: "https://github.com/Giszta/sliding-game---react-practice",
     liveUrl: "https://sliding-game-65029.web.app/",
     image: "/images/projects/sliding-game.png",
-    createdAt: "2023-11-01",
+    createdAt: "2023-11-20",
   },
   {
     slug: "photopage",
     title: "Fotoroman",
     shortDescription: {
-      en: "Photography showcase page for my father — dynamic galleries, slideshow viewer, built with vanilla HTML/CSS/JS.",
-      pl: "Strona fotograficzna dla mojego taty — dynamiczne galerie, przeglądarka slideshow, zbudowana w czystym HTML/CSS/JS.",
+      en: "Photography website for my dad — album galleries with filtering, a full-featured lightbox viewer, built with vanilla HTML, CSS and JavaScript.",
+      pl: "Strona fotograficzna dla mojego taty — galerie albumów z filtrowaniem, rozbudowana przeglądarka lightbox, zbudowana w czystym HTML, CSS i JavaScript.",
     },
     longDescription: {
-      en: "A photography showcase website built for my father to publish and share his photos online. Features organized album galleries with filtering, a manual and automatic slideshow viewer, and a responsive design for both desktop and mobile. Built with vanilla HTML, CSS, and JavaScript — no frameworks, no dependencies. A personal project with real users.",
-      pl: "Strona fotograficzna zbudowana dla mojego taty do publikacji i udostępniania jego zdjęć online. Zorganizowane galerie albumów z filtrowaniem, ręczna i automatyczna przeglądarka slideshow oraz responsywny design na desktop i mobile. Zbudowana w czystym HTML, CSS i JavaScript — bez frameworków, bez zależności. Projekt osobisty z prawdziwymi użytkownikami.",
+      en: "A photography website I built for my father so he could publish and share his photos online. It includes three pages: a home page with a randomly selected photo and quote on every load, an album gallery with category filtering, and an about page. The lightbox viewer was the most complex part — thumbnails, prev/next arrows, keyboard navigation, autoplay with an animated circular progress bar, and fade transitions, all implemented manually. Navigation and footer are injected into every page via JavaScript to avoid copy-pasting HTML across three files. Apart from Font Awesome icons loaded from CDN, the project uses no external libraries. It was a personal project with a real user who actually requested new features.",
+      pl: "Strona fotograficzna zbudowana dla mojego taty, żeby mógł publikować i udostępniać swoje zdjęcia online. Zawiera trzy podstrony: stronę główną z losowo wybranym zdjęciem i cytatem przy każdym załadowaniu, galerię albumów z filtrowaniem według kategorii oraz stronę o autorze. Najbardziej złożona była przeglądarka lightbox — miniatury, strzałki nawigacji, obsługa klawiatury, autoodtwarzanie z animowanym kołowym paskiem postępu i przejścia fade, wszystko zaimplementowane ręcznie. Nawigacja i footer są wstrzykiwane do każdej strony przez JavaScript, żeby uniknąć kopiowania tego samego HTML w trzech plikach. Poza ikonami Font Awesome ładowanymi z CDN projekt nie używa zewnętrznych bibliotek. To projekt osobisty z prawdziwym użytkownikiem, który faktycznie prosił o nowe funkcje.",
     },
     category: "frontend",
     status: "live",
@@ -642,80 +748,112 @@ export const projects: Project[] = [
     stack: ["HTML5", "CSS3", "JavaScript"],
     features: [
       {
-        en: "Dynamic photo galleries with album filtering",
-        pl: "Dynamiczne galerie zdjęć z filtrowaniem albumów",
+        en: "Album gallery with category filtering: Poland, Europe and Other",
+        pl: "Galeria albumów z filtrowaniem według kategorii: Polska, Europa i Inne",
       },
       {
-        en: "Manual and automatic slideshow viewer",
-        pl: "Ręczna i automatyczna przeglądarka slideshow",
+        en: "Lightbox viewer with thumbnails, prev/next arrows, keyboard navigation and photo counter",
+        pl: "Przeglądarka lightbox z miniaturami, strzałkami nawigacji, obsługą klawiatury i licznikiem zdjęć",
       },
       {
-        en: "Randomly loaded photos and quotes on homepage",
-        pl: "Losowo ładowane zdjęcia i cytaty na stronie głównej",
+        en: "Autoplay with animated circular progress bar and collapsible thumbnail strip",
+        pl: "Autoodtwarzanie z animowanym kołowym paskiem postępu i zwijanym paskiem miniatur",
       },
       {
-        en: "About me section with photographer's background",
-        pl: "Sekcja o mnie z informacjami o fotografie",
+        en: "Home page with a randomly selected photo and photography quote on each load",
+        pl: "Strona główna z losowo wybranym zdjęciem i cytatem fotograficznym przy każdym załadowaniu",
       },
       {
-        en: "Responsive design for desktop and mobile",
-        pl: "Responsywny design na desktop i mobile",
+        en: "Navigation and footer injected via JavaScript — one source of truth across all three pages",
+        pl: "Nawigacja i footer wstrzykiwane przez JavaScript — jeden punkt prawdy dla wszystkich trzech podstron",
+      },
+      {
+        en: "Responsive layout with hamburger sidebar on mobile devices",
+        pl: "Responsywny layout z bocznym menu hamburger na urządzeniach mobilnych",
       },
     ],
     techDecisions: [
       {
         problem: {
-          en: "How to build a gallery with filtering without any framework or build tool?",
-          pl: "Jak zbudować galerię z filtrowaniem bez żadnego frameworka ani narzędzia budowania?",
+          en: "How to filter albums without a framework or build tool?",
+          pl: "Jak filtrować albumy bez frameworka ani narzędzia budowania?",
         },
         decision: {
-          en: "Pure DOM manipulation with data attributes for filtering — show/hide elements based on album category attribute.",
-          pl: "Czysta manipulacja DOM z atrybutami data dla filtrowania — pokazywanie/ukrywanie elementów na podstawie atrybutu kategorii albumu.",
+          en: "Used filter buttons with data-filter attributes and toggled CSS classes on gallery items to show or hide them through pure DOM manipulation.",
+          pl: "Użyłem przycisków filtrów z atrybutami data-filter i przełączałem klasy CSS na elementach galerii, aby pokazywać lub ukrywać je przez czystą manipulację DOM.",
         },
         result: {
-          en: "Zero dependencies, instant filtering, and a deep understanding of how frameworks abstract DOM work.",
-          pl: "Zero zależności, natychmiastowe filtrowanie i głębokie zrozumienie jak frameworki abstrahują pracę z DOM.",
+          en: "The filtering worked instantly with no framework overhead. It also helped me understand how much repetitive DOM work modern frameworks abstract away.",
+          pl: "Filtrowanie działało natychmiast i bez narzutu frameworka. Pomogło mi też zrozumieć, jak dużo powtarzalnej pracy z DOM abstrahują nowoczesne frameworki.",
+        },
+      },
+      {
+        problem: {
+          en: "Three HTML pages needed the same navigation and footer — how to avoid copy-pasting the same markup?",
+          pl: "Trzy strony HTML potrzebowały tej samej nawigacji i footera — jak uniknąć kopiowania tego samego kodu?",
+        },
+        decision: {
+          en: "Rendered the navigation and footer as template literals in separate JavaScript files and injected them via innerHTML into placeholder elements on each page.",
+          pl: "Wyrenderowałem nawigację i footer jako template literals w osobnych plikach JavaScript, a następnie wstrzyknąłem je przez innerHTML do elementów placeholder na każdej stronie.",
+        },
+        result: {
+          en: "One change updated all pages. It was not an ideal solution, but it worked and showed me why component systems and templating engines exist.",
+          pl: "Jedna zmiana aktualizowała wszystkie podstrony. Nie było to idealne rozwiązanie, ale działało i pokazało mi, dlaczego istnieją systemy komponentów oraz silniki szablonów.",
         },
       },
     ],
     challenges: [
       {
         challenge: {
-          en: "Slideshow autoplay causing layout issues when browser tab is inactive — timer accumulating in the background.",
-          pl: "Autoodtwarzanie slideshowa powodujące problemy layoutu gdy zakładka przeglądarki jest nieaktywna — akumulacja timera w tle.",
+          en: "The lightbox had many moving parts — current image index, active thumbnail highlight, album reference, autoplay interval and progress bar animation all needed to stay in sync.",
+          pl: "Lightbox miał dużo zależnych elementów — aktualny indeks zdjęcia, podświetloną miniaturę, referencję do albumu, interwał autoodtwarzania i animację paska postępu, które musiały pozostać zsynchronizowane.",
         },
         solution: {
-          en: "Used Page Visibility API to pause the slideshow timer when the tab is hidden and resume when it becomes active again.",
-          pl: "Użyłem Page Visibility API do wstrzymania timera slideshowa gdy zakładka jest ukryta i wznowienia gdy staje się aktywna.",
+          en: "Centralized the state in module-level variables and made sure every navigation function — next, previous, thumbnail click and autoplay — updated the related values in the same order.",
+          pl: "Scentralizowałem stan w zmiennych na poziomie modułu i zadbałem, aby każda funkcja nawigacji — następne zdjęcie, poprzednie zdjęcie, kliknięcie miniatury i autoodtwarzanie — aktualizowała powiązane wartości w tej samej kolejności.",
         },
         result: {
-          en: "Smooth slideshow behavior regardless of tab switching — and knowledge of a browser API most developers learn much later.",
-          pl: "Płynne działanie slideshowa niezależnie od przełączania zakładek — i znajomość API przeglądarki której większość developerów uczy się znacznie później.",
+          en: "The lightbox worked, but the code became long and repetitive. This was the moment I understood why state management and component-based UI matter.",
+          pl: "Lightbox działał, ale kod stał się długi i powtarzalny. To był moment, w którym zrozumiałem, dlaczego zarządzanie stanem i komponentowe UI mają znaczenie.",
+        },
+      },
+      {
+        challenge: {
+          en: "I discovered a mismatch between JavaScript data and HTML classes — Slovenia albums had filter: 'Polska' in the data file but class='europa' in HTML, so filtering broke without a clear error.",
+          pl: "Odkryłem niezgodność między danymi JavaScript a klasami HTML — albumy ze Słowenii miały filter: 'Polska' w pliku danych, ale class='europa' w HTML, przez co filtrowanie przestało działać bez wyraźnego błędu.",
+        },
+        solution: {
+          en: "Fixed the data file to match the HTML. The real lesson, however, was that keeping the same information in two places eventually leads to inconsistencies.",
+          pl: "Poprawiłem plik danych, żeby był zgodny z HTML. Prawdziwa lekcja była jednak taka, że trzymanie tych samych informacji w dwóch miejscach prędzej czy później prowadzi do niespójności.",
+        },
+        result: {
+          en: "Filtering started working correctly, and I understood why a single source of truth matters even in a small project.",
+          pl: "Filtrowanie zaczęło działać poprawnie, a ja zrozumiałem, dlaczego jeden punkt prawdy ma znaczenie nawet w małym projekcie.",
         },
       },
     ],
     learnings: [
       {
-        en: "Vanilla JS DOM manipulation without framework abstractions",
-        pl: "Czyste manipulacje DOM w JS bez abstrakcji frameworka",
+        en: "Vanilla JavaScript DOM manipulation without framework abstractions",
+        pl: "Manipulacja DOM w czystym JavaScripcie bez abstrakcji frameworków",
       },
       {
-        en: "Page Visibility API for background tab handling",
-        pl: "Page Visibility API do obsługi zakładek w tle",
+        en: "Why component systems exist — I felt the pain of manually syncing the same HTML across multiple files",
+        pl: "Dlaczego istnieją systemy komponentów — poczułem problem ręcznej synchronizacji tego samego HTML w wielu plikach",
       },
       {
-        en: "Building for real users — feedback loop from a family member",
-        pl: "Budowanie dla prawdziwych użytkowników — pętla feedbacku od członka rodziny",
+        en: "Why state management exists — coordinating multiple interdependent variables manually gets messy fast",
+        pl: "Dlaczego istnieje zarządzanie stanem — ręczna koordynacja wielu zależnych zmiennych szybko staje się chaotyczna",
       },
       {
-        en: "Why frameworks exist — appreciation through vanilla JS pain",
-        pl: "Dlaczego frameworki istnieją — docenienie przez ból czystego JS",
+        en: "Building for a real user — feature requests, feedback and responsibility for something that is actually used",
+        pl: "Budowanie dla realnego użytkownika — prośby o funkcje, informacja zwrotna i odpowiedzialność za coś, z czego ktoś faktycznie korzysta",
       },
     ],
     githubUrl: "https://github.com/Giszta/photopage",
     liveUrl: "https://giszta.github.io/photopage/",
     image: "/images/projects/photopage.png",
-    createdAt: "2023-06-01",
+    createdAt: "2023-08-18",
   },
 ];
 
